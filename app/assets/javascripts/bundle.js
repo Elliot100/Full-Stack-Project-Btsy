@@ -175,16 +175,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById("root");
-  // let preloadedState = undefined;
-  // if (window.currentUser) {
-  //   preloadedState = {
-  //     session: {
-  //       currentUser: window.currentUser,
-  //     },
-  //   };
-  // }
-  // const store = createStore(preloadedState);
-  var store = (0, _store2.default)();
+  var preloadedState = undefined;
+  if (window.currentUser) {
+    preloadedState = {
+      session: {
+        currentUser: window.currentUser
+      }
+    };
+  }
+  var store = (0, _store2.default)(preloadedState);
+  // const store = createStore();
 
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -428,11 +428,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = function () {
-  return React.createElement(
-    "div",
+  return _react2.default.createElement(
+    'div',
     null,
-    "Product Index Container "
+    'Product Index Container '
   );
 };
 
