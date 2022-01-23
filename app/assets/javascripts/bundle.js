@@ -213,6 +213,10 @@ var _nav_bar_container = __webpack_require__(/*! ./nav_bar/nav_bar_container */ 
 
 var _nav_bar_container2 = _interopRequireDefault(_nav_bar_container);
 
+var _product_index_container = __webpack_require__(/*! ./products/product_index_container */ "./frontend/components/products/product_index_container.jsx");
+
+var _product_index_container2 = _interopRequireDefault(_product_index_container);
+
 var _login_container = __webpack_require__(/*! ./session/login_container */ "./frontend/components/session/login_container.js");
 
 var _login_container2 = _interopRequireDefault(_login_container);
@@ -229,18 +233,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // eslint-disable-next-line react/display-name
 
-// import ChirpIndexContainer from "./chirps/chirp_index_container";
 // import SignupContainer from "./session/signup_container";
+
+// import WelcomeBar from "./nav_bar/welcome_bar_container";
 exports.default = function () {
   return _react2.default.createElement(
     "div",
     null,
     _react2.default.createElement(_reactRouterDom.Route, { path: "/", component: _nav_bar_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _home2.default }),
-    _react2.default.createElement(_route_utils.AuthRoute, { path: "/login", component: _login_container2.default })
+    _react2.default.createElement(_route_utils.AuthRoute, { path: "/login", component: _login_container2.default }),
+    _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/products", component: _product_index_container2.default })
   );
 };
-// import WelcomeBar from "./nav_bar/welcome_bar_container";
 
 /***/ }),
 
@@ -409,6 +414,30 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 /***/ }),
 
+/***/ "./frontend/components/products/product_index_container.jsx":
+/*!******************************************************************!*\
+  !*** ./frontend/components/products/product_index_container.jsx ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  return React.createElement(
+    "div",
+    null,
+    "Product Index Container "
+  );
+};
+
+/***/ }),
+
 /***/ "./frontend/components/root.jsx":
 /*!**************************************!*\
   !*** ./frontend/components/root.jsx ***!
@@ -495,6 +524,7 @@ var Login = function (_React$Component) {
       password: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleDemoUser = _this.handleDemoUser.bind(_this);
     return _this;
   }
 
@@ -514,7 +544,17 @@ var Login = function (_React$Component) {
 
       e.preventDefault();
       this.props.login(this.state).then(function () {
-        return _this3.props.history.push("/chirps");
+        return _this3.props.history.push("/products");
+      });
+    }
+  }, {
+    key: "handleDemoUser",
+    value: function handleDemoUser(e) {
+      var _this4 = this;
+
+      e.preventDefault();
+      this.props.login({ username: "Francis Armstrong", password: "password" }).then(function () {
+        return _this4.props.history.push("/products");
       });
     }
   }, {
@@ -551,7 +591,12 @@ var Login = function (_React$Component) {
             "log in"
           ),
           _react2.default.createElement("br", null),
-          "or"
+          "or",
+          _react2.default.createElement(
+            "button",
+            { onClick: this.handleDemoUser },
+            "Log in as Demo User"
+          )
         )
       );
     }
