@@ -54,6 +54,9 @@
    display: flex;
    justify-content: space-between;
    padding: 20px;
+   padding-left: 72px;
+   padding-right: 72px;
+   align-items: center;
    background: lightblue;
    align-items: center;
    .btn {
@@ -67,6 +70,7 @@
     box-shadow: 1px 1px 1px darkblue;
    }
  }
+
 
  .session-form {
    display: flex;
