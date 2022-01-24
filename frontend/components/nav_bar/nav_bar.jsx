@@ -21,7 +21,11 @@ export default ({ currentUser, logout }) => {
 
   return (
     <header className="nav-bar">
-      <h1 className="logo">Btsy</h1>
+      <h1 className="logo">
+        <Link className="btn" to="/">
+          Btsy
+        </Link>
+      </h1>
       <div>{display}</div>
     </header>
   );

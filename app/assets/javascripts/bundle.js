@@ -350,7 +350,11 @@ exports.default = function (_ref) {
     _react2.default.createElement(
       "h1",
       { className: "logo" },
-      "Btsy"
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { className: "btn", to: "/" },
+        "Btsy"
+      )
     ),
     _react2.default.createElement(
       "div",
