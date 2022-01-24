@@ -86,6 +86,42 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/products.js":
+/*!**************************************!*\
+  !*** ./frontend/actions/products.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchProducts = exports.RECEIVE_PRODUCTS = undefined;
+
+var _products = __webpack_require__(/*! ../utils/products */ "./frontend/utils/products.js");
+
+var RECEIVE_PRODUCTS = exports.RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
+
+var receiveProducts = function receiveProducts(products) {
+  return {
+    type: RECEIVE_PRODUCTS,
+    products: products
+  };
+};
+
+var fetchProducts = exports.fetchProducts = function fetchProducts() {
+  return function (dispatch) {
+    return (0, _products.getProducts)().then(function (products) {
+      return dispatch(receiveProducts(products));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session.js":
 /*!*************************************!*\
   !*** ./frontend/actions/session.js ***!
@@ -464,6 +500,8 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _products = __webpack_require__(/*! ../../actions/products */ "./frontend/actions/products.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
@@ -473,6 +511,7 @@ exports.default = function () {
     'Product Index Container '
   );
 };
+// import ProductIndex from './product_index';
 
 /***/ }),
 
@@ -880,6 +919,31 @@ exports.default = (0, _redux.combineReducers)({
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _products = __webpack_require__(/*! ../actions/products */ "./frontend/actions/products.js");
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(state);
+  var products = {};
+  switch (action.type) {
+    case _products.RECEIVE_PRODUCTS:
+      action.products.forEach(function (product) {
+        products[product.id] = product;
+      });
+      return products;
+    // case RECEIVE_SINGLE_CHIRP:
+    //   return Object.assign({}, state, { [action.chirp.id]: action.chirp });
+    default:
+      return state;
+  }
+};
+
 /***/ }),
 
 /***/ "./frontend/reducers/root.js":
@@ -1019,6 +1083,27 @@ var thunk = function thunk(_ref) {
 };
 
 exports.default = thunk;
+
+/***/ }),
+
+/***/ "./frontend/utils/products.js":
+/*!************************************!*\
+  !*** ./frontend/utils/products.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getProducts = exports.getProducts = function getProducts() {
+  return $.ajax({
+    url: 'api/products'
+  });
+};
 
 /***/ }),
 
