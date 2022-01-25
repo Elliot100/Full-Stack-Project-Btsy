@@ -18,6 +18,7 @@ class ProductIndex extends React.Component {
             <ProductItem
               key={`product${product.id}`}
               product={product}
+              props={this.props}
             />
           ))}
       </div>

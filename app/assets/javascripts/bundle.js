@@ -271,7 +271,18 @@ var _route_utils = __webpack_require__(/*! ../utils/route_utils */ "./frontend/u
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var ProductPageContainer = function ProductPageContainer() {
+  return _react2.default.createElement(
+    "p",
+    null,
+    "ProductPageContainer"
+  );
+};
+
 // eslint-disable-next-line react/display-name
+
+// import WelcomeBar from "./nav_bar/welcome_bar_container";
+
 exports.default = function () {
   return _react2.default.createElement(
     "div",
@@ -280,10 +291,14 @@ exports.default = function () {
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _home2.default }),
     _react2.default.createElement(_route_utils.AuthRoute, { path: "/signup", component: _signup_container2.default }),
     _react2.default.createElement(_route_utils.AuthRoute, { path: "/login", component: _login_container2.default }),
-    _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/products", component: _product_index_container2.default })
+    _react2.default.createElement(
+      _reactRouterDom.Switch,
+      null,
+      _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/products/:id", component: ProductPageContainer }),
+      _react2.default.createElement(_route_utils.ProtectedRoute, { exact: true, path: "/products", component: _product_index_container2.default })
+    )
   );
 };
-// import WelcomeBar from "./nav_bar/welcome_bar_container";
 
 /***/ }),
 
@@ -531,6 +546,8 @@ var ProductIndex = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var products = this.props.products;
 
       return _react2.default.createElement(
@@ -539,7 +556,8 @@ var ProductIndex = function (_React$Component) {
         products.map(function (product) {
           return _react2.default.createElement(_product_item2.default, {
             key: "product" + product.id,
-            product: product
+            product: product,
+            props: _this2.props
           });
         })
       );
@@ -624,10 +642,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // eslint-disable-next-line react/display-name
 exports.default = function (_ref) {
-  var product = _ref.product;
+  var product = _ref.product,
+      props = _ref.props;
 
 
-  return _react2.default.createElement("img", { className: "product-img", src: product.image });
+  var handleClick = function handleClick(e) {
+    e.preventDefault();
+    props.history.push("/products/" + product.id);
+  };
+
+  return _react2.default.createElement(
+    "button",
+    { onClick: handleClick },
+    _react2.default.createElement("img", { className: "product-img", src: product.image })
+  );
 };
 
 /***/ }),
