@@ -1,16 +1,11 @@
-/* eslint-disable react/display-name */
-import React from 'react';
+import React from "react";
 
+// eslint-disable-next-line react/display-name
 export default ({ product }) => {
+  
   return (
-    // <div>
-    //   <img
-    //     className="product-img"
-    //     src=
-    //   />
-    // </div>
-     <li>
-       <h3>{product.title}</h3>
-     </li>
+    <li>
+      <h3>{product.title}</h3>
+    </li>
   );
-}
+};
