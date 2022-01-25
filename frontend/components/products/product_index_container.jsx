@@ -1,8 +1,16 @@
 import React from 'react';
-// import ProductIndex from './product_index';
+import ProductIndex from './product_index';
 import { fetchProducts } from '../../actions/products';
+import { connect } from "react-redux";
 
 
-export default () => (
-  <div>Product Index Container </div>
-);
+const mapStateToProps = (state) => ({
+  products: Object.keys(state.entities.products).map((key) => state.entities.products[key]),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchProducts: () => dispatch(fetchProducts()),
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductIndex);
