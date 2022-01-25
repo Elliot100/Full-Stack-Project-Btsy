@@ -4,8 +4,9 @@ import React from "react";
 export default ({ product }) => {
   
   return (
-    <li>
-      <h3>{product.title}</h3>
-    </li>
+    <img className="product-img" src={product.image} />
+    // <li>
+    //   <h3>{product.title}</h3>
+    // </li>
   );
 };

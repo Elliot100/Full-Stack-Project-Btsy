@@ -482,14 +482,157 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 /***/ }),
 
+/***/ "./frontend/components/products/product_index.jsx":
+/*!********************************************************!*\
+  !*** ./frontend/components/products/product_index.jsx ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _product_item = __webpack_require__(/*! ./product_item */ "./frontend/components/products/product_item.jsx");
+
+var _product_item2 = _interopRequireDefault(_product_item);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProductIndex = function (_React$Component) {
+  _inherits(ProductIndex, _React$Component);
+
+  function ProductIndex(props) {
+    _classCallCheck(this, ProductIndex);
+
+    return _possibleConstructorReturn(this, (ProductIndex.__proto__ || Object.getPrototypeOf(ProductIndex)).call(this, props));
+  }
+
+  _createClass(ProductIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchProducts();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var products = this.props.products;
+
+      return _react2.default.createElement(
+        "div",
+        { className: "product-img-frame" },
+        products.map(function (product) {
+          return _react2.default.createElement(_product_item2.default, {
+            key: "product" + product.id,
+            product: product
+          });
+        })
+      );
+    }
+  }]);
+
+  return ProductIndex;
+}(_react2.default.Component);
+
+exports.default = ProductIndex;
+
+/***/ }),
+
 /***/ "./frontend/components/products/product_index_container.jsx":
 /*!******************************************************************!*\
   !*** ./frontend/components/products/product_index_container.jsx ***!
   \******************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nDuplicate declaration \"mapStateToProps\"\n\n\u001b[0m \u001b[90m  9 | \u001b[39m}}\u001b[33m;\u001b[39m\n \u001b[90m 10 | \u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 11 | \u001b[39m\u001b[36mconst\u001b[39m mapStateToProps \u001b[33m=\u001b[39m (state) \u001b[33m=>\u001b[39m ({\n \u001b[90m    | \u001b[39m      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 12 | \u001b[39m  products\u001b[33m:\u001b[39m \u001b[33mObject\u001b[39m\u001b[33m.\u001b[39mkeys(state\u001b[33m.\u001b[39mentities\u001b[33m.\u001b[39mproducts)\u001b[33m.\u001b[39mmap((key) \u001b[33m=>\u001b[39m state\u001b[33m.\u001b[39mentities\u001b[33m.\u001b[39mproducts[key])\u001b[33m,\u001b[39m\n \u001b[90m 13 | \u001b[39m})\u001b[33m;\u001b[39m\n \u001b[90m 14 | \u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _product_index = __webpack_require__(/*! ./product_index */ "./frontend/components/products/product_index.jsx");
+
+var _product_index2 = _interopRequireDefault(_product_index);
+
+var _products = __webpack_require__(/*! ../../actions/products */ "./frontend/actions/products.js");
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    products: Object.keys(state.entities.products).map(function (key) {
+      return state.entities.products[key];
+    })
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchProducts: function fetchProducts() {
+      return dispatch((0, _products.fetchProducts)());
+    }
+
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_product_index2.default);
+
+/***/ }),
+
+/***/ "./frontend/components/products/product_item.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/products/product_item.jsx ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line react/display-name
+exports.default = function (_ref) {
+  var product = _ref.product;
+
+
+  return _react2.default.createElement("img", { className: "product-img", src: product.image })
+  // <li>
+  //   <h3>{product.title}</h3>
+  // </li>
+  ;
+};
 
 /***/ }),
 
