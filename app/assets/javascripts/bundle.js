@@ -627,11 +627,7 @@ exports.default = function (_ref) {
   var product = _ref.product;
 
 
-  return _react2.default.createElement("img", { className: "product-img", src: product.image })
-  // <li>
-  //   <h3>{product.title}</h3>
-  // </li>
-  ;
+  return _react2.default.createElement("img", { className: "product-img", src: product.image });
 };
 
 /***/ }),

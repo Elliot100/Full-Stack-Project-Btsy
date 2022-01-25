@@ -5,8 +5,5 @@ export default ({ product }) => {
   
   return (
     <img className="product-img" src={product.image} />
-    // <li>
-    //   <h3>{product.title}</h3>
-    // </li>
   );
 };
