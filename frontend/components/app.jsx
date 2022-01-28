@@ -19,9 +19,9 @@ export default () => (
     <Route exact path="/" component={Home} />
     <AuthRoute path="/signup" component={SignupContainer} />
     <AuthRoute path="/login" component={LoginContainer} />
-    <Switch>
-      <ProtectedRoute path="/products/:id" component={ProductPageContainer} />
+    {/* <Switch> */}
+      {/* <ProtectedRoute path="/products/:id" component={ProductPageContainer} /> */}
       <ProtectedRoute exact path="/products" component={ProductIndexContainer} />
-    </Switch>
+    {/* </Switch> */}
   </div>
 );

@@ -291,12 +291,7 @@ exports.default = function () {
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _home2.default }),
     _react2.default.createElement(_route_utils.AuthRoute, { path: "/signup", component: _signup_container2.default }),
     _react2.default.createElement(_route_utils.AuthRoute, { path: "/login", component: _login_container2.default }),
-    _react2.default.createElement(
-      _reactRouterDom.Switch,
-      null,
-      _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/products/:id", component: ProductPageContainer }),
-      _react2.default.createElement(_route_utils.ProtectedRoute, { exact: true, path: "/products", component: _product_index_container2.default })
-    )
+    _react2.default.createElement(_route_utils.ProtectedRoute, { exact: true, path: "/products", component: _product_index_container2.default })
   );
 };
 
@@ -612,7 +607,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchProducts: function fetchProducts() {
       return dispatch((0, _products.fetchProducts)());
     }
-
   };
 };
 
@@ -640,7 +634,16 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var ProductPageContainer = function ProductPageContainer() {
+  return _react2.default.createElement(
+    "h3",
+    null,
+    "ProductPageContainer"
+  );
+};
+
 // eslint-disable-next-line react/display-name
+
 exports.default = function (_ref) {
   var product = _ref.product,
       props = _ref.props;
@@ -648,7 +651,9 @@ exports.default = function (_ref) {
 
   var handleClick = function handleClick(e) {
     e.preventDefault();
+
     props.history.push("/products/" + product.id);
+    return { ProductPageContainer: ProductPageContainer };
   };
 
   return _react2.default.createElement(
