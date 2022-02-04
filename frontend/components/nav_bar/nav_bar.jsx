@@ -20,9 +20,6 @@ export default ({ currentUser, logout }) => {
     </div>
   ) : (
     <div className="nav-bar-items">
-      {/* <Link className="btn" to="/signup">
-        Sign Up
-      </Link> */}
       <Link className="btn" to="/login">
         Sign in
       </Link>
@@ -30,16 +27,35 @@ export default ({ currentUser, logout }) => {
     </div>
   );
 
+  const categories = (
+    <div className="categories">
+      <ul className="category-items">
+        <li className="btn">Special Day Gifts</li>
+        <li className="btn">Jewelry & Accessories</li>
+        <li className="btn">Clothing & Shoes</li>
+        <li className="btn">Home & Living</li>
+        <li className="btn">Wedding & Party</li>
+        <li className="btn">Toys & Entertainment</li>
+        <li className="btn">Art & Collectibles</li>
+        <li className="btn">Craft Supplies</li>
+        <li className="btn">Gifts & Gift Cards</li>
+      </ul>
+    </div>
+  );
+
   return (
-    <header className="header">
-      <nav className="nav-bar">
-        <div>
-          <Link className="logo" to="/">
-            Btsy
-          </Link>
-        </div>
-        <div>{display}</div>
-      </nav>
-    </header>
+    <div>
+      <header className="header">
+        <nav className="nav-bar">
+          <div>
+            <Link className="logo" to="/">
+              Btsy
+            </Link>
+          </div>
+          <div>{display}</div>
+        </nav>
+      </header>
+      <div>{categories}</div>
+    </div>
   );
 };

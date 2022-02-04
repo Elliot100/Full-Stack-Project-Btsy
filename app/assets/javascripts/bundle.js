@@ -430,26 +430,89 @@ exports.default = function (_ref) {
     )
   );
 
-  return _react2.default.createElement(
-    "header",
-    { className: "header" },
+  var categories = _react2.default.createElement(
+    "div",
+    { className: "categories" },
     _react2.default.createElement(
-      "nav",
-      { className: "nav-bar" },
+      "ul",
+      { className: "category-items" },
       _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { className: "logo", to: "/" },
-          "Btsy"
-        )
+        "li",
+        { className: "btn" },
+        "Special Day Gifts"
       ),
       _react2.default.createElement(
-        "div",
-        null,
-        display
+        "li",
+        { className: "btn" },
+        "Jewelry & Accessories"
+      ),
+      _react2.default.createElement(
+        "li",
+        { className: "btn" },
+        "Clothing & Shoes"
+      ),
+      _react2.default.createElement(
+        "li",
+        { className: "btn" },
+        "Home & Living"
+      ),
+      _react2.default.createElement(
+        "li",
+        { className: "btn" },
+        "Wedding & Party"
+      ),
+      _react2.default.createElement(
+        "li",
+        { className: "btn" },
+        "Toys & Entertainment"
+      ),
+      _react2.default.createElement(
+        "li",
+        { className: "btn" },
+        "Art & Collectibles"
+      ),
+      _react2.default.createElement(
+        "li",
+        { className: "btn" },
+        "Craft Supplies"
+      ),
+      _react2.default.createElement(
+        "li",
+        { className: "btn" },
+        "Gifts & Gift Cards"
       )
+    )
+  );
+
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement(
+      "header",
+      { className: "header" },
+      _react2.default.createElement(
+        "nav",
+        { className: "nav-bar" },
+        _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: "logo", to: "/" },
+            "Btsy"
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          null,
+          display
+        )
+      )
+    ),
+    _react2.default.createElement(
+      "div",
+      null,
+      categories
     )
   );
 };

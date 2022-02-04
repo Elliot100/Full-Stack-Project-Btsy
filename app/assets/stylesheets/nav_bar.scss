@@ -43,13 +43,31 @@
 
 }
 
-
 .btn {
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: #3f3e3e;
+    color: #2e2d2d;
     cursor: pointer;
+}
+
+.categories {
+  width: 1522px;
+  height: 34px;
+  background: white;
+  display: block;
+}
+
+.category-items {
+  max-width: 1328px;
+  height: 34px;
+  margin: 0 auto;
+  padding: 0px 36px;
+  font-size: 15px;
+  line-height: 1.4;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Graphik Webfont";
 }
 
