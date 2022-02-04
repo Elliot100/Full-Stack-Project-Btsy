@@ -71,3 +71,18 @@
   font-family: "Graphik Webfont";
 }
 
+.website-message {
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  background-color: #FDEBD2;
+  //  align-items: flex-end;
+  h1 {
+   height: 100%;
+   z-index: 1;
+   color: white;
+   text-shadow: 1px 1px 15px black;
+   text-align: center;
+   width: 100%;
+  }
+}

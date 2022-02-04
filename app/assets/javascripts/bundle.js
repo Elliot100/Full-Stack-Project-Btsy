@@ -324,20 +324,6 @@ exports.default = function () {
     null,
     _react2.default.createElement(
       "div",
-      { className: "home" },
-      _react2.default.createElement(
-        "div",
-        { className: "hero-img-frame" },
-        _react2.default.createElement("img", { className: "hero-img", src: "https://variety.com/wp-content/uploads/2017/02/angry-birds-blues-rovio.jpg" })
-      ),
-      _react2.default.createElement(
-        "h1",
-        null,
-        "Find extra-special ways to express your love."
-      )
-    ),
-    _react2.default.createElement(
-      "div",
       { className: "product-img-frame" },
       _react2.default.createElement("img", {
         className: "product-img",
@@ -484,6 +470,16 @@ exports.default = function (_ref) {
     )
   );
 
+  var website_message = _react2.default.createElement(
+    "div",
+    { className: "website-message" },
+    _react2.default.createElement(
+      "h1",
+      null,
+      "Find extra-special ways to express your love."
+    )
+  );
+
   return _react2.default.createElement(
     "div",
     null,
@@ -513,6 +509,11 @@ exports.default = function (_ref) {
       "div",
       null,
       categories
+    ),
+    _react2.default.createElement(
+      "div",
+      null,
+      website_message
     )
   );
 };

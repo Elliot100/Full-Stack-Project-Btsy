@@ -43,6 +43,12 @@ export default ({ currentUser, logout }) => {
     </div>
   );
 
+  const website_message = (
+    <div className="website-message">
+      <h1>Find extra-special ways to express your love.</h1>
+    </div>
+  );
+
   return (
     <div>
       <header className="header">
@@ -56,6 +62,7 @@ export default ({ currentUser, logout }) => {
         </nav>
       </header>
       <div>{categories}</div>
+      <div>{website_message}</div>
     </div>
   );
 };
