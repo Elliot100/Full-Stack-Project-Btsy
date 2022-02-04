@@ -9,7 +9,7 @@ export default ({ currentUser, logout }) => {
       <button onClick={logout}>Log Out</button>
     </div>
   ) : (
-    <div>
+    <div className="nav-bar-items">
       <Link className="btn" to="/signup">
         Sign Up
       </Link>
@@ -20,13 +20,15 @@ export default ({ currentUser, logout }) => {
   );
 
   return (
-    <header className="nav-bar">
-      <h1 className="logo">
-        <Link className="btn" to="/">
-          Btsy
-        </Link>
-      </h1>
-      <div>{display}</div>
+    <header className="header">
+      <nav className="nav-bar">
+        <div>
+          <Link className="logo" to="/">
+            Btsy
+          </Link>
+        </div>
+        <div>{display}</div>
+      </nav>
     </header>
   );
 };

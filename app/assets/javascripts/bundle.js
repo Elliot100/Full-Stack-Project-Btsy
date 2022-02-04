@@ -405,7 +405,7 @@ exports.default = function (_ref) {
     )
   ) : _react2.default.createElement(
     "div",
-    null,
+    { className: "nav-bar-items" },
     _react2.default.createElement(
       _reactRouterDom.Link,
       { className: "btn", to: "/signup" },
@@ -420,20 +420,24 @@ exports.default = function (_ref) {
 
   return _react2.default.createElement(
     "header",
-    { className: "nav-bar" },
+    { className: "header" },
     _react2.default.createElement(
-      "h1",
-      { className: "logo" },
+      "nav",
+      { className: "nav-bar" },
       _react2.default.createElement(
-        _reactRouterDom.Link,
-        { className: "btn", to: "/" },
-        "Btsy"
+        "div",
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { className: "logo", to: "/" },
+          "Btsy"
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        null,
+        display
       )
-    ),
-    _react2.default.createElement(
-      "div",
-      null,
-      display
     )
   );
 };
