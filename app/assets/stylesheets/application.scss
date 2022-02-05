@@ -20,23 +20,8 @@
    font-family: sans-serif;
  }
 
- .hero-img-frame {
-   position: absolute;
-   width: 100%;
-   max-height: 200px;
-   overflow: hidden;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   z-index: -1;
- }
-
- .hero-img {
-   width: 100%;
- }
-
 .website-message {
-  min-height: 200px;
+  height: 200px;
   display: flex;
   justify-content: center;
   background-color: #FDEBD2;
@@ -50,6 +35,31 @@
    font-family: "Guardian-EgypTT";
    font-weight: lighter;
   }
+}
+
+.home-products {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-img-frame {
+  width: 1348px;
+  height: 170px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10%;
+  padding-bottom: 10%;
+} 
+
+.product-img {
+  cursor: pointer;
+  height: 170px;
+  width: 250px;
+  object-fit: cover;
 }
 
  .session-form {

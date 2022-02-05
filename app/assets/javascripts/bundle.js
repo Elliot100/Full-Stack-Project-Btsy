@@ -331,7 +331,7 @@ exports.default = function () {
 
   var home_products = _react2.default.createElement(
     "div",
-    null,
+    { className: "home-products" },
     _react2.default.createElement(
       "div",
       { className: "product-img-frame" },
