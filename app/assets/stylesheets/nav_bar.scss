@@ -14,7 +14,6 @@
   line-height: 1.4;
   display: flex;
   justify-content: space-between;
-
 }
 
 .logo {
@@ -32,8 +31,65 @@
 }
 
 .search-bar {
-  width: 1035px;
-  height: 48px; 
+  width: 1080px;
+  height: 42px; 
+  display: flex;
+
+  // border-width: 2px;
+  // border-color: #222222;
+  // padding-left: 18px;
+  // padding-right: 42px;
+  // border-top-left-radius: 96px;
+  // border-bottom-left-radius: 96px;
+  // border-top-right-radius: 0;
+  // border-bottom-right-radius: 0;
+  // border-right: 0;
+  // background-color: #f5f4f4;
+  // font-size: 16px;
+  // font-family: inherit;
+}
+
+.search-bar-input {
+  width: 970px;
+  height: 42px; 
+  border-width: 2px;
+  border-color: #222222;
+  padding-left: 18px;
+  padding-right: 42px;
+  border-top-left-radius: 96px;
+  border-bottom-left-radius: 96px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+  background-color: #f5f4f4;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.search-bar-button {
+  width: 48px;
+  height: 48px;
+  border-width: 2px;
+  border-color: #222222;
+  cursor: pointer;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 96px;
+  border-bottom-right-radius: 96px;
+  // border: 1px solid rgba(34, 34, 34, 0.15);
+  border-left: 0;
+  padding-right: 21px;
+  padding-left: 15px;
+  padding-top: 14px;
+  padding-bottom: 12px;
+  background-color: #f5f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar-button-icon {
+
 }
 
 .nav-bar-items {
@@ -44,7 +100,6 @@
   align-items: center;
   font-family: "Graphik Webfont";
   font-weight: bold;
-
 }
 
 .btn {
