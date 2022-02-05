@@ -1,13 +1,12 @@
  
 .header { 
   background: white;
-  display: block;
-  width: 1522px;
+  width: 1537px;
   height: 72px;
 }
 
 .nav-bar {
-  max-width: 1328px;
+  max-width: 1348px;
   height: 48px;
   margin: 0 auto;
   padding: 12px 36px;
@@ -21,7 +20,7 @@
 .logo {
   display: flex;
   align-items: center;  
-  justify-content: center;
+  justify-content: left;
   color: #f1541e;
   background-color: white;
   text-decoration: none;
@@ -30,6 +29,11 @@
   font-size: 40px;
   -webkit-font-smoothing: antialiased;
   font-family: "Graphik Webfont";
+}
+
+.search-bar {
+  width: 1035px;
+  height: 48px; 
 }
 
 .nav-bar-items {

@@ -387,7 +387,19 @@ exports.default = function (_ref) {
     )
   );
 
-  var display = currentUser ? _react2.default.createElement(
+  var search_bar = _react2.default.createElement("input", { id: "global-enhancements-search-query",
+    "data-id": "search-query",
+    "data-search-input": "",
+    type: "text",
+    name: "search_query",
+    className: "search-bar",
+    placeholder: "Search for anything",
+    value: "",
+    autoComplete: "off",
+    autoCorrect: "off",
+    autoCapitalize: "off" });
+
+  var auth = currentUser ? _react2.default.createElement(
     "div",
     null,
     _react2.default.createElement(
@@ -501,7 +513,12 @@ exports.default = function (_ref) {
         _react2.default.createElement(
           "div",
           null,
-          display
+          search_bar
+        ),
+        _react2.default.createElement(
+          "div",
+          null,
+          auth
         )
       )
     ),

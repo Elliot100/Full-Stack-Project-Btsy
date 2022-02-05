@@ -13,7 +13,21 @@ export default ({ currentUser, logout }) => {
     </span>
   );
 
-  const display = currentUser ? (
+  const search_bar = (
+  <input id="global-enhancements-search-query" 
+    data-id="search-query" 
+    data-search-input="" 
+    type="text" 
+    name="search_query" 
+    className="search-bar" 
+    placeholder="Search for anything" 
+    value="" 
+    autoComplete="off" 
+    autoCorrect="off" 
+    autoCapitalize="off"/>
+  );
+
+  const auth = currentUser ? (
     <div>
       <p>Hello {currentUser.username}</p>
       <button onClick={logout}>Log Out</button>
@@ -58,7 +72,8 @@ export default ({ currentUser, logout }) => {
               Btsy
             </Link>
           </div>
-          <div>{display}</div>
+          <div>{search_bar}</div>
+          <div>{auth}</div>
         </nav>
       </header>
       <div>{categories}</div>
