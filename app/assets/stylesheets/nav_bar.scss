@@ -44,12 +44,12 @@
 }
 
 .btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: #2e2d2d;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #2e2d2d;
+  cursor: pointer;
 }
 
 .categories {
@@ -57,6 +57,7 @@
   height: 34px;
   background: white;
   display: block;
+  border-bottom: 2px solid rgba(34, 34, 34, 0.15);
 }
 
 .category-items {
@@ -78,11 +79,12 @@
   background-color: #FDEBD2;
   //  align-items: flex-end;
   h1 {
-   height: 100%;
    z-index: 1;
-   color: white;
-   text-shadow: 1px 1px 15px black;
+   color: rgb(61, 61, 61);
+  //  text-shadow: 1px 1px 15px black;
    text-align: center;
-   width: 100%;
+   font-size: 52px;
+   font-family: "Guardian-EgypTT";
+   font-weight: lighter;
   }
 }
