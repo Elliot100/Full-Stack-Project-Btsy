@@ -319,7 +319,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // eslint-disable-next-line react/display-name
 exports.default = function () {
-  return _react2.default.createElement(
+  var website_message = _react2.default.createElement(
+    "div",
+    { className: "website-message" },
+    _react2.default.createElement(
+      "h1",
+      null,
+      "Find extra-special ways to express your love."
+    )
+  );
+
+  var home_products = _react2.default.createElement(
     "div",
     null,
     _react2.default.createElement(
@@ -342,6 +352,21 @@ exports.default = function () {
         src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ6eg1NED1_i7sG-GRzpTxaht2SOIGRG7XSA&usqp=CAU"
       }),
       _react2.default.createElement("img", { className: "product-img", src: "https://www.kids-world.com/images/LO886.jpg" })
+    )
+  );
+
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement(
+      "div",
+      null,
+      website_message
+    ),
+    _react2.default.createElement(
+      "div",
+      null,
+      home_products
     )
   );
 };
@@ -507,16 +532,6 @@ exports.default = function (_ref) {
     )
   );
 
-  var website_message = _react2.default.createElement(
-    "div",
-    { className: "website-message" },
-    _react2.default.createElement(
-      "h1",
-      null,
-      "Find extra-special ways to express your love."
-    )
-  );
-
   return _react2.default.createElement(
     "div",
     null,
@@ -551,11 +566,6 @@ exports.default = function (_ref) {
       "div",
       null,
       categories
-    ),
-    _react2.default.createElement(
-      "div",
-      null,
-      website_message
     )
   );
 };

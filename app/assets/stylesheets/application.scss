@@ -35,20 +35,22 @@
    width: 100%;
  }
 
- .home {
-   min-height: 250px;
-   display: flex;
-   justify-content: center;
+.website-message {
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  background-color: #FDEBD2;
   //  align-items: flex-end;
-   h1 {
-    height: 100%;
-    z-index: 1;
-    color: white;
-    text-shadow: 1px 1px 15px black;
-    text-align: center;
-    width: 100%;
-   }
- }
+  h1 {
+   z-index: 1;
+   color: rgb(61, 61, 61);
+  //  text-shadow: 1px 1px 15px black;
+   text-align: center;
+   font-size: 52px;
+   font-family: "Guardian-EgypTT";
+   font-weight: lighter;
+  }
+}
 
  .session-form {
    display: flex;

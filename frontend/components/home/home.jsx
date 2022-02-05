@@ -1,7 +1,14 @@
 import React from "react";
 
 // eslint-disable-next-line react/display-name
-export default () => (
+export default () => {
+  const website_message = (
+    <div className="website-message">
+      <h1>Find extra-special ways to express your love.</h1>
+    </div>
+  );
+
+  const home_products = (
   <div>
     <div className="product-img-frame">
       <img
@@ -23,4 +30,12 @@ export default () => (
       <img className="product-img" src="https://www.kids-world.com/images/LO886.jpg" />
     </div>
   </div>
-);
+  );
+
+  return (
+    <div>
+      <div>{website_message}</div>
+      <div>{home_products}</div>
+    </div>
+  );
+};
