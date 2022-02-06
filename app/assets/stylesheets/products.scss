@@ -1,2 +1,39 @@
 
+.home-products {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-img-frame {
+  width: 1348px;
+  height: 170px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10%;
+  padding-bottom: 10%;
+} 
+
+.product-img {
+  cursor: pointer;
+  height: 170px;
+  width: 250px;
+  object-fit: cover;
+  border-radius: 5%;
+}
+
+.imagedropshadow {
+    padding: 5px;
+    border: solid 1px #EFEFEF;
+}
+img.imagedropshadow:hover {
+  border: solid 1px #CCC;
+  -moz-box-shadow: 1px 1px 5px #999;
+  -webkit-box-shadow: 1px 1px 5px #999;
+  box-shadow: 1px 1px 5px #999;
+}
+
  
