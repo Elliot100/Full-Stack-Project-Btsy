@@ -265,24 +265,19 @@ var _home = __webpack_require__(/*! ./home/home */ "./frontend/components/home/h
 
 var _home2 = _interopRequireDefault(_home);
 
+var _product_page_container = __webpack_require__(/*! ./products/product_page_container */ "./frontend/components/products/product_page_container.jsx");
+
+var _product_page_container2 = _interopRequireDefault(_product_page_container);
+
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
 var _route_utils = __webpack_require__(/*! ../utils/route_utils */ "./frontend/utils/route_utils.jsx");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ProductPageContainer = function ProductPageContainer() {
-  return _react2.default.createElement(
-    "p",
-    null,
-    "ProductPageContainer"
-  );
-};
-
 // eslint-disable-next-line react/display-name
 
 // import WelcomeBar from "./nav_bar/welcome_bar_container";
-
 exports.default = function () {
   return _react2.default.createElement(
     "div",
@@ -294,7 +289,7 @@ exports.default = function () {
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
-      _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/products/:id", component: ProductPageContainer }),
+      _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/products/:id", component: _product_page_container2.default }),
       _react2.default.createElement(_route_utils.ProtectedRoute, { exact: true, path: "/products", component: _product_index_container2.default })
     )
   );
@@ -785,6 +780,111 @@ exports.default = function (_ref) {
 
   return _react2.default.createElement("img", { onClick: handleClick, className: "product-img imagedropshadow", src: product.image });
 };
+
+/***/ }),
+
+/***/ "./frontend/components/products/product_page.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/products/product_page.jsx ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProductPage = function (_React$Component) {
+  _inherits(ProductPage, _React$Component);
+
+  function ProductPage() {
+    _classCallCheck(this, ProductPage);
+
+    return _possibleConstructorReturn(this, (ProductPage.__proto__ || Object.getPrototypeOf(ProductPage)).apply(this, arguments));
+  }
+
+  _createClass(ProductPage, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'product-page-back-button' },
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { className: 'btn', to: '/products' },
+          'back'
+        )
+      );
+    }
+  }]);
+
+  return ProductPage;
+}(_react2.default.Component);
+
+exports.default = ProductPage;
+
+/***/ }),
+
+/***/ "./frontend/components/products/product_page_container.jsx":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/products/product_page_container.jsx ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _product_page = __webpack_require__(/*! ./product_page */ "./frontend/components/products/product_page.jsx");
+
+var _product_page2 = _interopRequireDefault(_product_page);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  // return {
+  //   products: Object.keys(state.entities.products).map((key) => state.entities.products[key]),
+  // };
+};
+// import { fetchProducts } from "../../actions/products";
+
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    // fetchProducts: () => dispatch(fetchProducts()),
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(null, null)(_product_page2.default);
 
 /***/ }),
 

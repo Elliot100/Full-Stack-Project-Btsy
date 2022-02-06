@@ -5,12 +5,10 @@ import ProductIndexContainer from "./products/product_index_container";
 import SignupContainer from "./session/signup_container";
 import LoginContainer from "./session/login_container";
 import Home from "./home/home";
+import ProductPageContainer from "./products/product_page_container";
 import { Route, Switch } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from "../utils/route_utils";
 
-const ProductPageContainer = () => (
-  <p>ProductPageContainer</p>
-)
 
 // eslint-disable-next-line react/display-name
 export default () => (
