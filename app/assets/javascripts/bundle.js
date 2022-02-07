@@ -843,13 +843,40 @@ var ProductPage = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'product-page-back-button' },
+        null,
         _react2.default.createElement(
-          _reactRouterDom.Link,
-          { className: 'btn', to: '/products' },
-          'back'
+          'div',
+          { className: 'product-page-back-button' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: 'btn', to: '/products' },
+            'back'
+          )
         ),
-        console.log(selected_product)
+        _react2.default.createElement(
+          'div',
+          { className: 'product-page' },
+          _react2.default.createElement(
+            'section',
+            { className: 'product-page-frame' },
+            _react2.default.createElement(
+              'div',
+              { className: 'product-page-img' },
+              _react2.default.createElement('img', { src: selected_product.image })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'product-info' },
+              _react2.default.createElement(
+                'form',
+                null,
+                selected_product.title,
+                selected_product.price,
+                selected_product.description
+              )
+            )
+          )
+        )
       );
     }
   }]);
