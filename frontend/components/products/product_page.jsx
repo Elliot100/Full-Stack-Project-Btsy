@@ -13,11 +13,11 @@ class ProductPage extends React.Component {
 
   product_image() {
     const { image } = this.props.product;
-    <img src={image} />;
+    return <img src={image} />;
   }
 
   product_info() {
-
+    const { title, price, description } = this.props.product;
     return (
       <div className="product-info">
         <form>
@@ -34,8 +34,6 @@ class ProductPage extends React.Component {
       return <div>LOADING</div>
     }
     
-    // console.log(this.props.product);
-
     return (
       <div>
         <div className="product-page-back-button">

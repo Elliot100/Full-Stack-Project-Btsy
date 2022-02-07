@@ -848,11 +848,15 @@ var ProductPage = function (_React$Component) {
     value: function product_image() {
       var image = this.props.product.image;
 
-      _react2.default.createElement('img', { src: image });
+      return _react2.default.createElement('img', { src: image });
     }
   }, {
     key: 'product_info',
     value: function product_info() {
+      var _props$product = this.props.product,
+          title = _props$product.title,
+          price = _props$product.price,
+          description = _props$product.description;
 
       return _react2.default.createElement(
         'div',
@@ -876,8 +880,6 @@ var ProductPage = function (_React$Component) {
           'LOADING'
         );
       }
-
-      // console.log(this.props.product);
 
       return _react2.default.createElement(
         'div',
