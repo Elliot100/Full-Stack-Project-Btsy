@@ -816,15 +816,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ProductPage = function (_React$Component) {
   _inherits(ProductPage, _React$Component);
 
-  function ProductPage() {
+  function ProductPage(props) {
     _classCallCheck(this, ProductPage);
 
-    return _possibleConstructorReturn(this, (ProductPage.__proto__ || Object.getPrototypeOf(ProductPage)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ProductPage.__proto__ || Object.getPrototypeOf(ProductPage)).call(this, props));
   }
 
   _createClass(ProductPage, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchProducts();
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var products = this.props.products;
+
+      var product_id = this.props.match.params.id;
+      var selected_product = {};
+
+      products.forEach(function (product) {
+        if (product_id == product.id) {
+          selected_product = product;
+        }
+      });
+
       return _react2.default.createElement(
         'div',
         { className: 'product-page-back-button' },
@@ -832,7 +848,8 @@ var ProductPage = function (_React$Component) {
           _reactRouterDom.Link,
           { className: 'btn', to: '/products' },
           'back'
-        )
+        ),
+        console.log(selected_product)
       );
     }
   }]);
@@ -866,25 +883,29 @@ var _product_page = __webpack_require__(/*! ./product_page */ "./frontend/compon
 
 var _product_page2 = _interopRequireDefault(_product_page);
 
+var _products = __webpack_require__(/*! ../../actions/products */ "./frontend/actions/products.js");
+
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-  // return {
-  //   products: Object.keys(state.entities.products).map((key) => state.entities.products[key]),
-  // };
-};
-// import { fetchProducts } from "../../actions/products";
-
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    // fetchProducts: () => dispatch(fetchProducts()),
+    products: Object.keys(state.entities.products).map(function (key) {
+      return state.entities.products[key];
+    })
   };
 };
 
-exports.default = (0, _reactRedux.connect)(null, null)(_product_page2.default);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchProducts: function fetchProducts() {
+      return dispatch((0, _products.fetchProducts)());
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_product_page2.default);
 
 /***/ }),
 
