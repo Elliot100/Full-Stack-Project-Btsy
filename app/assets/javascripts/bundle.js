@@ -835,15 +835,7 @@ var ProductPage = function (_React$Component) {
   function ProductPage(props) {
     _classCallCheck(this, ProductPage);
 
-    var _this = _possibleConstructorReturn(this, (ProductPage.__proto__ || Object.getPrototypeOf(ProductPage)).call(this, props));
-
-    _this.state = {
-      id: "",
-      title: "",
-      image: "",
-      description: ""
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (ProductPage.__proto__ || Object.getPrototypeOf(ProductPage)).call(this, props));
   }
 
   _createClass(ProductPage, [{
@@ -851,38 +843,23 @@ var ProductPage = function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchSingleProduct();
     }
-
-    // componentDidUpdate(prevProps) {
-    //   if (this.props.products !== prevProps.products) {
-    //     const { products } = this.props;
-    //     let product_id = this.props.match.params.id;
-
-    //     products.forEach((product) => {
-    //       if (product_id == product.id) {
-    //         // selected_product = product;
-    //         this.setState(product);
-    //       }
-    //     });
-    //   }
-    // }
-
-  }, {
-    key: 'helperFunction',
-    value: function helperFunction() {
-      console.log(this.props);
-    }
   }, {
     key: 'render',
     value: function render() {
-      console.log("asdfada", this.props);
-
-      if (this.props.products.length === 0) {
+      if (!this.props.product) {
         return _react2.default.createElement(
           'div',
           null,
-          'LOAIDIGNASDFA'
+          'LOADING'
         );
       }
+
+      var _props$product = this.props.product,
+          image = _props$product.image,
+          title = _props$product.title,
+          price = _props$product.price,
+          description = _props$product.description;
+      // console.log(this.props.product);
 
       return _react2.default.createElement(
         'div',
@@ -905,7 +882,7 @@ var ProductPage = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'product-page-img' },
-              _react2.default.createElement('img', { src: this.image })
+              _react2.default.createElement('img', { src: image })
             ),
             _react2.default.createElement(
               'div',
@@ -913,9 +890,9 @@ var ProductPage = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 null,
-                this.title,
-                this.price,
-                this.description
+                title,
+                price,
+                description
               )
             )
           )
@@ -959,16 +936,13 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    products: Object.keys(state.entities.products).map(function (key) {
-      return state.entities.products[key];
-    })
+    product: state.entities.products[ownProps.match.params.id]
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-  // const {location} = ownProps; 
   return {
     fetchSingleProduct: function fetchSingleProduct() {
       return dispatch((0, _products.fetchSingleProduct)(ownProps.match.params.id));

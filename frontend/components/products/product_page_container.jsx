@@ -3,14 +3,13 @@ import ProductPage from "./product_page";
 import { fetchSingleProduct } from "../../actions/products";
 import { connect } from "react-redux";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    products: Object.keys(state.entities.products).map((key) => state.entities.products[key]),
+    product: state.entities.products[ownProps.match.params.id],
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  // const {location} = ownProps; 
   return {
   fetchSingleProduct: () => dispatch(fetchSingleProduct(ownProps.match.params.id)),
 }
