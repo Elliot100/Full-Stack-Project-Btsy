@@ -862,12 +862,22 @@ var ProductPage = function (_React$Component) {
         'div',
         { className: 'product-info' },
         _react2.default.createElement(
-          'form',
+          'h1',
+          { className: 'product-info-title' },
+          title
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'product-info-price' },
+          '$',
+          price
+        ),
+        _react2.default.createElement(
+          'section',
           null,
-          title,
-          price,
-          description
-        )
+          'Description'
+        ),
+        description
       );
     }
   }, {

@@ -20,11 +20,10 @@ class ProductPage extends React.Component {
     const { title, price, description } = this.props.product;
     return (
       <div className="product-info">
-        <form>
-          {title}
-          {price}
-          {description}
-        </form>
+        <h1 className="product-info-title">{title}</h1>
+        <div className="product-info-price">${price}</div>
+        <section>Description</section>
+        {description}
       </div>
     );
   }

@@ -77,5 +77,25 @@ img.imagedropshadow:hover {
 
 .product-info {
   width: 40%;
-  height: 100px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info-title {
+  line-height: 32px;
+  font-size: 35px;
+  font-family: "Guardian-EgypTT";
+  font-weight: 300;
+  letter-spacing: 0.35px;
+  color: #222;
+}
+
+.product-info-price {
+  font-size: 30px;
+  line-height: 42px;
+  font-family:  "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+  color: #222;
+  font-weight: 700;
+  padding: 20px 0;
 }
