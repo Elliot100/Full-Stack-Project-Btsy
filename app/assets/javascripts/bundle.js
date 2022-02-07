@@ -99,11 +99,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchProducts = exports.RECEIVE_PRODUCTS = undefined;
+exports.fetchSingleProduct = exports.fetchProducts = exports.RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_PRODUCTS = undefined;
 
 var _products = __webpack_require__(/*! ../utils/products */ "./frontend/utils/products.js");
 
 var RECEIVE_PRODUCTS = exports.RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
+var RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_SINGLE_PRODUCT = "RECEIVE_SINGLE_PRODUCT";
 
 var receiveProducts = function receiveProducts(products) {
   return {
@@ -116,6 +117,21 @@ var fetchProducts = exports.fetchProducts = function fetchProducts() {
   return function (dispatch) {
     return (0, _products.getProducts)().then(function (products) {
       return dispatch(receiveProducts(products));
+    });
+  };
+};
+
+var receiveSingleProduct = function receiveSingleProduct(product) {
+  return {
+    type: RECEIVE_SINGLE_PRODUCT,
+    product: product
+  };
+};
+
+var fetchSingleProduct = exports.fetchSingleProduct = function fetchSingleProduct(id) {
+  return function (dispatch) {
+    return (0, _products.getSingleProduct)(id).then(function (product) {
+      return dispatch(receiveSingleProduct(product));
     });
   };
 };
@@ -819,27 +835,54 @@ var ProductPage = function (_React$Component) {
   function ProductPage(props) {
     _classCallCheck(this, ProductPage);
 
-    return _possibleConstructorReturn(this, (ProductPage.__proto__ || Object.getPrototypeOf(ProductPage)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ProductPage.__proto__ || Object.getPrototypeOf(ProductPage)).call(this, props));
+
+    _this.state = {
+      id: "",
+      title: "",
+      image: "",
+      description: ""
+    };
+    return _this;
   }
 
   _createClass(ProductPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.fetchProducts();
+      this.props.fetchSingleProduct();
+    }
+
+    // componentDidUpdate(prevProps) {
+    //   if (this.props.products !== prevProps.products) {
+    //     const { products } = this.props;
+    //     let product_id = this.props.match.params.id;
+
+    //     products.forEach((product) => {
+    //       if (product_id == product.id) {
+    //         // selected_product = product;
+    //         this.setState(product);
+    //       }
+    //     });
+    //   }
+    // }
+
+  }, {
+    key: 'helperFunction',
+    value: function helperFunction() {
+      console.log(this.props);
     }
   }, {
     key: 'render',
     value: function render() {
-      var products = this.props.products;
+      console.log("asdfada", this.props);
 
-      var product_id = this.props.match.params.id;
-      var selected_product = {};
-
-      products.forEach(function (product) {
-        if (product_id == product.id) {
-          selected_product = product;
-        }
-      });
+      if (this.props.products.length === 0) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'LOAIDIGNASDFA'
+        );
+      }
 
       return _react2.default.createElement(
         'div',
@@ -862,7 +905,7 @@ var ProductPage = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'product-page-img' },
-              _react2.default.createElement('img', { src: selected_product.image })
+              _react2.default.createElement('img', { src: this.image })
             ),
             _react2.default.createElement(
               'div',
@@ -870,9 +913,9 @@ var ProductPage = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 null,
-                selected_product.title,
-                selected_product.price,
-                selected_product.description
+                this.title,
+                this.price,
+                this.description
               )
             )
           )
@@ -924,10 +967,11 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  // const {location} = ownProps; 
   return {
-    fetchProducts: function fetchProducts() {
-      return dispatch((0, _products.fetchProducts)());
+    fetchSingleProduct: function fetchSingleProduct() {
+      return dispatch((0, _products.fetchSingleProduct)(ownProps.match.params.id));
     }
   };
 };
@@ -1346,6 +1390,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _products = __webpack_require__(/*! ../actions/products */ "./frontend/actions/products.js");
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
@@ -1359,8 +1405,8 @@ exports.default = function () {
         products[product.id] = product;
       });
       return products;
-    // case RECEIVE_SINGLE_CHIRP:
-    //   return Object.assign({}, state, { [action.chirp.id]: action.chirp });
+    case _products.RECEIVE_SINGLE_PRODUCT:
+      return Object.assign({}, state, _defineProperty({}, action.product.id, action.product));
     default:
       return state;
   }
@@ -1524,6 +1570,12 @@ Object.defineProperty(exports, "__esModule", {
 var getProducts = exports.getProducts = function getProducts() {
   return $.ajax({
     url: 'api/products'
+  });
+};
+
+var getSingleProduct = exports.getSingleProduct = function getSingleProduct(id) {
+  return $.ajax({
+    url: 'api/products/' + id
   });
 };
 

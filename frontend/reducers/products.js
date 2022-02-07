@@ -1,4 +1,4 @@
-import { RECEIVE_PRODUCTS } from "../actions/products";
+import { RECEIVE_PRODUCTS, RECEIVE_SINGLE_PRODUCT } from "../actions/products";
 
 export default (state = {}, action) => {
   Object.freeze(state);
@@ -10,8 +10,8 @@ export default (state = {}, action) => {
         products[product.id] = product;
       });
       return products;
-    // case RECEIVE_SINGLE_CHIRP:
-    //   return Object.assign({}, state, { [action.chirp.id]: action.chirp });
+    case RECEIVE_SINGLE_PRODUCT:
+      return Object.assign({}, state, { [action.product.id]: action.product });
     default:
       return state;
   }

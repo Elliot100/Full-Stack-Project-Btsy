@@ -1,6 +1,6 @@
 class Api::ProductsController < ApplicationController
   def create
-    @product = Product.new(chirp_params)
+    @product = Product.new(product_params)
     if @product.save
       render :show
     else
@@ -21,6 +21,11 @@ class Api::ProductsController < ApplicationController
   
   def show
     @product = selected_product
+    if @product
+      render :show
+    else
+      render json: @product.errors.full_messages, status: 404
+    end
   end
   
   def index
@@ -40,7 +45,7 @@ class Api::ProductsController < ApplicationController
   private
   
   def selected_product
-    Product.find_by(params[:id])
+    Product.find(params[:id])
   end
   
   def product_params
