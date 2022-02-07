@@ -844,6 +844,29 @@ var ProductPage = function (_React$Component) {
       this.props.fetchSingleProduct();
     }
   }, {
+    key: 'product_image',
+    value: function product_image() {
+      var image = this.props.product.image;
+
+      _react2.default.createElement('img', { src: image });
+    }
+  }, {
+    key: 'product_info',
+    value: function product_info() {
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'product-info' },
+        _react2.default.createElement(
+          'form',
+          null,
+          title,
+          price,
+          description
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (!this.props.product) {
@@ -854,11 +877,6 @@ var ProductPage = function (_React$Component) {
         );
       }
 
-      var _props$product = this.props.product,
-          image = _props$product.image,
-          title = _props$product.title,
-          price = _props$product.price,
-          description = _props$product.description;
       // console.log(this.props.product);
 
       return _react2.default.createElement(
@@ -882,19 +900,9 @@ var ProductPage = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'product-page-img' },
-              _react2.default.createElement('img', { src: image })
+              this.product_image()
             ),
-            _react2.default.createElement(
-              'div',
-              { className: 'product-info' },
-              _react2.default.createElement(
-                'form',
-                null,
-                title,
-                price,
-                description
-              )
-            )
+            this.product_info()
           )
         )
       );

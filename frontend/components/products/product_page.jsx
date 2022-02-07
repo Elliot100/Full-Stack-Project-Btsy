@@ -11,12 +11,29 @@ class ProductPage extends React.Component {
     this.props.fetchSingleProduct();
   }
 
+  product_image() {
+    const { image } = this.props.product;
+    <img src={image} />;
+  }
+
+  product_info() {
+
+    return (
+      <div className="product-info">
+        <form>
+          {title}
+          {price}
+          {description}
+        </form>
+      </div>
+    );
+  }
+
   render() {
     if (!this.props.product) {
       return <div>LOADING</div>
     }
     
-    const {image, title, price, description} = this.props.product;
     // console.log(this.props.product);
 
     return (
@@ -29,15 +46,9 @@ class ProductPage extends React.Component {
         <div className="product-page">
           <section className="product-page-frame">
             <div className="product-page-img">
-              <img src={image} />
+              {this.product_image()}
             </div>
-            <div className="product-info">
-              <form>
-                {title}
-                {price}
-                {description}
-              </form>
-            </div>
+            {this.product_info()}
           </section>
         </div>
       </div>
