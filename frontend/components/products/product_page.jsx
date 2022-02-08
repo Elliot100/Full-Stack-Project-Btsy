@@ -26,6 +26,9 @@ class ProductPage extends React.Component {
           <h3>Description</h3>
           {description}
         </div>
+        <button className="add-to-cart-button" type="submit">
+          Add to cart
+        </button>
       </div>
     );
   }
@@ -44,10 +47,9 @@ class ProductPage extends React.Component {
         </div>
         <div className="product-page">
           <section className="product-page-frame">
-            <div className="product-page-img">
-              {this.product_image()}
-            </div>
+            <div className="product-page-img">{this.product_image()}</div>
             {this.product_info()}
+
           </section>
         </div>
       </div>

@@ -881,6 +881,11 @@ var ProductPage = function (_React$Component) {
             'Description'
           ),
           description
+        ),
+        _react2.default.createElement(
+          'button',
+          { className: 'add-to-cart-button', type: 'submit' },
+          'Add to cart'
         )
       );
     }
