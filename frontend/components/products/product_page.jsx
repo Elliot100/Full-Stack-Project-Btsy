@@ -26,7 +26,7 @@ class ProductPage extends React.Component {
           <h3>Description</h3>
           {description}
         </div>
-        <button className="add-to-cart-button" type="submit">
+        <button className="growing-button" type="submit">
           Add to cart
         </button>
       </div>

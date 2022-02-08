@@ -884,7 +884,7 @@ var ProductPage = function (_React$Component) {
         ),
         _react2.default.createElement(
           'button',
-          { className: 'add-to-cart-button', type: 'submit' },
+          { className: 'growing-button', type: 'submit' },
           'Add to cart'
         )
       );
@@ -1132,14 +1132,14 @@ var Login = function (_React$Component) {
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "button",
-            { onClick: this.handleSubmit },
+            { className: "growing-button", onClick: this.handleSubmit },
             "log in"
           ),
           _react2.default.createElement("br", null),
           "or",
           _react2.default.createElement(
             "button",
-            { onClick: this.handleDemoUser },
+            { className: "growing-button", onClick: this.handleDemoUser },
             "Log in as Demo User"
           )
         )
