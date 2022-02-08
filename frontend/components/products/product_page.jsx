@@ -22,8 +22,10 @@ class ProductPage extends React.Component {
       <div className="product-info">
         <h1 className="product-info-title">{title}</h1>
         <div className="product-info-price">${price}</div>
-        <section>Description</section>
-        {description}
+        <div className="product-info-description">
+          <h3>Description</h3>
+          {description}
+        </div>
       </div>
     );
   }

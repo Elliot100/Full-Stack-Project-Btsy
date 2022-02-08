@@ -873,11 +873,15 @@ var ProductPage = function (_React$Component) {
           price
         ),
         _react2.default.createElement(
-          'section',
-          null,
-          'Description'
-        ),
-        description
+          'div',
+          { className: 'product-info-description' },
+          _react2.default.createElement(
+            'h3',
+            null,
+            'Description'
+          ),
+          description
+        )
       );
     }
   }, {
@@ -1089,7 +1093,7 @@ var Login = function (_React$Component) {
       var _this4 = this;
 
       e.preventDefault();
-      this.props.login({ username: "Francis Armstrong", password: "password" }).then(function () {
+      this.props.login({ username: "Alton Stiedemann", password: "password" }).then(function () {
         return _this4.props.history.push("/products");
       });
     }
