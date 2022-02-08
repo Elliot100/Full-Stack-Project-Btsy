@@ -467,7 +467,7 @@ exports.default = function (_ref) {
 
   var auth = currentUser ? _react2.default.createElement(
     "div",
-    null,
+    { className: "nav-bar-items" },
     _react2.default.createElement(
       "p",
       null,
@@ -487,11 +487,7 @@ exports.default = function (_ref) {
       { className: "btn", to: "/login" },
       "Sign in"
     ),
-    _react2.default.createElement(
-      "div",
-      null,
-      cart_icon
-    )
+    cart_icon
   );
 
   var categories = _react2.default.createElement(
@@ -566,14 +562,10 @@ exports.default = function (_ref) {
             "Btsy"
           )
         ),
+        search_bar,
         _react2.default.createElement(
           "div",
-          null,
-          search_bar
-        ),
-        _react2.default.createElement(
-          "div",
-          null,
+          { className: "auth" },
           auth
         )
       )

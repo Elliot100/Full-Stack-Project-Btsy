@@ -45,7 +45,7 @@ export default ({ currentUser, logout }) => {
   );
 
   const auth = currentUser ? (
-    <div>
+    <div className="nav-bar-items">
       <p>Hello {currentUser.username}</p>
       <button onClick={logout}>Log Out</button>
     </div>
@@ -54,7 +54,7 @@ export default ({ currentUser, logout }) => {
       <Link className="btn" to="/login">
         Sign in
       </Link>
-      <div>{cart_icon}</div>
+      {cart_icon}
     </div>
   );
 
@@ -83,8 +83,8 @@ export default ({ currentUser, logout }) => {
               Btsy
             </Link>
           </div>
-          <div>{search_bar}</div>
-          <div>{auth}</div>
+          {search_bar}
+          <div className="auth">{auth}</div>
         </nav>
       </header>
       <div>{categories}</div>

@@ -1,12 +1,12 @@
  
 .header { 
   background: white;
-  width: 1537px;
+  width: 100%;
   height: 72px;
 }
 
 .nav-bar {
-  max-width: 1348px;
+  max-width: 87%;
   height: 48px;
   margin: 0 auto;
   padding: 12px 36px;
@@ -23,7 +23,7 @@
   color: #f1541e;
   background-color: white;
   text-decoration: none;
-  width: 80px;
+  width: 5%;
   height: 40px;
   font-size: 40px;
   -webkit-font-smoothing: antialiased;
@@ -31,7 +31,7 @@
 }
 
 .search-bar {
-  width: 1080px;
+  width: 80%;
   height: 42px; 
   display: flex;
 }
@@ -74,15 +74,22 @@
   align-items: center;
 }
 
-.nav-bar-items {
-  width: 160px;
+.auth {
+  width: 10%;
   height: 48px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   font-family: "Graphik Webfont";
   font-weight: bold;
 }
+
+.nav-bar-items {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
 
 .btn {
   display: flex;
