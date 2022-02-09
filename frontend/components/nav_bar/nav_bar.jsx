@@ -46,7 +46,7 @@ export default ({ currentUser, logout }) => {
 
   const auth = currentUser ? (
     <div className="nav-bar-items">
-      <p>Hello {currentUser.username}</p>
+      <p>Hi {currentUser.username.split(" ")[0]}</p>
       <button onClick={logout}>Log Out</button>
     </div>
   ) : (

@@ -25,7 +25,8 @@ class Login extends React.Component {
 
   handleDemoUser(e) {
     e.preventDefault();
-    this.props.login({ username: "Alton Stiedemann", password: "password" })
+    this.props
+      .login({ username: "Albertha O'Reilly CPA", password: "password" })
       .then(() => this.props.history.push("/products"));
   }
 

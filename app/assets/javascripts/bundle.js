@@ -471,8 +471,8 @@ exports.default = function (_ref) {
     _react2.default.createElement(
       "p",
       null,
-      "Hello ",
-      currentUser.username
+      "Hi ",
+      currentUser.username.split(" ")[0]
     ),
     _react2.default.createElement(
       "button",
@@ -1090,7 +1090,7 @@ var Login = function (_React$Component) {
       var _this4 = this;
 
       e.preventDefault();
-      this.props.login({ username: "Alton Stiedemann", password: "password" }).then(function () {
+      this.props.login({ username: "Albertha O'Reilly CPA", password: "password" }).then(function () {
         return _this4.props.history.push("/products");
       });
     }
