@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     post '/search', to: 'users#search'
 
     resources :products
+    resources :cartitems, only: [:index,:create]
+    delete '/cartitems', to: 'cartitems#destroy'
 
   end
   root to: 'root#root'
