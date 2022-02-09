@@ -474,6 +474,7 @@ exports.default = function (_ref) {
       "Hi ",
       currentUser.username.split(" ")[0]
     ),
+    cart_icon,
     _react2.default.createElement(
       "button",
       { onClick: logout },
