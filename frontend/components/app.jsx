@@ -6,6 +6,7 @@ import SignupContainer from "./session/signup_container";
 import LoginContainer from "./session/login_container";
 import Home from "./home/home";
 import ProductPageContainer from "./products/product_page_container";
+import CartitemContainer from './cartitems/cartitems_container.rb';
 import { Route, Switch } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from "../utils/route_utils";
 
@@ -17,6 +18,7 @@ export default () => (
     <Route exact path="/" component={Home} />
     <AuthRoute path="/signup" component={SignupContainer} />
     <AuthRoute path="/login" component={LoginContainer} />
+    <ProtectedRoute path="/users/:user_id/cartitems" component={CartitemContainer} />
     <Switch>
       <ProtectedRoute path="/products/:id" component={ProductPageContainer} />
       <ProtectedRoute exact path="/products" component={ProductIndexContainer} />
