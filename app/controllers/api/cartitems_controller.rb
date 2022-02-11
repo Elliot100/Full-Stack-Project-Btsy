@@ -1,4 +1,9 @@
 class Api::CartitemsController < ApplicationController
+  def index
+    # array of cartitem
+    @cartitems = Cartitem.find_by(user_id: current_user)
+  end
+
   def create
     @cartitem = Cartitem.new
     @cartitem.user_id = current_user.id
