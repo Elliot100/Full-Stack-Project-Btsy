@@ -17,7 +17,15 @@ class ProductPage extends React.Component {
   }
 
   product_info() {
-    const { title, price, description } = this.props.product;
+    const { id, title, price, description } = this.props.product;
+    let addToCartText = "Add to cart";
+    let addToCartAction = () => this.props.addToCart(id);
+
+    if (this.props.product.added_by_current_user) {
+      addToCartText = "Added to cart";
+      addToCartAction = () => this.props.deleteFromCart(id);
+    }
+    
     return (
       <div className="product-info">
         <h1 className="product-info-title">{title}</h1>
@@ -26,8 +34,8 @@ class ProductPage extends React.Component {
           <h3>Description</h3>
           {description}
         </div>
-        <button className="growing-button" type="submit">
-          Add to cart
+        <button onClick={addToCartAction} className="growing-button">
+          {addToCartText}
         </button>
       </div>
     );

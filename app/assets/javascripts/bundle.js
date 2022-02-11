@@ -99,7 +99,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchSingleProduct = exports.fetchProducts = exports.RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_PRODUCTS = undefined;
+exports.deleteFromCart = exports.addToCart = exports.fetchSingleProduct = exports.fetchProducts = exports.RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_PRODUCTS = undefined;
 
 var _products = __webpack_require__(/*! ../utils/products */ "./frontend/utils/products.js");
 
@@ -113,6 +113,13 @@ var receiveProducts = function receiveProducts(products) {
   };
 };
 
+var receiveSingleProduct = function receiveSingleProduct(product) {
+  return {
+    type: RECEIVE_SINGLE_PRODUCT,
+    product: product
+  };
+};
+
 var fetchProducts = exports.fetchProducts = function fetchProducts() {
   return function (dispatch) {
     return (0, _products.getProducts)().then(function (products) {
@@ -121,16 +128,25 @@ var fetchProducts = exports.fetchProducts = function fetchProducts() {
   };
 };
 
-var receiveSingleProduct = function receiveSingleProduct(product) {
-  return {
-    type: RECEIVE_SINGLE_PRODUCT,
-    product: product
-  };
-};
-
 var fetchSingleProduct = exports.fetchSingleProduct = function fetchSingleProduct(id) {
   return function (dispatch) {
     return (0, _products.getSingleProduct)(id).then(function (product) {
+      return dispatch(receiveSingleProduct(product));
+    });
+  };
+};
+
+var addToCart = exports.addToCart = function addToCart(id) {
+  return function (dispatch) {
+    return (0, _products.postCartitem)(id).then(function (product) {
+      return dispatch(receiveSingleProduct(product));
+    });
+  };
+};
+
+var deleteFromCart = exports.deleteFromCart = function deleteFromCart(id) {
+  return function (dispatch) {
+    return (0, _products.deleteCartitem)(id).then(function (product) {
       return dispatch(receiveSingleProduct(product));
     });
   };
@@ -846,10 +862,25 @@ var ProductPage = function (_React$Component) {
   }, {
     key: 'product_info',
     value: function product_info() {
+      var _this2 = this;
+
       var _props$product = this.props.product,
+          id = _props$product.id,
           title = _props$product.title,
           price = _props$product.price,
           description = _props$product.description;
+
+      var addToCartText = "Add to cart";
+      var addToCartAction = function addToCartAction() {
+        return _this2.props.addToCart(id);
+      };
+
+      if (this.props.product.added_by_current_user) {
+        addToCartText = "Added to cart";
+        addToCartAction = function addToCartAction() {
+          return _this2.props.deleteFromCart(id);
+        };
+      }
 
       return _react2.default.createElement(
         'div',
@@ -877,8 +908,8 @@ var ProductPage = function (_React$Component) {
         ),
         _react2.default.createElement(
           'button',
-          { className: 'growing-button', type: 'submit' },
-          'Add to cart'
+          { onClick: addToCartAction, className: 'growing-button' },
+          addToCartText
         )
       );
     }
@@ -968,6 +999,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchSingleProduct: function fetchSingleProduct() {
       return dispatch((0, _products.fetchSingleProduct)(ownProps.match.params.id));
+    },
+    addToCart: function addToCart(id) {
+      return dispatch((0, _products.addToCart)(id));
+    },
+    deleteFromCart: function deleteFromCart(id) {
+      return dispatch((0, _products.deleteFromCart)(id));
     }
   };
 };
