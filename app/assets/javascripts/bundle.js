@@ -1571,7 +1571,23 @@ var getProducts = exports.getProducts = function getProducts() {
 
 var getSingleProduct = exports.getSingleProduct = function getSingleProduct(id) {
   return $.ajax({
-    url: 'api/products/' + id
+    url: "api/products/" + id
+  });
+};
+
+var postCartitem = exports.postCartitem = function postCartitem(id) {
+  return $.ajax({
+    url: "/api/cartitems",
+    method: "POST",
+    data: { id: id }
+  });
+};
+
+var deleteCartitem = exports.deleteCartitem = function deleteCartitem(id) {
+  return $.ajax({
+    url: "/api/cartitems",
+    method: "DELETE",
+    data: { id: id }
   });
 };
 
