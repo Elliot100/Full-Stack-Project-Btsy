@@ -369,6 +369,39 @@ exports.default = function () {
 
 /***/ }),
 
+/***/ "./frontend/components/cartitems/cartitem.jsx":
+/*!****************************************************!*\
+  !*** ./frontend/components/cartitems/cartitem.jsx ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line react/display-name
+exports.default = function (_ref) {
+  var cartitem = _ref.cartitem;
+
+  return _react2.default.createElement(
+    "h1",
+    null,
+    cartitem.title
+  );
+};
+
+/***/ }),
+
 /***/ "./frontend/components/cartitems/cartitem_index.jsx":
 /*!**********************************************************!*\
   !*** ./frontend/components/cartitems/cartitem_index.jsx ***!
@@ -389,9 +422,9 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _cartitems = __webpack_require__(/*! ./cartitems */ "./frontend/components/cartitems/cartitems.jsx");
+var _cartitem = __webpack_require__(/*! ./cartitem */ "./frontend/components/cartitems/cartitem.jsx");
 
-var _cartitems2 = _interopRequireDefault(_cartitems);
+var _cartitem2 = _interopRequireDefault(_cartitem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -418,10 +451,17 @@ var CartitemIndex = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var cartitems = this.props.cartitems;
 
+      console.log("zdsfe", cartitems);
+
+      if (!this.props.cartitems) {
+        return _react2.default.createElement(
+          "div",
+          null,
+          "LOADING"
+        );
+      }
       return _react2.default.createElement(
         "div",
         { className: "home-cartitems" },
@@ -429,7 +469,7 @@ var CartitemIndex = function (_React$Component) {
           "div",
           { className: "cartitem-img-frame" },
           cartitems.map(function (cartitem) {
-            return _react2.default.createElement(_cartitems2.default, { key: "cartitem" + cartitem.id, cartitem: cartitem, props: _this2.props });
+            return _react2.default.createElement(_cartitem2.default, { key: "cartitem" + cartitem.id, cartitem: cartitem });
           })
         )
       );
@@ -440,46 +480,6 @@ var CartitemIndex = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = CartitemIndex;
-
-/***/ }),
-
-/***/ "./frontend/components/cartitems/cartitems.jsx":
-/*!*****************************************************!*\
-  !*** ./frontend/components/cartitems/cartitems.jsx ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// eslint-disable-next-line react/display-name
-exports.default = function (_ref) {
-  var cartitem = _ref.cartitem,
-      props = _ref.props;
-
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-
-  //   props.history.push(`/cartitems/${cartitem.id}`);
-  // };
-
-  return _react2.default.createElement(
-    "div",
-    { className: "cartitem-img imagedropshadow" },
-    cartitem.product_id
-  );
-};
 
 /***/ }),
 
@@ -619,19 +619,10 @@ exports.default = function (_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
 
-  var handleClick_carticon = function handleClick_carticon(e) {
-    _react2.default.createElement(
-      _reactRouterDom.Link,
-      { className: "btn", to: "/login" },
-      "Sign in"
-    );
-
-    props.history.push("/users/" + currentUser.id + "/cartitems");
-  };
 
   var cart_icon = _react2.default.createElement(
-    _reactRouterDom.Link,
-    { className: "btn", to: "/users/" + currentUser.id + "/cartitems" },
+    "button",
+    { className: "btn" },
     _react2.default.createElement(
       "svg",
       {
@@ -1615,9 +1606,8 @@ exports.default = function () {
   var cartitems = {};
   switch (action.type) {
     case _cartitems.RECEIVE_CARTITEMS:
-      console.log("asdf", action.cartitems);
-      action.cartitems.forEach(function (cartitem) {
-        cartitems[cartitem.id] = cartitem;
+      action.cartitems.forEach(function (cartitem, idx) {
+        cartitems[idx] = cartitem;
       });
       return cartitems;
     // case RECEIVE_SINGLE_PRODUCT:
@@ -1686,7 +1676,6 @@ exports.default = function () {
 
   Object.freeze(state);
   var products = {};
-  // console.log("asf", action)
   switch (action.type) {
     case _products.RECEIVE_PRODUCTS:
       action.products.forEach(function (product) {

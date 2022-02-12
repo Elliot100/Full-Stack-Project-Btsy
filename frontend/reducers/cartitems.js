@@ -5,10 +5,10 @@ export default (state = {}, action) => {
   const cartitems = {};
   switch (action.type) {
     case RECEIVE_CARTITEMS:
-      console.log("asdf",action.cartitems );
-      action.cartitems.forEach((cartitem) => {
-        cartitems[cartitem.id] = cartitem;
-      });
+        action.cartitems.forEach((cartitem, idx) => {
+          cartitems[idx] = cartitem;
+
+        });
       return cartitems;
     // case RECEIVE_SINGLE_PRODUCT:
     //   return Object.assign({}, state, { [action.product.id]: action.product });

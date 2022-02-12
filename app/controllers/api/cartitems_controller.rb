@@ -1,7 +1,10 @@
 class Api::CartitemsController < ApplicationController
   def index
     # array of cartitem
-    @cartitems = Cartitem.find_by(user_id: current_user)
+    @cartitems = Cartitem.where(user_id: current_user.id)
+    @cartitems = @cartitems.map{ |cartitem| 
+      cartitem.product
+    }
   end
 
   def create

@@ -1,0 +1,1 @@
+json.extract! cartitem, :id, :title, :price, :image, :description
