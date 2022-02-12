@@ -7,5 +7,5 @@ const receiveCartitems = (cartitems) => ({
   cartitems,
 });
 
-export const fetchCartitems = user_id => (dispatch) => getCartitems(user_id)
+export const fetchCartitems = () => (dispatch) => getCartitems()
 .then((cartitems) => dispatch(receiveCartitems(cartitems)));

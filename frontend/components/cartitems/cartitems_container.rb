@@ -1,14 +1,15 @@
 import { connect } from "react-redux";
-import Cartitem from './cartitems';
+import CartitemIndex from './cartitem_index';
+import { fetchCartitems } from "../../actions/cartitems.js"
 
 const mapStateToProps = (state) => {
   return {
-  products: Object.keys(state.entities.products).map((key) => state.entities.products[key]),
-}
+  cartitems: Object.keys(state.entities.cartitems).map((key) => state.entities.cartitems[key]),
+  }
 };
 
 const mapDispatchToProps = (dispatch) => (
-  {fetchProducts: () => dispatch(fetchProducts()),}
+  { fetchCartitems: () => dispatch(fetchCartitems()),}
 );
 
-export default connect(null, null)(Cartitem);
+export default connect(mapStateToProps, mapDispatchToProps)(CartitemIndex);

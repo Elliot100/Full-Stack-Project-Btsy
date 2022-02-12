@@ -86,6 +86,42 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/cartitems.js":
+/*!***************************************!*\
+  !*** ./frontend/actions/cartitems.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchCartitems = exports.RECEIVE_CARTITEMS = undefined;
+
+var _cartitems = __webpack_require__(/*! ../utils/cartitems */ "./frontend/utils/cartitems.js");
+
+var RECEIVE_CARTITEMS = exports.RECEIVE_CARTITEMS = "RECEIVE_CARTITEMS";
+
+var receiveCartitems = function receiveCartitems(cartitems) {
+  return {
+    type: RECEIVE_CARTITEMS,
+    cartitems: cartitems
+  };
+};
+
+var fetchCartitems = exports.fetchCartitems = function fetchCartitems() {
+  return function (dispatch) {
+    return (0, _cartitems.getCartitems)().then(function (cartitems) {
+      return dispatch(receiveCartitems(cartitems));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/products.js":
 /*!**************************************!*\
   !*** ./frontend/actions/products.js ***!
@@ -333,10 +369,10 @@ exports.default = function () {
 
 /***/ }),
 
-/***/ "./frontend/components/cartitems/cartitems.jsx":
-/*!*****************************************************!*\
-  !*** ./frontend/components/cartitems/cartitems.jsx ***!
-  \*****************************************************/
+/***/ "./frontend/components/cartitems/cartitem_index.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/cartitems/cartitem_index.jsx ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -353,6 +389,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _cartitems = __webpack_require__(/*! ./cartitems */ "./frontend/components/cartitems/cartitems.jsx");
+
+var _cartitems2 = _interopRequireDefault(_cartitems);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -361,30 +401,85 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Cartitem = function (_React$Component) {
-  _inherits(Cartitem, _React$Component);
+var CartitemIndex = function (_React$Component) {
+  _inherits(CartitemIndex, _React$Component);
 
-  function Cartitem(props) {
-    _classCallCheck(this, Cartitem);
+  function CartitemIndex(props) {
+    _classCallCheck(this, CartitemIndex);
 
-    return _possibleConstructorReturn(this, (Cartitem.__proto__ || Object.getPrototypeOf(Cartitem)).call(this, props));
+    return _possibleConstructorReturn(this, (CartitemIndex.__proto__ || Object.getPrototypeOf(CartitemIndex)).call(this, props));
   }
 
-  _createClass(Cartitem, [{
-    key: 'render',
+  _createClass(CartitemIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchCartitems();
+    }
+  }, {
+    key: "render",
     value: function render() {
+      var _this2 = this;
+
+      var cartitems = this.props.cartitems;
+
       return _react2.default.createElement(
-        'h1',
-        null,
-        'Cartitem'
+        "div",
+        { className: "home-cartitems" },
+        _react2.default.createElement(
+          "div",
+          { className: "cartitem-img-frame" },
+          cartitems.map(function (cartitem) {
+            return _react2.default.createElement(_cartitems2.default, { key: "cartitem" + cartitem.id, cartitem: cartitem, props: _this2.props });
+          })
+        )
       );
     }
   }]);
 
-  return Cartitem;
+  return CartitemIndex;
 }(_react2.default.Component);
 
-exports.default = Cartitem;
+exports.default = CartitemIndex;
+
+/***/ }),
+
+/***/ "./frontend/components/cartitems/cartitems.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/cartitems/cartitems.jsx ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line react/display-name
+exports.default = function (_ref) {
+  var cartitem = _ref.cartitem,
+      props = _ref.props;
+
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+
+  //   props.history.push(`/cartitems/${cartitem.id}`);
+  // };
+
+  return _react2.default.createElement(
+    "div",
+    { className: "cartitem-img imagedropshadow" },
+    cartitem.product_id
+  );
+};
 
 /***/ }),
 
@@ -398,22 +493,25 @@ exports.default = Cartitem;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _cartitems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cartitems */ "./frontend/components/cartitems/cartitems.jsx");
-/* harmony import */ var _cartitems__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_cartitems__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _cartitem_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cartitem_index */ "./frontend/components/cartitems/cartitem_index.jsx");
+/* harmony import */ var _cartitem_index__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_cartitem_index__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/cartitems.js */ "./frontend/actions/cartitems.js");
+/* harmony import */ var _actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
 const mapStateToProps = (state) => {
   return {
-  products: Object.keys(state.entities.products).map((key) => state.entities.products[key]),
-}
+  cartitems: Object.keys(state.entities.cartitems).map((key) => state.entities.cartitems[key]),
+  }
 };
 
 const mapDispatchToProps = (dispatch) => (
-  {fetchProducts: () => dispatch(fetchProducts()),}
+  { fetchCartitems: () => dispatch(Object(_actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2__["fetchCartitems"])()),}
 );
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, null)(_cartitems__WEBPACK_IMPORTED_MODULE_1___default.a));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_cartitem_index__WEBPACK_IMPORTED_MODULE_1___default.a));
 
 
 /***/ }),
@@ -521,12 +619,29 @@ exports.default = function (_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
 
+  var handleClick_carticon = function handleClick_carticon(e) {
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { className: "btn", to: "/login" },
+      "Sign in"
+    );
+
+    props.history.push("/users/" + currentUser.id + "/cartitems");
+  };
+
   var cart_icon = _react2.default.createElement(
-    "span",
-    { className: "btn" },
+    _reactRouterDom.Link,
+    { className: "btn", to: "/users/" + currentUser.id + "/cartitems" },
     _react2.default.createElement(
       "svg",
-      { width: "24", height: "24", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false" },
+      {
+        width: "24",
+        height: "24",
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        "aria-hidden": "true",
+        focusable: "false"
+      },
       _react2.default.createElement("circle", { cx: "9", cy: "20", r: "2" }),
       _react2.default.createElement("circle", { cx: "16", cy: "20", r: "2" }),
       _react2.default.createElement("path", { d: "M21,5H5.665L4.978,1.79A1,1,0,0,0,4,1H1A1,1,0,0,0,1,3H3.191L6.022,16.21a0.962,0.962,0,0,0,.064.159,1.015,1.015,0,0,0,.063.155,0.978,0.978,0,0,0,.133.153,1.006,1.006,0,0,0,.088.1,1,1,0,0,0,.185.105,0.975,0.975,0,0,0,.107.06A0.994,0.994,0,0,0,7,17H18a1,1,0,0,0,.958-0.713l3-10A1,1,0,0,0,21,5Zm-2.244,5H16V7h3.656ZM7.819,15l-0.6-3H9v3H7.819ZM11,12h3v3H11V12Zm0-2V7h3v3H11ZM9,7v3H6.82L6.22,7H9Zm8.256,8H16V12h2.156Z" })
@@ -556,13 +671,21 @@ exports.default = function (_ref) {
         className: "search-bar-button",
         value: "Search",
         "aria-label": "Search",
-        "data-id": "gnav-search-submit-button" },
+        "data-id": "gnav-search-submit-button"
+      },
       _react2.default.createElement(
         "span",
         { className: "search-bar-button-icon" },
         _react2.default.createElement(
           "svg",
-          { width: "24", height: "24", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24", "aria-hidden": "true", focusable: "false" },
+          {
+            width: "24",
+            height: "24",
+            xmlns: "http://www.w3.org/2000/svg",
+            viewBox: "0 0 24 24",
+            "aria-hidden": "true",
+            focusable: "false"
+          },
           _react2.default.createElement("path", { d: "M10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18ZM10,4a6,6,0,1,0,6,6A6.007,6.007,0,0,0,10,4Z" }),
           _react2.default.createElement("path", { d: "M21,22a1,1,0,0,1-.707-0.293l-4-4a1,1,0,0,1,1.414-1.414l4,4A1,1,0,0,1,21,22Z" })
         )
@@ -1468,6 +1591,44 @@ exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(_signup2.de
 
 /***/ }),
 
+/***/ "./frontend/reducers/cartitems.js":
+/*!****************************************!*\
+  !*** ./frontend/reducers/cartitems.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _cartitems = __webpack_require__(/*! ../actions/cartitems */ "./frontend/actions/cartitems.js");
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(state);
+  var cartitems = {};
+  switch (action.type) {
+    case _cartitems.RECEIVE_CARTITEMS:
+      console.log("asdf", action.cartitems);
+      action.cartitems.forEach(function (cartitem) {
+        cartitems[cartitem.id] = cartitem;
+      });
+      return cartitems;
+    // case RECEIVE_SINGLE_PRODUCT:
+    //   return Object.assign({}, state, { [action.product.id]: action.product });
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities.js":
 /*!***************************************!*\
   !*** ./frontend/reducers/entities.js ***!
@@ -1488,10 +1649,15 @@ var _products = __webpack_require__(/*! ./products */ "./frontend/reducers/produ
 
 var _products2 = _interopRequireDefault(_products);
 
+var _cartitems = __webpack_require__(/*! ./cartitems */ "./frontend/reducers/cartitems.js");
+
+var _cartitems2 = _interopRequireDefault(_cartitems);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-  products: _products2.default
+  products: _products2.default,
+  cartitems: _cartitems2.default
 });
 
 /***/ }),
@@ -1673,6 +1839,27 @@ var thunk = function thunk(_ref) {
 };
 
 exports.default = thunk;
+
+/***/ }),
+
+/***/ "./frontend/utils/cartitems.js":
+/*!*************************************!*\
+  !*** ./frontend/utils/cartitems.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getCartitems = exports.getCartitems = function getCartitems(user_id) {
+  return $.ajax({
+    url: "api/users/" + user_id + "/cartitems"
+  });
+};
 
 /***/ }),
 

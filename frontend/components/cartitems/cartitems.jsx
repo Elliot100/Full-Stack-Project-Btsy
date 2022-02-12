@@ -1,15 +1,12 @@
-import React from 'react';
+import React from "react";
 
-class Cartitem extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+// eslint-disable-next-line react/display-name
+export default ({ cartitem, props }) => {
+  // const handleClick = (e) => {
+  //   e.preventDefault();
 
-  render() {
-    return (
-      <h1>Cartitem</h1>
-    )
-  }
-}
+  //   props.history.push(`/cartitems/${cartitem.id}`);
+  // };
 
-export default Cartitem;
+  return <div className="cartitem-img imagedropshadow" >{cartitem.product_id}</div>;
+};
