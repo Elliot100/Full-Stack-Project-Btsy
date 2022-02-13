@@ -16,5 +16,15 @@
 
 .cartitem-frame {
   width: 65%;
-  height: 200px;
+  height: 300px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.cartitem-info-frame {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
 }

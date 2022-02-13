@@ -397,9 +397,20 @@ exports.default = function (_ref) {
     "div",
     { className: "cartitem-frame" },
     _react2.default.createElement(
-      "h1",
-      null,
-      cartitem.title
+      "div",
+      { className: "cartitem-info-frame" },
+      _react2.default.createElement("img", { src: cartitem.image }),
+      _react2.default.createElement(
+        "h1",
+        null,
+        cartitem.title
+      ),
+      _react2.default.createElement(
+        "p",
+        null,
+        "$",
+        cartitem.price
+      )
     )
   );
 };
