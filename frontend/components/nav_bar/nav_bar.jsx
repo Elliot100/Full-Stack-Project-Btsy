@@ -65,7 +65,7 @@ export default ({ currentUser, logout }) => {
   const auth = currentUser ? (
     <div className="nav-bar-items">
       <p>Hi {currentUser.username.split(" ")[0]}</p>
-      {cart_icon}
+      <Link to={`/users/${currentUser.id}/cartitems`}>{cart_icon}</Link>
       <button onClick={logout}>Log Out</button>
     </div>
   ) : (
@@ -73,7 +73,6 @@ export default ({ currentUser, logout }) => {
       <Link className="btn" to="/login">
         Sign in
       </Link>
-      {cart_icon}
     </div>
   );
 

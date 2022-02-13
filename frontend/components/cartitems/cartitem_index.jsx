@@ -12,7 +12,6 @@ class CartitemIndex extends React.Component {
 
   render() {
     const { cartitems } = this.props;
-    console.log("zdsfe", cartitems);
 
     if (!this.props.cartitems) {
       return <div>LOADING</div>;

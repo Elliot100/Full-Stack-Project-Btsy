@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    currentUser: state.session.currentUser,
     product: state.entities.products[ownProps.match.params.id],
   };
 };

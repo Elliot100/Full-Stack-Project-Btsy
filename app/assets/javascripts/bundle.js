@@ -453,7 +453,6 @@ var CartitemIndex = function (_React$Component) {
     value: function render() {
       var cartitems = this.props.cartitems;
 
-      console.log("zdsfe", cartitems);
 
       if (!this.props.cartitems) {
         return _react2.default.createElement(
@@ -693,7 +692,11 @@ exports.default = function (_ref) {
       "Hi ",
       currentUser.username.split(" ")[0]
     ),
-    cart_icon,
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { to: "/users/" + currentUser.id + "/cartitems" },
+      cart_icon
+    ),
     _react2.default.createElement(
       "button",
       { onClick: logout },
@@ -706,8 +709,7 @@ exports.default = function (_ref) {
       _reactRouterDom.Link,
       { className: "btn", to: "/login" },
       "Sign in"
-    ),
-    cart_icon
+    )
   );
 
   var categories = _react2.default.createElement(
@@ -1033,6 +1035,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
+var _ReactDOMFactories = __webpack_require__(/*! react/lib/ReactDOMFactories */ "./node_modules/react/lib/ReactDOMFactories.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1075,7 +1079,8 @@ var ProductPage = function (_React$Component) {
 
       var addToCartText = "Add to cart";
       var addToCartAction = function addToCartAction() {
-        return _this2.props.addToCart(id);
+        _this2.props.addToCart(id);
+        _this2.props.history.push('/users/' + _this2.props.currentUser.id + '/cartitems');
       };
 
       if (this.props.product.added_by_current_user) {
@@ -1194,6 +1199,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
+    currentUser: state.session.currentUser,
     product: state.entities.products[ownProps.match.params.id]
   };
 };
