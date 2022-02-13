@@ -8,8 +8,9 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => (
-  { fetchCartitems: () => dispatch(fetchCartitems()),}
-);
+const mapDispatchToProps = (dispatch) => ({ 
+  fetchCartitems: () => dispatch(fetchCartitems()),
+  deleteFromCart: id => dispatch(deleteFromCart(id))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartitemIndex);

@@ -393,18 +393,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function (_ref) {
   var cartitem = _ref.cartitem;
 
+  // const remove_from_cart = (
+  //   this.props.deleteFromCart(cartitem.id)
+  // );
+
+  var image_title_remove = _react2.default.createElement(
+    "section",
+    { className: "image-title-remove" },
+    _react2.default.createElement("img", { src: cartitem.image }),
+    _react2.default.createElement(
+      "div",
+      { className: "title-remove" },
+      _react2.default.createElement(
+        "p",
+        null,
+        cartitem.title
+      ),
+      _react2.default.createElement(
+        "button",
+        null,
+        "Remove"
+      )
+    )
+  );
+
   return _react2.default.createElement(
     "div",
     { className: "cartitem-frame" },
     _react2.default.createElement(
       "div",
       { className: "cartitem-info-frame" },
-      _react2.default.createElement("img", { src: cartitem.image }),
-      _react2.default.createElement(
-        "h1",
-        null,
-        cartitem.title
-      ),
+      image_title_remove,
       _react2.default.createElement(
         "p",
         null,
@@ -547,9 +566,10 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => (
-  { fetchCartitems: () => dispatch(Object(_actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2__["fetchCartitems"])()),}
-);
+const mapDispatchToProps = (dispatch) => ({ 
+  fetchCartitems: () => dispatch(Object(_actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2__["fetchCartitems"])()),
+  deleteFromCart: id => dispatch(deleteFromCart(id))
+});
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_cartitem_index__WEBPACK_IMPORTED_MODULE_1___default.a));
 

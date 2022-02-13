@@ -28,3 +28,17 @@
   display: flex;
   justify-content: space-between;
 }
+
+.image-title-remove {
+  width: 50%;
+  height:80%;
+  display: flex;
+}
+
+.title-remove {
+  width: 20%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
