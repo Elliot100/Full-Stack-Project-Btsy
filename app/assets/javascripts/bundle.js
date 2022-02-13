@@ -394,9 +394,13 @@ exports.default = function (_ref) {
   var cartitem = _ref.cartitem;
 
   return _react2.default.createElement(
-    "h1",
-    null,
-    cartitem.title
+    "div",
+    { className: "cartitem-frame" },
+    _react2.default.createElement(
+      "h1",
+      null,
+      cartitem.title
+    )
   );
 };
 
@@ -426,6 +430,8 @@ var _cartitem = __webpack_require__(/*! ./cartitem */ "./frontend/components/car
 
 var _cartitem2 = _interopRequireDefault(_cartitem);
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -449,6 +455,29 @@ var CartitemIndex = function (_React$Component) {
       this.props.fetchCartitems();
     }
   }, {
+    key: "cart_nav",
+    value: function cart_nav() {
+      return _react2.default.createElement(
+        "div",
+        { className: "cart-nav-frame" },
+        _react2.default.createElement(
+          "div",
+          { className: "cart-nav" },
+          _react2.default.createElement(
+            "p",
+            null,
+            this.props.cartitems.length,
+            " items in your cart"
+          ),
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: "/products" },
+            "Keep shopping"
+          )
+        )
+      );
+    }
+  }, {
     key: "render",
     value: function render() {
       var cartitems = this.props.cartitems;
@@ -463,10 +492,11 @@ var CartitemIndex = function (_React$Component) {
       }
       return _react2.default.createElement(
         "div",
-        { className: "home-cartitems" },
+        null,
+        this.cart_nav(),
         _react2.default.createElement(
           "div",
-          { className: "cartitem-img-frame" },
+          null,
           cartitems.map(function (cartitem) {
             return _react2.default.createElement(_cartitem2.default, { key: "cartitem" + cartitem.id, cartitem: cartitem });
           })
