@@ -536,9 +536,33 @@ var CartitemIndex = function (_React$Component) {
         "div",
         { className: "checkout-frame" },
         _react2.default.createElement(
-          "h1",
-          null,
-          "checkout"
+          "div",
+          { className: "checkout" },
+          _react2.default.createElement(
+            "div",
+            { className: "items-total border-bottom checkout-styles" },
+            "Item(s) total"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "subtotal checkout-styles" },
+            "Subtotal"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "shipping border-bottom checkout-styles" },
+            "Shipping"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "total checkout-styles" },
+            "Total"
+          ),
+          _react2.default.createElement(
+            "button",
+            { className: "growing-button" },
+            "Proceed to checkout"
+          )
         )
       );
     }

@@ -24,10 +24,16 @@ class CartitemIndex extends React.Component {
 
   checkout_frame() {
     return (
-    <div className="checkout-frame">
-      <h1>checkout</h1>
-    </div>
-    )}
+      <div className="checkout-frame">
+        <div className="checkout">
+          <div className="items-total border-bottom checkout-styles">Item(s) total</div>
+          <div className="subtotal checkout-styles">Subtotal</div>
+          <div className="shipping border-bottom checkout-styles">Shipping</div>
+          <div className="total checkout-styles">Total</div>
+          <button className="growing-button">Proceed to checkout</button>
+        </div>
+      </div>
+    );}
 
   render() {
     const { cartitems } = this.props;
