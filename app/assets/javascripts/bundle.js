@@ -530,6 +530,19 @@ var CartitemIndex = function (_React$Component) {
       );
     }
   }, {
+    key: "checkout_frame",
+    value: function checkout_frame() {
+      return _react2.default.createElement(
+        "div",
+        { className: "checkout-frame" },
+        _react2.default.createElement(
+          "h1",
+          null,
+          "checkout"
+        )
+      );
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -550,10 +563,15 @@ var CartitemIndex = function (_React$Component) {
         this.cart_nav(),
         _react2.default.createElement(
           "div",
-          null,
-          cartitems.map(function (cartitem) {
-            return _react2.default.createElement(_cartitem2.default, { key: "cartitem" + cartitem.id, cartitem: cartitem, props: _this2.props });
-          })
+          { className: "frame" },
+          _react2.default.createElement(
+            "div",
+            { className: "frame-left" },
+            cartitems.map(function (cartitem) {
+              return _react2.default.createElement(_cartitem2.default, { key: "cartitem" + cartitem.id, cartitem: cartitem, props: _this2.props });
+            })
+          ),
+          this.checkout_frame()
         )
       );
     }

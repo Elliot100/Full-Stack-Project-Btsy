@@ -22,6 +22,13 @@ class CartitemIndex extends React.Component {
     );
   }
 
+  checkout_frame() {
+    return (
+    <div className="checkout-frame">
+      <h1>checkout</h1>
+    </div>
+    )}
+
   render() {
     const { cartitems } = this.props;
 
@@ -31,10 +38,13 @@ class CartitemIndex extends React.Component {
     return (
       <div>
         {this.cart_nav()}
-        <div>
-          {cartitems.map((cartitem) => (
-            <Cartitem key={`cartitem${cartitem.id}`} cartitem={cartitem} props={this.props} />
-          ))}
+        <div className="frame">
+          <div className="frame-left">
+            {cartitems.map((cartitem) => (
+              <Cartitem key={`cartitem${cartitem.id}`} cartitem={cartitem} props={this.props} />
+            ))}
+          </div>
+          {this.checkout_frame()}
         </div>
       </div>
     );

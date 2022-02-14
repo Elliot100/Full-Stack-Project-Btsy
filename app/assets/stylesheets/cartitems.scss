@@ -11,11 +11,12 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-right: 10px;
 }
 
 .cartitem-frame {
-  width: 65%;
+  width: 100%;
   height: 300px;
   display: flex;
   justify-content: right;
@@ -76,4 +77,20 @@
   font-weight: bold;
   display: flex;
   align-items: flex-start;
+}
+
+.frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.frame-left {
+  width: 65%;
+}
+
+.checkout-frame {
+  width: 35%;
+  height: 300px;
+
 }
