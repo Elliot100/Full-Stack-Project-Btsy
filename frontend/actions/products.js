@@ -1,4 +1,5 @@
-import { getProducts, getSingleProduct, postCartitem, deleteCartitem } from '../utils/products';
+import { getProducts, getSingleProduct } from '../utils/products';
+import { postCartitem, deleteCartitem } from '../utils/cartitems';
 
 export const RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
 export const RECEIVE_SINGLE_PRODUCT = "RECEIVE_SINGLE_PRODUCT";

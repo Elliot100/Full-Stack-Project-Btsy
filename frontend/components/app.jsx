@@ -6,7 +6,7 @@ import SignupContainer from "./session/signup_container";
 import LoginContainer from "./session/login_container";
 import Home from "./home/home";
 import ProductPageContainer from "./products/product_page_container";
-import CartitemContainer from './cartitems/cartitems_container.rb';
+import CartitemContainer from './cartitems/cartitems_container';
 import { Route, Switch } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from "../utils/route_utils";
 

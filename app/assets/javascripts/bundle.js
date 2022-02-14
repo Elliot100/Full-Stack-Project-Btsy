@@ -99,7 +99,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchCartitems = exports.RECEIVE_CARTITEMS = undefined;
+exports.deleteFromCart = exports.fetchCartitems = exports.RECEIVE_CARTITEMS = undefined;
 
 var _cartitems = __webpack_require__(/*! ../utils/cartitems */ "./frontend/utils/cartitems.js");
 
@@ -116,6 +116,23 @@ var fetchCartitems = exports.fetchCartitems = function fetchCartitems() {
   return function (dispatch) {
     return (0, _cartitems.getCartitems)().then(function (cartitems) {
       return dispatch(receiveCartitems(cartitems));
+    });
+  };
+};
+
+// export const addToCart = (id) => (dispatch) =>
+//   postCartitem(id).then((product) => dispatch(receiveSingleProduct(product)));
+
+// export const deleteFromCart = (id) => (dispatch) =>
+//   deleteCartitem(id).then(getCartitems()
+// .then((cartitems) => {
+//   dispatch(receiveCartitems(cartitems))})
+// );
+
+var deleteFromCart = exports.deleteFromCart = function deleteFromCart(id) {
+  return function (dispatch) {
+    return (0, _cartitems.deleteCartitem)(id).then(_cartitems.getCartitems).then(function (cartitems) {
+      dispatch(receiveCartitems(cartitems));
     });
   };
 };
@@ -138,6 +155,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.deleteFromCart = exports.addToCart = exports.fetchSingleProduct = exports.fetchProducts = exports.RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_PRODUCTS = undefined;
 
 var _products = __webpack_require__(/*! ../utils/products */ "./frontend/utils/products.js");
+
+var _cartitems = __webpack_require__(/*! ../utils/cartitems */ "./frontend/utils/cartitems.js");
 
 var RECEIVE_PRODUCTS = exports.RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
 var RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_SINGLE_PRODUCT = "RECEIVE_SINGLE_PRODUCT";
@@ -174,7 +193,7 @@ var fetchSingleProduct = exports.fetchSingleProduct = function fetchSingleProduc
 
 var addToCart = exports.addToCart = function addToCart(id) {
   return function (dispatch) {
-    return (0, _products.postCartitem)(id).then(function (product) {
+    return (0, _cartitems.postCartitem)(id).then(function (product) {
       return dispatch(receiveSingleProduct(product));
     });
   };
@@ -182,7 +201,7 @@ var addToCart = exports.addToCart = function addToCart(id) {
 
 var deleteFromCart = exports.deleteFromCart = function deleteFromCart(id) {
   return function (dispatch) {
-    return (0, _products.deleteCartitem)(id).then(function (product) {
+    return (0, _cartitems.deleteCartitem)(id).then(function (product) {
       return dispatch(receiveSingleProduct(product));
     });
   };
@@ -337,7 +356,7 @@ var _product_page_container = __webpack_require__(/*! ./products/product_page_co
 
 var _product_page_container2 = _interopRequireDefault(_product_page_container);
 
-var _cartitems_container = __webpack_require__(/*! ./cartitems/cartitems_container.rb */ "./frontend/components/cartitems/cartitems_container.rb");
+var _cartitems_container = __webpack_require__(/*! ./cartitems/cartitems_container */ "./frontend/components/cartitems/cartitems_container.js");
 
 var _cartitems_container2 = _interopRequireDefault(_cartitems_container);
 
@@ -391,11 +410,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // eslint-disable-next-line react/display-name
 exports.default = function (_ref) {
-  var cartitem = _ref.cartitem;
+  var cartitem = _ref.cartitem,
+      props = _ref.props;
 
-  // const remove_from_cart = (
-  //   this.props.deleteFromCart(cartitem.id)
-  // );
+  var remove_from_cart = function remove_from_cart(e) {
+    e.preventDefault();
+
+    props.deleteFromCart(cartitem.id);
+  };
 
   var image_title_remove = _react2.default.createElement(
     "section",
@@ -411,7 +433,7 @@ exports.default = function (_ref) {
       ),
       _react2.default.createElement(
         "button",
-        null,
+        { onClick: remove_from_cart },
         "Remove"
       )
     )
@@ -510,6 +532,8 @@ var CartitemIndex = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var cartitems = this.props.cartitems;
 
 
@@ -528,7 +552,7 @@ var CartitemIndex = function (_React$Component) {
           "div",
           null,
           cartitems.map(function (cartitem) {
-            return _react2.default.createElement(_cartitem2.default, { key: "cartitem" + cartitem.id, cartitem: cartitem });
+            return _react2.default.createElement(_cartitem2.default, { key: "cartitem" + cartitem.id, cartitem: cartitem, props: _this2.props });
           })
         )
       );
@@ -542,37 +566,51 @@ exports.default = CartitemIndex;
 
 /***/ }),
 
-/***/ "./frontend/components/cartitems/cartitems_container.rb":
+/***/ "./frontend/components/cartitems/cartitems_container.js":
 /*!**************************************************************!*\
-  !*** ./frontend/components/cartitems/cartitems_container.rb ***!
+  !*** ./frontend/components/cartitems/cartitems_container.js ***!
   \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _cartitem_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cartitem_index */ "./frontend/components/cartitems/cartitem_index.jsx");
-/* harmony import */ var _cartitem_index__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_cartitem_index__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/cartitems.js */ "./frontend/actions/cartitems.js");
-/* harmony import */ var _actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2__);
 
 
-
-
-const mapStateToProps = (state) => {
-  return {
-  cartitems: Object.keys(state.entities.cartitems).map((key) => state.entities.cartitems[key]),
-  }
-};
-
-const mapDispatchToProps = (dispatch) => ({ 
-  fetchCartitems: () => dispatch(Object(_actions_cartitems_js__WEBPACK_IMPORTED_MODULE_2__["fetchCartitems"])()),
-  deleteFromCart: id => dispatch(deleteFromCart(id))
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_cartitem_index__WEBPACK_IMPORTED_MODULE_1___default.a));
+var _cartitem_index = __webpack_require__(/*! ./cartitem_index */ "./frontend/components/cartitems/cartitem_index.jsx");
 
+var _cartitem_index2 = _interopRequireDefault(_cartitem_index);
+
+var _cartitems = __webpack_require__(/*! ../../actions/cartitems */ "./frontend/actions/cartitems.js");
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    cartitems: Object.keys(state.entities.cartitems).map(function (key) {
+      return state.entities.cartitems[key];
+    })
+    // cartitems: state.entities.cartitems
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchCartitems: function fetchCartitems() {
+      return dispatch((0, _cartitems.fetchCartitems)());
+    },
+    deleteFromCart: function deleteFromCart(id) {
+      return dispatch((0, _cartitems.deleteFromCart)(id));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_cartitem_index2.default);
 
 /***/ }),
 
@@ -1096,8 +1134,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
-var _ReactDOMFactories = __webpack_require__(/*! react/lib/ReactDOMFactories */ "./node_modules/react/lib/ReactDOMFactories.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1140,8 +1176,9 @@ var ProductPage = function (_React$Component) {
 
       var addToCartText = "Add to cart";
       var addToCartAction = function addToCartAction() {
-        _this2.props.addToCart(id);
-        _this2.props.history.push('/users/' + _this2.props.currentUser.id + '/cartitems');
+        _this2.props.addToCart(id).then(function () {
+          return _this2.props.history.push('/users/' + _this2.props.currentUser.id + '/cartitems');
+        });
       };
 
       if (this.props.product.added_by_current_user) {
@@ -1665,18 +1702,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _cartitems = __webpack_require__(/*! ../actions/cartitems */ "./frontend/actions/cartitems.js");
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
   Object.freeze(state);
-  var cartitems = {};
+  var cartitems = [];
   switch (action.type) {
     case _cartitems.RECEIVE_CARTITEMS:
-      action.cartitems.forEach(function (cartitem, idx) {
-        cartitems[idx] = cartitem;
-      });
-      return cartitems;
+      // console.log('asdf',action.cartitems);
+      //   action.cartitems.forEach((cartitem, idx) => {
+      //     cartitems[idx] = cartitem;
+      //   });
+      //   return cartitems;
+      return [].concat(_toConsumableArray(action.cartitems));
+    // return action.cartitems;
     // case RECEIVE_SINGLE_PRODUCT:
     //   return Object.assign({}, state, { [action.product.id]: action.product });
     default:
@@ -1917,6 +1959,22 @@ var getCartitems = exports.getCartitems = function getCartitems(user_id) {
   });
 };
 
+var postCartitem = exports.postCartitem = function postCartitem(id) {
+  return $.ajax({
+    url: "/api/cartitems",
+    method: "POST",
+    data: { id: id }
+  });
+};
+
+var deleteCartitem = exports.deleteCartitem = function deleteCartitem(id) {
+  return $.ajax({
+    url: "/api/cartitems",
+    method: "DELETE",
+    data: { id: id }
+  });
+};
+
 /***/ }),
 
 /***/ "./frontend/utils/products.js":
@@ -1940,23 +1998,7 @@ var getProducts = exports.getProducts = function getProducts() {
 
 var getSingleProduct = exports.getSingleProduct = function getSingleProduct(id) {
   return $.ajax({
-    url: "api/products/" + id
-  });
-};
-
-var postCartitem = exports.postCartitem = function postCartitem(id) {
-  return $.ajax({
-    url: "/api/cartitems",
-    method: "POST",
-    data: { id: id }
-  });
-};
-
-var deleteCartitem = exports.deleteCartitem = function deleteCartitem(id) {
-  return $.ajax({
-    url: "/api/cartitems",
-    method: "DELETE",
-    data: { id: id }
+    url: 'api/products/' + id
   });
 };
 

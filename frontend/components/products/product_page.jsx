@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { s } from 'react/lib/ReactDOMFactories';
 
 
 class ProductPage extends React.Component {
@@ -21,8 +20,10 @@ class ProductPage extends React.Component {
     const { id, title, price, description } = this.props.product;
     let addToCartText = "Add to cart";
     let addToCartAction = () => {
-      this.props.addToCart(id);
-      this.props.history.push(`/users/${this.props.currentUser.id}/cartitems`);
+      this.props.addToCart(id)
+      .then(() => 
+      this.props.history.push(`/users/${this.props.currentUser.id}/cartitems`)
+      )
     }
 
     if (this.props.product.added_by_current_user) {

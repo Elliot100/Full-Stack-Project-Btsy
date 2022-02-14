@@ -33,7 +33,7 @@ class CartitemIndex extends React.Component {
         {this.cart_nav()}
         <div>
           {cartitems.map((cartitem) => (
-            <Cartitem key={`cartitem${cartitem.id}`} cartitem={cartitem} />
+            <Cartitem key={`cartitem${cartitem.id}`} cartitem={cartitem} props={this.props} />
           ))}
         </div>
       </div>
