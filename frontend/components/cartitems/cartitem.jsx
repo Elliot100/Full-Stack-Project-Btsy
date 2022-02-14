@@ -12,8 +12,8 @@ export default ({ cartitem, props }) => {
     <section className="image-title-remove">
       <img src={cartitem.image} />
       <div className="title-remove">
-        <p>{cartitem.title}</p>
-        <button onClick={remove_from_cart}>Remove</button>
+        <h1>{cartitem.title}</h1>
+        <p onClick={remove_from_cart}>Remove</p>
       </div>
     </section>
   );

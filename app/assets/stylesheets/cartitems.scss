@@ -27,18 +27,53 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .image-title-remove {
-  width: 50%;
+  width: 65%;
   height:80%;
   display: flex;
+  justify-content: space-between;
+}
+
+.image-title-remove > img {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 5%;
 }
 
 .title-remove {
-  width: 20%;
-  height: 80%;
+  width: 55%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.title-remove > h1 {
+  line-height: 24px;
+  font-family: inherit;
+  font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.title-remove > p {
+  font-weight: bold;
+  display: flex;
+  width: 20%;
+}
+
+.title-remove > p:hover {
+  cursor: pointer;  
+}
+
+.cartitem-info-frame > p {
+  width: 10%;
+  height: 80%;
+  font-weight: bold;
+  display: flex;
+  align-items: flex-start;
 }
