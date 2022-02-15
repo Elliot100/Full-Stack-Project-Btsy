@@ -566,26 +566,61 @@ var CartitemIndex = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { className: "items-total border-bottom checkout-styles" },
-            "Item(s) total $",
-            this.state.itemstotal
+            _react2.default.createElement(
+              "p",
+              null,
+              "Item(s) total"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              "$",
+              this.state.itemstotal
+            )
           ),
           _react2.default.createElement(
             "div",
             { className: "subtotal checkout-styles" },
-            "Subtotal $",
-            this.state.subtotal
+            _react2.default.createElement(
+              "p",
+              null,
+              "Subtotal"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              "$",
+              this.state.subtotal
+            )
           ),
           _react2.default.createElement(
             "div",
             { className: "shipping border-bottom checkout-styles" },
-            "Shipping $",
-            this.state.shipping.toFixed(2)
+            _react2.default.createElement(
+              "p",
+              null,
+              "Shipping"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              "$",
+              this.state.shipping.toFixed(2)
+            )
           ),
           _react2.default.createElement(
             "div",
             { className: "total checkout-styles" },
-            "Total $",
-            this.state.total.toFixed(2)
+            _react2.default.createElement(
+              "p",
+              null,
+              "Total"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              this.state.total.toFixed(2)
+            )
           ),
           _react2.default.createElement(
             "button",

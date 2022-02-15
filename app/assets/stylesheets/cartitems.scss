@@ -15,6 +15,13 @@
   padding-right: 10px;
 }
 
+.cart-nav > p {
+  font-size: 34px;
+  font-family: "Guardian-EgypTT",Charter,"Charter Bitstream",Cambria,"Noto Serif Light","Droid Serif",Georgia,serif;
+  font-weight: 100;
+  letter-spacing: 0.5px;
+}
+
 .cartitem-frame {
   width: 100%;
   height: 300px;
@@ -58,7 +65,7 @@
   font-family: inherit;
   font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .title-remove > p {
@@ -95,7 +102,7 @@
 }
 
 .checkout {
-  width: 80%;
+  width: 70%;
   height: 100%;
   box-shadow: 0 4px 24px rgba(34, 34, 34, .15);
   border-radius: 5%;
@@ -112,10 +119,12 @@
 }
 
 .checkout-styles {
-  padding: 20px 0;
   width: 90%;
   font-size: inherit;
   font-family: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .items-total {

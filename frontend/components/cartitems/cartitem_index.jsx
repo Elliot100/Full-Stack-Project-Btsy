@@ -48,10 +48,22 @@ class CartitemIndex extends React.Component {
     return (
       <div className="checkout-frame">
         <div className="checkout">
-          <div className="items-total border-bottom checkout-styles">Item(s) total ${this.state.itemstotal}</div>
-          <div className="subtotal checkout-styles">Subtotal ${this.state.subtotal}</div>
-          <div className="shipping border-bottom checkout-styles">Shipping ${this.state.shipping.toFixed(2)}</div>
-          <div className="total checkout-styles">Total ${this.state.total.toFixed(2)}</div>
+          <div className="items-total border-bottom checkout-styles">
+            <p>Item(s) total</p>
+            <p>${this.state.itemstotal}</p>
+          </div>
+          <div className="subtotal checkout-styles">
+            <p>Subtotal</p>
+            <p>${this.state.subtotal}</p>
+          </div>
+          <div className="shipping border-bottom checkout-styles">
+            <p>Shipping</p>
+            <p>${this.state.shipping.toFixed(2)}</p>
+          </div>
+          <div className="total checkout-styles">
+            <p>Total</p>
+            <p>{this.state.total.toFixed(2)}</p>
+          </div>
           <button className="growing-button">Proceed to checkout</button>
         </div>
       </div>
