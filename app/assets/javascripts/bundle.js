@@ -498,13 +498,38 @@ var CartitemIndex = function (_React$Component) {
   function CartitemIndex(props) {
     _classCallCheck(this, CartitemIndex);
 
-    return _possibleConstructorReturn(this, (CartitemIndex.__proto__ || Object.getPrototypeOf(CartitemIndex)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (CartitemIndex.__proto__ || Object.getPrototypeOf(CartitemIndex)).call(this, props));
+
+    _this.state = {
+      itemstotal: 0,
+      subtotal: 0,
+      shipping: 0,
+      total: 0
+    };
+    return _this;
   }
 
   _createClass(CartitemIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchCartitems();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      // Typical usage (don't forget to compare props):
+      if (this.props.cartitems !== prevProps.cartitems) {
+        var itemstotal = 0.00;
+        this.props.cartitems.forEach(function (cartitem) {
+          itemstotal += parseFloat(cartitem.price);
+        });
+        this.setState({
+          itemstotal: itemstotal,
+          subtotal: itemstotal,
+          shipping: itemstotal * 0.048,
+          total: itemstotal + itemstotal * 0.048
+        });
+      }
     }
   }, {
     key: "cart_nav",
@@ -541,22 +566,26 @@ var CartitemIndex = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { className: "items-total border-bottom checkout-styles" },
-            "Item(s) total"
+            "Item(s) total $",
+            this.state.itemstotal
           ),
           _react2.default.createElement(
             "div",
             { className: "subtotal checkout-styles" },
-            "Subtotal"
+            "Subtotal $",
+            this.state.subtotal
           ),
           _react2.default.createElement(
             "div",
             { className: "shipping border-bottom checkout-styles" },
-            "Shipping"
+            "Shipping $",
+            this.state.shipping.toFixed(2)
           ),
           _react2.default.createElement(
             "div",
             { className: "total checkout-styles" },
-            "Total"
+            "Total $",
+            this.state.total.toFixed(2)
           ),
           _react2.default.createElement(
             "button",
@@ -581,6 +610,7 @@ var CartitemIndex = function (_React$Component) {
           "LOADING"
         );
       }
+
       return _react2.default.createElement(
         "div",
         null,
