@@ -10,9 +10,9 @@ export default ({ cartitem, props }) => {
 
   const image_title_remove = (
     <section className="image-title-remove">
-      <img src={cartitem.image} />
+      <img src={cartitem.product.image} />
       <div className="title-remove">
-        <h1>{cartitem.title}</h1>
+        <h1>{cartitem.product.title}</h1>
         <p onClick={remove_from_cart}>Remove</p>
       </div>
     </section>
@@ -22,7 +22,8 @@ export default ({ cartitem, props }) => {
     <div className="cartitem-frame">
       <div className="cartitem-info-frame">
         {image_title_remove}
-        <p>${cartitem.price}</p>
+        {cartitem.qty}
+        <p>${cartitem.product.price}</p>
       </div>
     </div>
   );

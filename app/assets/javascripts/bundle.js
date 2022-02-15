@@ -108,7 +108,7 @@ var RECEIVE_CARTITEMS = exports.RECEIVE_CARTITEMS = "RECEIVE_CARTITEMS";
 var receiveCartitems = function receiveCartitems(cartitems) {
   return {
     type: RECEIVE_CARTITEMS,
-    cartitems: cartitems
+    cartitems: cartitems.cartitems
   };
 };
 
@@ -422,14 +422,14 @@ exports.default = function (_ref) {
   var image_title_remove = _react2.default.createElement(
     "section",
     { className: "image-title-remove" },
-    _react2.default.createElement("img", { src: cartitem.image }),
+    _react2.default.createElement("img", { src: cartitem.product.image }),
     _react2.default.createElement(
       "div",
       { className: "title-remove" },
       _react2.default.createElement(
         "h1",
         null,
-        cartitem.title
+        cartitem.product.title
       ),
       _react2.default.createElement(
         "p",
@@ -446,11 +446,12 @@ exports.default = function (_ref) {
       "div",
       { className: "cartitem-info-frame" },
       image_title_remove,
+      cartitem.qty,
       _react2.default.createElement(
         "p",
         null,
         "$",
-        cartitem.price
+        cartitem.product.price
       )
     )
   );
@@ -519,6 +520,7 @@ var CartitemIndex = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       // Typical usage (don't forget to compare props):
       if (this.props.cartitems !== prevProps.cartitems) {
+        console.log(this.props.cartitems);
         var itemstotal = 0.00;
         this.props.cartitems.forEach(function (cartitem) {
           itemstotal += parseFloat(cartitem.price);
@@ -699,10 +701,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    cartitems: Object.keys(state.entities.cartitems).map(function (key) {
-      return state.entities.cartitems[key];
-    })
-    // cartitems: state.entities.cartitems
+    // cartitems: Object.keys(state.entities.cartitems).map((key) => state.entities.cartitems[key]),
+    cartitems: state.entities.cartitems
   };
 };
 
@@ -1805,22 +1805,16 @@ Object.defineProperty(exports, "__esModule", {
 
 var _cartitems = __webpack_require__(/*! ../actions/cartitems */ "./frontend/actions/cartitems.js");
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
   Object.freeze(state);
-  var cartitems = [];
+  var cartitems = {};
   switch (action.type) {
     case _cartitems.RECEIVE_CARTITEMS:
-      // console.log('asdf',action.cartitems);
-      //   action.cartitems.forEach((cartitem, idx) => {
-      //     cartitems[idx] = cartitem;
-      //   });
-      //   return cartitems;
-      return [].concat(_toConsumableArray(action.cartitems));
+      // console.log("asdf",action.cartitems);
+      return action.cartitems;
     // return action.cartitems;
     // case RECEIVE_SINGLE_PRODUCT:
     //   return Object.assign({}, state, { [action.product.id]: action.product });

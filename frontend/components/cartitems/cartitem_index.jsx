@@ -20,6 +20,7 @@ class CartitemIndex extends React.Component {
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     if (this.props.cartitems !== prevProps.cartitems) {
+      console.log(this.props.cartitems);
       let itemstotal = 0.00;
       this.props.cartitems.forEach(cartitem => {
         itemstotal += parseFloat(cartitem.price);

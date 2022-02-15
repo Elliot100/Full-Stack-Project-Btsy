@@ -4,7 +4,7 @@ export const RECEIVE_CARTITEMS = "RECEIVE_CARTITEMS";
 
 const receiveCartitems = (cartitems) => ({
   type: RECEIVE_CARTITEMS,
-  cartitems,
+  cartitems: cartitems.cartitems
 });
 
 export const fetchCartitems = () => (dispatch) => getCartitems()

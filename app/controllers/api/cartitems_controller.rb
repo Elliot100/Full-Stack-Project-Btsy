@@ -2,9 +2,12 @@ class Api::CartitemsController < ApplicationController
   def index
     # array of cartitem
     @cartitems = Cartitem.where(user_id: current_user.id)
-    @cartitems = @cartitems.map{ |cartitem| 
-      cartitem.product
+    @cartitems = @cartitems.map { |cartitem| 
+      { product: cartitem.product,
+        qty: cartitem.qty }
     }
+    # puts @cartitems[0][:qty]
+    # puts @cartitems[0][:product].title
   end
 
   def create
