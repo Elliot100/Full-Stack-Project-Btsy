@@ -20,9 +20,9 @@ product3 = Product.create(title: "Wood Table Lamp", image: "https://media.istock
 product4 = Product.create(title: "Chunky Yarn", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ6eg1NED1_i7sG-GRzpTxaht2SOIGRG7XSA&usqp=CAU", price: 25.32, description: "Soft knitting material - greate DIY gift")
 product5 = Product.create(title: "Wool Slippers", image: "https://www.kids-world.com/images/LO886.jpg", price: 38.99, description: "Soft and comfortable handmade slippers")
 
-Cartitem.create(user_id: user3.id, product_id: product1.id)
-Cartitem.create(user_id: user1.id, product_id: product2.id)
-Cartitem.create(user_id: user2.id, product_id: product3.id)
-Cartitem.create(user_id: user3.id, product_id: product3.id)
-Cartitem.create(user_id: user1.id, product_id: product4.id)
-Cartitem.create(user_id: user2.id, product_id: product5.id)
+Cartitem.create(user_id: user1.id, product_id: product2.id, qty: 1)
+Cartitem.create(user_id: user1.id, product_id: product4.id, qty: 1)
+Cartitem.create(user_id: user2.id, product_id: product3.id, qty: 1)
+Cartitem.create(user_id: user2.id, product_id: product5.id, qty: 1)
+Cartitem.create(user_id: user3.id, product_id: product3.id, qty: 1)
+
