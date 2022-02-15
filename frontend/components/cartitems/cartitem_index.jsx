@@ -20,10 +20,10 @@ class CartitemIndex extends React.Component {
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     if (this.props.cartitems !== prevProps.cartitems) {
-      console.log(this.props.cartitems);
+      // console.log(this.props.cartitems);
       let itemstotal = 0.00;
       this.props.cartitems.forEach(cartitem => {
-        itemstotal += parseFloat(cartitem.price);
+        itemstotal += parseFloat(cartitem.product.price * cartitem.qty);
       });
       this.setState({
         itemstotal,
@@ -51,11 +51,11 @@ class CartitemIndex extends React.Component {
         <div className="checkout">
           <div className="items-total border-bottom checkout-styles">
             <p>Item(s) total</p>
-            <p>${this.state.itemstotal}</p>
+            <p>${this.state.itemstotal.toFixed(2)}</p>
           </div>
           <div className="subtotal checkout-styles">
             <p>Subtotal</p>
-            <p>${this.state.subtotal}</p>
+            <p>${this.state.subtotal.toFixed(2)}</p>
           </div>
           <div className="shipping border-bottom checkout-styles">
             <p>Shipping</p>
@@ -63,7 +63,7 @@ class CartitemIndex extends React.Component {
           </div>
           <div className="total checkout-styles">
             <p>Total</p>
-            <p>{this.state.total.toFixed(2)}</p>
+            <p>${this.state.total.toFixed(2)}</p>
           </div>
           <button className="growing-button">Proceed to checkout</button>
         </div>
@@ -84,7 +84,7 @@ class CartitemIndex extends React.Component {
         <div className="frame">
           <div className="frame-left">
             {cartitems.map((cartitem) => {
-              return <Cartitem key={`cartitem${cartitem.id}`} cartitem={cartitem} props={this.props} />;
+              return <Cartitem key={`cartitem${cartitem.product.id}`} cartitem={cartitem} props={this.props} />;
             })}
           </div>
           {this.checkout_frame()}

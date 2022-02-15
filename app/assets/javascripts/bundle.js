@@ -416,7 +416,7 @@ exports.default = function (_ref) {
   var remove_from_cart = function remove_from_cart(e) {
     e.preventDefault();
 
-    props.deleteFromCart(cartitem.id);
+    props.deleteFromCart(cartitem.product.id);
   };
 
   var image_title_remove = _react2.default.createElement(
@@ -520,10 +520,10 @@ var CartitemIndex = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       // Typical usage (don't forget to compare props):
       if (this.props.cartitems !== prevProps.cartitems) {
-        console.log(this.props.cartitems);
+        // console.log(this.props.cartitems);
         var itemstotal = 0.00;
         this.props.cartitems.forEach(function (cartitem) {
-          itemstotal += parseFloat(cartitem.price);
+          itemstotal += parseFloat(cartitem.product.price * cartitem.qty);
         });
         this.setState({
           itemstotal: itemstotal,
@@ -577,7 +577,7 @@ var CartitemIndex = function (_React$Component) {
               "p",
               null,
               "$",
-              this.state.itemstotal
+              this.state.itemstotal.toFixed(2)
             )
           ),
           _react2.default.createElement(
@@ -592,7 +592,7 @@ var CartitemIndex = function (_React$Component) {
               "p",
               null,
               "$",
-              this.state.subtotal
+              this.state.subtotal.toFixed(2)
             )
           ),
           _react2.default.createElement(
@@ -621,6 +621,7 @@ var CartitemIndex = function (_React$Component) {
             _react2.default.createElement(
               "p",
               null,
+              "$",
               this.state.total.toFixed(2)
             )
           ),
@@ -659,7 +660,7 @@ var CartitemIndex = function (_React$Component) {
             "div",
             { className: "frame-left" },
             cartitems.map(function (cartitem) {
-              return _react2.default.createElement(_cartitem2.default, { key: "cartitem" + cartitem.id, cartitem: cartitem, props: _this2.props });
+              return _react2.default.createElement(_cartitem2.default, { key: "cartitem" + cartitem.product.id, cartitem: cartitem, props: _this2.props });
             })
           ),
           this.checkout_frame()
@@ -701,8 +702,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    // cartitems: Object.keys(state.entities.cartitems).map((key) => state.entities.cartitems[key]),
-    cartitems: state.entities.cartitems
+    cartitems: Object.keys(state.entities.cartitems).map(function (key) {
+      return state.entities.cartitems[key];
+    })
+    // cartitems: state.entities.cartitems
   };
 };
 

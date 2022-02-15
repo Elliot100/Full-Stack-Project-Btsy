@@ -5,7 +5,7 @@ export default ({ cartitem, props }) => {
   const remove_from_cart = (e) => {
     e.preventDefault();
 
-    props.deleteFromCart(cartitem.id);
+    props.deleteFromCart(cartitem.product.id);
   };
 
   const image_title_remove = (

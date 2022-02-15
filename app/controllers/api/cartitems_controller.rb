@@ -14,6 +14,7 @@ class Api::CartitemsController < ApplicationController
     @cartitem = Cartitem.new
     @cartitem.user_id = current_user.id
     @cartitem.product_id = params[:id]
+    @cartitem.qty = 1
     if @cartitem.save
       @product = @cartitem.product
       render 'api/products/show'
