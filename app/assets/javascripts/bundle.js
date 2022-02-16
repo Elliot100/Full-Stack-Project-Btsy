@@ -454,7 +454,7 @@ exports.default = function (_ref) {
 
   var cartitem_qty_dropdown = _react2.default.createElement(
     "select",
-    { value: cartitem.qty, onChange: handleQtyChange },
+    { className: "cartitem-qty-dropdown", value: cartitem.qty, onChange: handleQtyChange },
     _react2.default.createElement(
       "option",
       { defaultValue: "1" },
@@ -514,8 +514,11 @@ exports.default = function (_ref) {
       "div",
       { className: "cartitem-info-frame" },
       image_title_remove,
-      cartitem_qty_dropdown,
-      cartitem.qty,
+      _react2.default.createElement(
+        "a",
+        null,
+        cartitem_qty_dropdown
+      ),
       _react2.default.createElement(
         "p",
         null,

@@ -26,7 +26,7 @@ export default ({ cartitem, props }) => {
 
 
   const cartitem_qty_dropdown = (
-    <select value={cartitem.qty} onChange={handleQtyChange}>
+    <select className="cartitem-qty-dropdown" value={cartitem.qty} onChange={handleQtyChange}>
       <option defaultValue="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -44,7 +44,7 @@ export default ({ cartitem, props }) => {
     <div className="cartitem-frame">
       <div className="cartitem-info-frame">
         {image_title_remove}
-        {cartitem_qty_dropdown}{cartitem.qty}
+        <a>{cartitem_qty_dropdown}</a>
         <p>${cartitem.product.price}</p>
       </div>
     </div>
