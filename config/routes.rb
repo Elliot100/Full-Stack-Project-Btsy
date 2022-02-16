@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     post '/search', to: 'users#search'
 
     resources :products
-    resources :cartitems, only: [:index,:create]
+    resources :cartitems, only: [:index,:create,:update]
     delete '/cartitems', to: 'cartitems#destroy'
 
   end

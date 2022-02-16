@@ -1,5 +1,5 @@
 import CartitemIndex from "./cartitem_index";
-import { fetchCartitems, deleteFromCart } from "../../actions/cartitems";
+import { fetchCartitems, updateFromCart, deleteFromCart } from "../../actions/cartitems";
 import { connect } from "react-redux";
 
 
@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({ 
   fetchCartitems: () => dispatch(fetchCartitems()),
-  deleteFromCart: (id) => dispatch(deleteFromCart(id))
+  deleteFromCart: (id) => dispatch(deleteFromCart(id)),
+  updateFromCart: (id, qty) => dispatch(updateFromCart(id, qty))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartitemIndex);

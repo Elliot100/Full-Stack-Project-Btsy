@@ -4,6 +4,7 @@
 
 json.cartitems @cartitems do |cartitem|
   json.(cartitem, :qty)
+  json.(cartitem, :id)
   json.product cartitem[:product], partial: 'api/cartitems/cartitem', as: :product
 end
 

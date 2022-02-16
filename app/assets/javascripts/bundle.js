@@ -99,7 +99,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteFromCart = exports.fetchCartitems = exports.RECEIVE_CARTITEMS = undefined;
+exports.updateFromCart = exports.deleteFromCart = exports.fetchCartitems = exports.RECEIVE_CARTITEMS = undefined;
 
 var _cartitems = __webpack_require__(/*! ../utils/cartitems */ "./frontend/utils/cartitems.js");
 
@@ -120,6 +120,22 @@ var fetchCartitems = exports.fetchCartitems = function fetchCartitems() {
   };
 };
 
+var deleteFromCart = exports.deleteFromCart = function deleteFromCart(id) {
+  return function (dispatch) {
+    return (0, _cartitems.deleteCartitem)(id).then(_cartitems.getCartitems).then(function (cartitems) {
+      dispatch(receiveCartitems(cartitems));
+    });
+  };
+};
+
+var updateFromCart = exports.updateFromCart = function updateFromCart(id, qty) {
+  return function (dispatch) {
+    return (0, _cartitems.updateCartitem)(id, qty).then(_cartitems.getCartitems).then(function (cartitems) {
+      dispatch(receiveCartitems(cartitems));
+    });
+  };
+};
+
 // export const addToCart = (id) => (dispatch) =>
 //   postCartitem(id).then((product) => dispatch(receiveSingleProduct(product)));
 
@@ -128,14 +144,6 @@ var fetchCartitems = exports.fetchCartitems = function fetchCartitems() {
 // .then((cartitems) => {
 //   dispatch(receiveCartitems(cartitems))})
 // );
-
-var deleteFromCart = exports.deleteFromCart = function deleteFromCart(id) {
-  return function (dispatch) {
-    return (0, _cartitems.deleteCartitem)(id).then(_cartitems.getCartitems).then(function (cartitems) {
-      dispatch(receiveCartitems(cartitems));
-    });
-  };
-};
 
 /***/ }),
 
@@ -439,6 +447,66 @@ exports.default = function (_ref) {
     )
   );
 
+  var handleQtyChange = function handleQtyChange(e) {
+    // console.log("qty", e.target.value);
+    props.updateFromCart(cartitem.id, e.target.value);
+  };
+
+  var cartitem_qty_dropdown = _react2.default.createElement(
+    "select",
+    { value: cartitem.qty, onChange: handleQtyChange },
+    _react2.default.createElement(
+      "option",
+      { defaultValue: "1" },
+      "1"
+    ),
+    _react2.default.createElement(
+      "option",
+      { value: "2" },
+      "2"
+    ),
+    _react2.default.createElement(
+      "option",
+      { value: "3" },
+      "3"
+    ),
+    _react2.default.createElement(
+      "option",
+      { value: "4" },
+      "4"
+    ),
+    _react2.default.createElement(
+      "option",
+      { value: "5" },
+      "5"
+    ),
+    _react2.default.createElement(
+      "option",
+      { value: "6" },
+      "6"
+    ),
+    _react2.default.createElement(
+      "option",
+      { value: "7" },
+      "7"
+    ),
+    _react2.default.createElement(
+      "option",
+      { value: "8" },
+      "8"
+    ),
+    _react2.default.createElement(
+      "option",
+      { value: "9" },
+      "9"
+    ),
+    _react2.default.createElement(
+      "option",
+      { value: "10" },
+      "10"
+    )
+  );
+
   return _react2.default.createElement(
     "div",
     { className: "cartitem-frame" },
@@ -446,6 +514,7 @@ exports.default = function (_ref) {
       "div",
       { className: "cartitem-info-frame" },
       image_title_remove,
+      cartitem_qty_dropdown,
       cartitem.qty,
       _react2.default.createElement(
         "p",
@@ -456,6 +525,19 @@ exports.default = function (_ref) {
     )
   );
 };
+
+{/* <select onchange="window.location.href = this.value">
+   <option value="#" selected="selected">1</option>
+   <option value="#">2</option>
+   <!--<option disabled>2</option>-->
+   <option value="#">3</option>
+   <option value="#">4</option>
+   <option value="#">5</option>
+   <option value="#">6</option>
+   <option value="#">7</option>
+   <option value="#">8</option>
+   <option value="#">9</option>
+  </select> */}
 
 /***/ }),
 
@@ -716,6 +798,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     deleteFromCart: function deleteFromCart(id) {
       return dispatch((0, _cartitems.deleteFromCart)(id));
+    },
+    updateFromCart: function updateFromCart(id, qty) {
+      return dispatch((0, _cartitems.updateFromCart)(id, qty));
     }
   };
 };
@@ -2060,10 +2145,11 @@ var getCartitems = exports.getCartitems = function getCartitems(user_id) {
 };
 
 var postCartitem = exports.postCartitem = function postCartitem(id) {
+  var qty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   return $.ajax({
     url: "/api/cartitems",
     method: "POST",
-    data: { id: id }
+    data: { id: id, qty: qty }
   });
 };
 
@@ -2072,6 +2158,14 @@ var deleteCartitem = exports.deleteCartitem = function deleteCartitem(id) {
     url: "/api/cartitems",
     method: "DELETE",
     data: { id: id }
+  });
+};
+
+var updateCartitem = exports.updateCartitem = function updateCartitem(id, qty) {
+  return $.ajax({
+    url: "/api/cartitems/" + id,
+    method: "PATCH",
+    data: { id: id, qty: qty }
   });
 };
 
