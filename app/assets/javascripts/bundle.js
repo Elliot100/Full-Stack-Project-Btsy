@@ -1334,6 +1334,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -1346,17 +1348,80 @@ var ProductNew = function (_React$Component) {
   function ProductNew(props) {
     _classCallCheck(this, ProductNew);
 
-    return _possibleConstructorReturn(this, (ProductNew.__proto__ || Object.getPrototypeOf(ProductNew)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ProductNew.__proto__ || Object.getPrototypeOf(ProductNew)).call(this, props));
+
+    _this.state = {
+      title: "",
+      description: "",
+      price: "",
+      image_url: ""
+    };
+    return _this;
   }
 
   _createClass(ProductNew, [{
-    key: 'render',
-    value: function render() {
+    key: "handleInput",
+    value: function handleInput(type) {
+      var _this2 = this;
 
+      return function (e) {
+        _this2.setState(_defineProperty({}, type, e.target.value));
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      // this.props.login(this.state).then(() => this.props.history.push("/products"));
+    }
+  }, {
+    key: "render",
+    value: function render() {
       return _react2.default.createElement(
-        'h1',
-        null,
-        'Product New'
+        "div",
+        { className: "session-form" },
+        _react2.default.createElement(
+          "h2",
+          null,
+          "Sell a product!"
+        ),
+        _react2.default.createElement(
+          "form",
+          null,
+          _react2.default.createElement(
+            "label",
+            null,
+            "title:",
+            _react2.default.createElement("input", { type: "text", value: this.title, onChange: this.handleInput("title") })
+          ),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "label",
+            null,
+            "description:",
+            _react2.default.createElement("input", { type: "text", value: this.description, onChange: this.handleInput("description") })
+          ),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "label",
+            null,
+            "price:",
+            _react2.default.createElement("input", { type: "text", value: this.price, onChange: this.handleInput("price") })
+          ),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "label",
+            null,
+            "image url:",
+            _react2.default.createElement("input", { type: "text", value: this.image_url, onChange: this.handleInput("image_url") })
+          ),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "button",
+            { className: "growing-button", onClick: this.handleSubmit },
+            "submit"
+          )
+        )
       );
     }
   }]);
