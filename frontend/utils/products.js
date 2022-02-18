@@ -7,4 +7,9 @@ export const getSingleProduct = (id) =>
     url: `api/products/${id}`,
   });
 
-
+export const postProduct = (product) => 
+  $.ajax({
+    url: 'api/products',
+    method: "POST",
+    data: { product }
+  })

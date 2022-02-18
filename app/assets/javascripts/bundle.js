@@ -160,7 +160,7 @@ var updateFromCart = exports.updateFromCart = function updateFromCart(id, qty) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteFromCart = exports.addToCart = exports.fetchSingleProduct = exports.fetchProducts = exports.RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_PRODUCTS = undefined;
+exports.createProduct = exports.deleteFromCart = exports.addToCart = exports.fetchSingleProduct = exports.fetchProducts = exports.RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_PRODUCTS = undefined;
 
 var _products = __webpack_require__(/*! ../utils/products */ "./frontend/utils/products.js");
 
@@ -210,6 +210,14 @@ var addToCart = exports.addToCart = function addToCart(id) {
 var deleteFromCart = exports.deleteFromCart = function deleteFromCart(id) {
   return function (dispatch) {
     return (0, _cartitems.deleteCartitem)(id).then(function (product) {
+      return dispatch(receiveSingleProduct(product));
+    });
+  };
+};
+
+var createProduct = exports.createProduct = function createProduct(product) {
+  return function (dispatch) {
+    return (0, _products.postProduct)(product).then(function (product) {
       return dispatch(receiveSingleProduct(product));
     });
   };
@@ -1354,8 +1362,10 @@ var ProductNew = function (_React$Component) {
       title: "",
       description: "",
       price: "",
-      image_url: ""
+      image: ""
     };
+    _this.handleInput = _this.handleInput.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
@@ -1371,8 +1381,19 @@ var ProductNew = function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this3 = this;
+
       e.preventDefault();
+      this.props.createProduct(this.state).then(function (product) {
+        return _this3.props.history.push("/products/" + product.id);
+      });
       // this.props.login(this.state).then(() => this.props.history.push("/products"));
+
+      // () => {
+      //   this.props.addToCart(id).then(() => this.props.history.push(`/users/${this.props.currentUser.id}/cartitems`));
+      // };
+
+      // https://st4.depositphotos.com/16549710/31382/i/1600/depositphotos_313828130-stock-photo-concrete-pot-modern-geometric-concrete.jpg
     }
   }, {
     key: "render",
@@ -1391,29 +1412,29 @@ var ProductNew = function (_React$Component) {
           _react2.default.createElement(
             "label",
             null,
-            "title:",
+            "title :",
             _react2.default.createElement("input", { type: "text", value: this.title, onChange: this.handleInput("title") })
           ),
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "label",
             null,
-            "description:",
+            "description :",
             _react2.default.createElement("input", { type: "text", value: this.description, onChange: this.handleInput("description") })
           ),
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "label",
             null,
-            "price:",
+            "price :",
             _react2.default.createElement("input", { type: "text", value: this.price, onChange: this.handleInput("price") })
           ),
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "label",
             null,
-            "image url:",
-            _react2.default.createElement("input", { type: "text", value: this.image_url, onChange: this.handleInput("image_url") })
+            "image url :",
+            _react2.default.createElement("input", { type: "text", value: this.image_url, onChange: this.handleInput("image") })
           ),
           _react2.default.createElement("br", null),
           _react2.default.createElement(
@@ -1451,6 +1472,8 @@ var _product_new = __webpack_require__(/*! ./product_new */ "./frontend/componen
 
 var _product_new2 = _interopRequireDefault(_product_new);
 
+var _products = __webpack_require__(/*! ../../actions/products */ "./frontend/actions/products.js");
+
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1460,16 +1483,17 @@ var mapStateToProps = function mapStateToProps(state) {
   //   products: Object.keys(state.entities.products).map((key) => state.entities.products[key]),
   // };
 };
-// import { fetchProducts } from "../../actions/products";
-
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    createProduct: function createProduct(product) {
+      return dispatch((0, _products.createProduct)(product));
+    }
     // fetchProducts: () => dispatch(fetchProducts()),
   };
 };
 
-exports.default = (0, _reactRedux.connect)(null, null)(_product_new2.default);
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(_product_new2.default);
 
 /***/ }),
 
@@ -2363,6 +2387,14 @@ var getProducts = exports.getProducts = function getProducts() {
 var getSingleProduct = exports.getSingleProduct = function getSingleProduct(id) {
   return $.ajax({
     url: 'api/products/' + id
+  });
+};
+
+var postProduct = exports.postProduct = function postProduct(product) {
+  return $.ajax({
+    url: 'api/products',
+    method: "POST",
+    data: { product: product }
   });
 };
 

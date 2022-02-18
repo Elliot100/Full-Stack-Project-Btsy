@@ -1,4 +1,4 @@
-import { getProducts, getSingleProduct } from '../utils/products';
+import { getProducts, getSingleProduct, postProduct } from '../utils/products';
 import { postCartitem, deleteCartitem } from '../utils/cartitems';
 
 export const RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
@@ -25,3 +25,6 @@ export const addToCart = (id) => (dispatch) => postCartitem(id)
 
 export const deleteFromCart = (id) => (dispatch) => deleteCartitem(id)
     .then((product) => dispatch(receiveSingleProduct(product)));
+
+export const createProduct = (product) => (dispatch) =>
+  postProduct(product).then((product) => dispatch(receiveSingleProduct(product)));

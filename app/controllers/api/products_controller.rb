@@ -2,6 +2,7 @@ class Api::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
+      puts @product
       render :show
     else
       render @product.errors.full_messages, status: 401
@@ -49,6 +50,6 @@ class Api::ProductsController < ApplicationController
   end
   
   def product_params
-    params.require(:product).permit(:id, :title, :image, :price, :description)
+    params.require(:product).permit(:title, :image, :price, :description)
   end
 end
