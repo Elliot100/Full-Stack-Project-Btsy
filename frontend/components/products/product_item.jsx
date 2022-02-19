@@ -10,6 +10,8 @@ export default ({ product, props }) => {
   };
   
   return (
+    <div>
       <img onClick={handleClick} className="product-img imagedropshadow" src={product.image} />
+    </div>
   );
 };

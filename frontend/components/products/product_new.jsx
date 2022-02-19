@@ -64,7 +64,7 @@ class ProductNew extends React.Component {
           {this.state.showMessage && (
             <div>
               <FlashMessage duration={5000}>
-                <strong>please fill out all fields</strong>
+                <strong>please fill out all the fields</strong>
               </FlashMessage>
             </div>
           )}

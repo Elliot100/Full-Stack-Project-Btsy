@@ -1315,7 +1315,11 @@ exports.default = function (_ref) {
     props.history.push("/products/" + product.id);
   };
 
-  return _react2.default.createElement("img", { onClick: handleClick, className: "product-img imagedropshadow", src: product.image });
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement("img", { onClick: handleClick, className: "product-img imagedropshadow", src: product.image })
+  );
 };
 
 /***/ }),
@@ -1454,7 +1458,7 @@ var ProductNew = function (_React$Component) {
               _react2.default.createElement(
                 'strong',
                 null,
-                'please fill out all fields'
+                'please fill out all the fields'
               )
             )
           )
