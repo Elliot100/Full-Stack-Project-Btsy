@@ -543,19 +543,6 @@ exports.default = function (_ref) {
   );
 };
 
-{/* <select onchange="window.location.href = this.value">
-   <option value="#" selected="selected">1</option>
-   <option value="#">2</option>
-   <!--<option disabled>2</option>-->
-   <option value="#">3</option>
-   <option value="#">4</option>
-   <option value="#">5</option>
-   <option value="#">6</option>
-   <option value="#">7</option>
-   <option value="#">8</option>
-   <option value="#">9</option>
-  </select> */}
-
 /***/ }),
 
 /***/ "./frontend/components/cartitems/cartitem_index.jsx":
@@ -924,7 +911,10 @@ var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_module
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var LOGOUT = "LOGOUT";
+
 // eslint-disable-next-line react/display-name
+
 exports.default = function (_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
@@ -990,24 +980,55 @@ exports.default = function (_ref) {
     )
   );
 
+  var render_auth_dropdown = function render_auth_dropdown() {
+    return _react2.default.createElement(
+      "div",
+      { className: "auth-dropdown" },
+      _react2.default.createElement(
+        "p",
+        null,
+        "Hi ",
+        currentUser.username.split(" ")[0]
+      ),
+      _react2.default.createElement(
+        "ul",
+        null,
+        _react2.default.createElement(
+          "li",
+          { onClick: logout },
+          "Log Out"
+        )
+      )
+    )
+    // <select onChange={handleAuthDropdown}>
+    //   <option defaultValue="1">{currentUser.username.split(" ")[0]}</option>
+    //   <option value="LOGOUT">Sign out</option>
+    // </select>
+    ;
+  };
+
+  // <select className="cartitem-qty-dropdown" value={cartitem.qty} onChange={handleQtyChange}>
+  //   <option defaultValue="1">1</option>
+  //   <option value="2">2</option>
+  //   <option value="3">3</option>
+  //   <option value="4">4</option>
+  //   <option value="5">5</option>
+  //   <option value="6">6</option>
+  //   <option value="7">7</option>
+  //   <option value="8">8</option>
+  //   <option value="9">9</option>
+  //   <option value="10">10</option>
+  // </select>
+
+
   var auth = currentUser ? _react2.default.createElement(
     "div",
     { className: "nav-bar-items" },
-    _react2.default.createElement(
-      "p",
-      null,
-      "Hi ",
-      currentUser.username.split(" ")[0]
-    ),
+    render_auth_dropdown(),
     _react2.default.createElement(
       _reactRouterDom.Link,
       { to: "/users/" + currentUser.id + "/cartitems" },
       cart_icon
-    ),
-    _react2.default.createElement(
-      "button",
-      { onClick: logout },
-      "Log Out"
     )
   ) : _react2.default.createElement(
     "div",

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+const LOGOUT = "LOGOUT";
 
 // eslint-disable-next-line react/display-name
 export default ({ currentUser, logout }) => {
@@ -60,11 +61,41 @@ export default ({ currentUser, logout }) => {
   );
 
 
+  const render_auth_dropdown = () => (
+    <div className="auth-dropdown">
+      <p>Hi {currentUser.username.split(" ")[0]}</p>
+      <ul>
+        {/* <button>Hi {currentUser.username.split(" ")[0]}</button> */}
+        <li onClick={logout}>Log Out</li>
+      </ul>
+    </div>
+    // <select onChange={handleAuthDropdown}>
+    //   <option defaultValue="1">{currentUser.username.split(" ")[0]}</option>
+    //   <option value="LOGOUT">Sign out</option>
+    // </select>
+  );
+
+    // <select className="cartitem-qty-dropdown" value={cartitem.qty} onChange={handleQtyChange}>
+    //   <option defaultValue="1">1</option>
+    //   <option value="2">2</option>
+    //   <option value="3">3</option>
+    //   <option value="4">4</option>
+    //   <option value="5">5</option>
+    //   <option value="6">6</option>
+    //   <option value="7">7</option>
+    //   <option value="8">8</option>
+    //   <option value="9">9</option>
+    //   <option value="10">10</option>
+    // </select>
+
+
+
   const auth = currentUser ? (
     <div className="nav-bar-items">
-      <p>Hi {currentUser.username.split(" ")[0]}</p>
+      {render_auth_dropdown()}
+      {/* <p>Hi {currentUser.username.split(" ")[0]}</p> */}
       <Link to={`/users/${currentUser.id}/cartitems`}>{cart_icon}</Link>
-      <button onClick={logout}>Log Out</button>
+      {/* <button onClick={logout}>Log Out</button> */}
     </div>
   ) : (
     <div className="nav-bar-items">
