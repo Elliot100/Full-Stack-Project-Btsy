@@ -1340,6 +1340,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactFlashMessage = __webpack_require__(/*! react-flash-message */ "./node_modules/react-flash-message/build/index.js");
+
+var _reactFlashMessage2 = _interopRequireDefault(_reactFlashMessage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1362,7 +1366,8 @@ var ProductNew = function (_React$Component) {
       title: "",
       description: "",
       price: "",
-      image: ""
+      image: "",
+      showMessage: false
     };
     _this.handleInput = _this.handleInput.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -1370,7 +1375,7 @@ var ProductNew = function (_React$Component) {
   }
 
   _createClass(ProductNew, [{
-    key: "handleInput",
+    key: 'handleInput',
     value: function handleInput(type) {
       var _this2 = this;
 
@@ -1379,68 +1384,79 @@ var ProductNew = function (_React$Component) {
       };
     }
   }, {
-    key: "handleSubmit",
+    key: 'handleSubmit',
     value: function handleSubmit(e) {
       var _this3 = this;
 
       e.preventDefault();
-      this.props.createProduct(this.state).then(function (product) {
-        return _this3.props.history.push("/products/" + product.id);
-      });
-      // this.props.login(this.state).then(() => this.props.history.push("/products"));
-
-      // () => {
-      //   this.props.addToCart(id).then(() => this.props.history.push(`/users/${this.props.currentUser.id}/cartitems`));
-      // };
-
-      // https://st4.depositphotos.com/16549710/31382/i/1600/depositphotos_313828130-stock-photo-concrete-pot-modern-geometric-concrete.jpg
+      this.setState({ showMessage: false });
+      if (this.title && this.description && this.price && this.image) {
+        this.props.createProduct(this.state).then(function (product) {
+          return _this3.props.history.push('/products/' + product.id);
+        });
+      } else {
+        this.setState({ showMessage: true });
+      }
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "session-form" },
+        'div',
+        { className: 'session-form' },
         _react2.default.createElement(
-          "h2",
+          'h2',
           null,
-          "Sell a product!"
+          'Sell a product!'
         ),
         _react2.default.createElement(
-          "form",
+          'form',
           null,
           _react2.default.createElement(
-            "label",
+            'label',
             null,
-            "title :",
-            _react2.default.createElement("input", { type: "text", value: this.title, onChange: this.handleInput("title") })
+            'title :',
+            _react2.default.createElement('input', { type: 'text', value: this.title, onChange: this.handleInput("title") })
           ),
-          _react2.default.createElement("br", null),
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
-            "label",
+            'label',
             null,
-            "description :",
-            _react2.default.createElement("input", { type: "text", value: this.description, onChange: this.handleInput("description") })
+            'description :',
+            _react2.default.createElement('input', { type: 'text', value: this.description, onChange: this.handleInput("description") })
           ),
-          _react2.default.createElement("br", null),
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
-            "label",
+            'label',
             null,
-            "price :",
-            _react2.default.createElement("input", { type: "text", value: this.price, onChange: this.handleInput("price") })
+            'price :',
+            _react2.default.createElement('input', { type: 'text', value: this.price, onChange: this.handleInput("price") })
           ),
-          _react2.default.createElement("br", null),
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
-            "label",
+            'label',
             null,
-            "image url :",
-            _react2.default.createElement("input", { type: "text", value: this.image_url, onChange: this.handleInput("image") })
+            'image url :',
+            _react2.default.createElement('input', { type: 'text', value: this.image_url, onChange: this.handleInput("image") })
           ),
-          _react2.default.createElement("br", null),
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
-            "button",
-            { className: "growing-button", onClick: this.handleSubmit },
-            "submit"
+            'button',
+            { className: 'growing-button', onClick: this.handleSubmit },
+            'submit'
+          ),
+          this.state.showMessage && _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              _reactFlashMessage2.default,
+              { duration: 5000 },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'please fill out all fields'
+              )
+            )
           )
         )
       );
@@ -24900,6 +24916,17 @@ if (true) {
 }
 
 module.exports = validateDOMNesting;
+
+/***/ }),
+
+/***/ "./node_modules/react-flash-message/build/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/react-flash-message/build/index.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+(()=>{var e={159:(e,t,r)=>{"use strict";var n=r(929);function o(){}function i(){}i.resetWarningCache=o,e.exports=function(){function e(e,t,r,o,i,u){if(u!==n){var s=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw s.name="Invariant Violation",s}}function t(){return e}e.isRequired=e;var r={array:e,bool:e,func:e,number:e,object:e,string:e,symbol:e,any:e,arrayOf:t,element:e,elementType:e,instanceOf:t,node:e,objectOf:t,oneOf:t,oneOfType:t,shape:t,exact:t,checkPropTypes:i,resetWarningCache:o};return r.PropTypes=r,r}},15:(e,t,r)=>{e.exports=r(159)()},929:e=>{"use strict";e.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"}},t={};function r(n){var o=t[n];if(void 0!==o)return o.exports;var i=t[n]={exports:{}};return e[n](i,i.exports,r),i.exports}r.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return r.d(t,{a:t}),t},r.d=(e,t)=>{for(var n in t)r.o(t,n)&&!r.o(e,n)&&Object.defineProperty(e,n,{enumerable:!0,get:t[n]})},r.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),r.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})};var n={};(()=>{"use strict";r.r(n),r.d(n,{default:()=>l});const e=__webpack_require__(/*! react */ "./node_modules/react/react.js");var t=r.n(e),o=r(15);function i(e){return(i="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function u(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function s(e,t){return(s=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function a(e,t){if(t&&("object"===i(t)||"function"==typeof t))return t;if(void 0!==t)throw new TypeError("Derived constructors may only return object or undefined");return c(e)}function c(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function p(e){return(p=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}var f=function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&s(e,t)}(l,e);var r,n,o,i,f=(o=l,i=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){}))),!0}catch(e){return!1}}(),function(){var e,t=p(o);if(i){var r=p(this).constructor;e=Reflect.construct(t,arguments,r)}else e=t.apply(this,arguments);return a(this,e)});function l(e){var t;return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,l),(t=f.call(this,e)).state={isVisible:!0},t.hide=t.hide.bind(c(t)),t.resumeTimer=t.resumeTimer.bind(c(t)),t.pauseTimer=t.pauseTimer.bind(c(t)),t}return r=l,(n=[{key:"componentDidMount",value:function(){var e=this.props.duration;this.remaining=e,this.resumeTimer()}},{key:"componentWillUnmount",value:function(){clearTimeout(this.timer)}},{key:"hide",value:function(){this.setState({isVisible:!1})}},{key:"resumeTimer",value:function(){window.clearTimeout(this.timer),this.start=new Date,this.timer=setTimeout(this.hide,this.remaining)}},{key:"pauseTimer",value:function(){this.props.persistOnHover&&(clearTimeout(this.timer),this.remaining-=new Date-this.start)}},{key:"render",value:function(){var e=this.state.isVisible,r=this.props.children;return e?t().createElement("div",{onMouseEnter:this.pauseTimer,onMouseLeave:this.resumeTimer},r):null}}])&&u(r.prototype,n),l}(e.Component);f.defaultProps={duration:5e3,children:null,persistOnHover:!0},f.propTypes={children:o.node,duration:o.number,persistOnHover:o.bool};const l=f})(),module.exports=n})();
 
 /***/ }),
 
