@@ -64,9 +64,9 @@ export default ({ currentUser, logout }) => {
   const render_auth_dropdown = () => (
     <div className="auth-dropdown">
       <p>Hi {currentUser.username.split(" ")[0]}</p>
-      <ul>
+      <ul className="auth-dropdown-ul">
         {/* <button>Hi {currentUser.username.split(" ")[0]}</button> */}
-        <li onClick={logout}>Log Out</li>
+        <li onClick={logout}><a>Log Out</a></li>
       </ul>
     </div>
     // <select onChange={handleAuthDropdown}>

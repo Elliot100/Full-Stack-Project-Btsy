@@ -992,11 +992,15 @@ exports.default = function (_ref) {
       ),
       _react2.default.createElement(
         "ul",
-        null,
+        { className: "auth-dropdown-ul" },
         _react2.default.createElement(
           "li",
           { onClick: logout },
-          "Log Out"
+          _react2.default.createElement(
+            "a",
+            null,
+            "Log Out"
+          )
         )
       )
     )
