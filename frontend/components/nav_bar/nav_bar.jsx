@@ -65,7 +65,7 @@ export default ({ currentUser, logout }) => {
     <div className="auth-dropdown">
       <p>Hi {currentUser.username.split(" ")[0]}</p>
       <ul className="auth-dropdown-ul">
-        {/* <button>Hi {currentUser.username.split(" ")[0]}</button> */}
+        <li><Link className="auth-link" to="/newproduct">Sell a product</Link></li>
         <li onClick={logout}><a>Log Out</a></li>
       </ul>
     </div>

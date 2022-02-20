@@ -995,6 +995,15 @@ exports.default = function (_ref) {
         { className: "auth-dropdown-ul" },
         _react2.default.createElement(
           "li",
+          null,
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: "auth-link", to: "/newproduct" },
+            "Sell a product"
+          )
+        ),
+        _react2.default.createElement(
+          "li",
           { onClick: logout },
           _react2.default.createElement(
             "a",
