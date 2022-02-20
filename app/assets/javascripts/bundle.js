@@ -1428,7 +1428,7 @@ var ProductNew = function (_React$Component) {
 
       e.preventDefault();
       this.setState({ showMessage: false });
-      if (this.title && this.description && this.price && this.image) {
+      if (this.state.title && this.state.description && this.state.price && this.state.image) {
         this.props.createProduct(this.state).then(function (product) {
           return _this3.props.history.push('/products/' + product.id);
         });
@@ -1475,7 +1475,7 @@ var ProductNew = function (_React$Component) {
             'label',
             null,
             'image url :',
-            _react2.default.createElement('input', { type: 'text', value: this.image_url, onChange: this.handleInput("image") })
+            _react2.default.createElement('input', { type: 'text', value: this.image, onChange: this.handleInput("image") })
           ),
           _react2.default.createElement('br', null),
           _react2.default.createElement(

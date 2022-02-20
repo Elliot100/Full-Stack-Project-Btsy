@@ -24,7 +24,7 @@ class ProductNew extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({showMessage: false});
-    if (this.title && this.description && this.price && this.image) {
+    if (this.state.title && this.state.description && this.state.price && this.state.image) {
           this.props.createProduct(this.state)
           .then((product) => this.props.history.push(`/products/${product.id}`));
 
@@ -55,7 +55,7 @@ class ProductNew extends React.Component {
           <br />
           <label>
             image url :
-            <input type="text" value={this.image_url} onChange={this.handleInput("image")} />
+            <input type="text" value={this.image} onChange={this.handleInput("image")} />
           </label>
           <br />
           <button className="growing-button" onClick={this.handleSubmit}>

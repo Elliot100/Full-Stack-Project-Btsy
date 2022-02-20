@@ -3,7 +3,7 @@ class Api::ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       puts @product
-      render :show
+      render 'api/products/show'
     else
       render @product.errors.full_messages, status: 401
     end
