@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -16,9 +17,16 @@ class SearchBar extends React.Component {
 
   handleClick (e) {
     e.preventDefault();
-    // console.log(this.state);
+    // console.log(this.props);
+    // this.props.history.push(`/products?${this.state}`);
     this.props.findProduct(this.state.search)
-      .then((res) => console.log(res));
+    .then(() =>  {
+      this.props.history.push(`/?${this.state.search}`);
+            // console.log(this.props.location.search.substring(1));
+    });
+    // this.props.history.push(`/products?${this.state}`)
+
+    // console.log(this.state);
   }
 
   render () {

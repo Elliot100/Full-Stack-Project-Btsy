@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(logout()),
-  findProduct: search => dispatch(findProduct(search))
+  findProduct: search => dispatch(findProduct(search)),
 });
 
 // Comment this out when you have built the login functionality

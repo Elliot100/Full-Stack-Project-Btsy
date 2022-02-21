@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
   fetchSingleProduct: () => dispatch(fetchSingleProduct(ownProps.match.params.id)),
   addToCart: id => dispatch(addToCart(id)),
-  deleteFromCart: id => dispatch(deleteFromCart(id))
+  deleteFromCart: id => dispatch(deleteFromCart(id)),
 }};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

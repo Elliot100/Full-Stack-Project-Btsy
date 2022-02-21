@@ -4,9 +4,9 @@ import SearchBar from "./search_bar";
 
 
 // eslint-disable-next-line react/display-name
-export default ({ currentUser, logout, findProduct }) => {
+export default ({ currentUser, logout, findProduct, history, location}) => {
 
-
+  
   const cart_icon = (
     <svg
       width="24"
@@ -112,7 +112,7 @@ export default ({ currentUser, logout, findProduct }) => {
               Btsy
             </Link>
           </div>
-          <SearchBar findProduct={findProduct}/>
+          <SearchBar findProduct={findProduct} history={history} location={location}/>
           <div className="auth">{auth}</div>
         </nav>
       </header>

@@ -7,7 +7,24 @@ class ProductIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchProducts();
+    if (this.props.location.search.substring(1)) {
+      const searchTerm = this.props.location.search.substring(1);
+      this.props.findProduct(searchTerm);
+    } else {
+      this.props.fetchProducts();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.location.search !== prevProps.location.search) {
+      if (this.props.location.search.substring(1)) {
+        const searchTerm = this.props.location.search.substring(1);
+        this.props.findProduct(searchTerm);
+      } else {
+        this.props.fetchProducts();
+      }
+    }
   }
 
   render() {

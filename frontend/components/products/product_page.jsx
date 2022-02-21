@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 class ProductPage extends React.Component {
@@ -54,13 +55,15 @@ class ProductPage extends React.Component {
     if (!this.props.product) {
       return <div>LOADING</div>
     }
+    // const history = useHistory();
     
     return (
       <div>
         <div className="product-page-back-button">
-          <Link className="btn" to="/products">
+          <p className="btn" onClick={() => this.props.history.goBack()}>back</p>
+          {/* <Link className="btn" to="/products">
             back
-          </Link>
+          </Link> */}
         </div>
         <div className="product-page">
           <section className="product-page-frame">

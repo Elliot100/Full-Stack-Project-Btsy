@@ -847,7 +847,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function (_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout,
-      findProduct = _ref.findProduct;
+      findProduct = _ref.findProduct,
+      history = _ref.history,
+      location = _ref.location;
 
 
   var cart_icon = _react2.default.createElement(
@@ -1031,7 +1033,7 @@ exports.default = function (_ref) {
             "Btsy"
           )
         ),
-        _react2.default.createElement(_search_bar2.default, { findProduct: findProduct }),
+        _react2.default.createElement(_search_bar2.default, { findProduct: findProduct, history: history, location: location }),
         _react2.default.createElement(
           "div",
           { className: "auth" },
@@ -1123,6 +1125,8 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1148,60 +1152,67 @@ var SearchBar = function (_React$Component) {
   }
 
   _createClass(SearchBar, [{
-    key: "handleInput",
+    key: 'handleInput',
     value: function handleInput(e) {
       this.setState({ search: e.target.value });
     }
   }, {
-    key: "handleClick",
+    key: 'handleClick',
     value: function handleClick(e) {
+      var _this2 = this;
+
       e.preventDefault();
-      // console.log(this.state);
-      this.props.findProduct(this.state.search).then(function (res) {
-        return console.log(res);
+      // console.log(this.props);
+      // this.props.history.push(`/products?${this.state}`);
+      this.props.findProduct(this.state.search).then(function () {
+        _this2.props.history.push('/?' + _this2.state.search);
+        // console.log(this.props.location.search.substring(1));
       });
+      // this.props.history.push(`/products?${this.state}`)
+
+      // console.log(this.state);
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "search-bar" },
-        _react2.default.createElement("input", {
+        'div',
+        { className: 'search-bar' },
+        _react2.default.createElement('input', {
           onChange: this.handleInput,
-          id: "global-enhancements-search-query",
-          "data-id": "search-query",
-          "data-search-input": "",
-          type: "text",
-          name: "search_query",
-          className: "search-bar-input",
-          placeholder: "Search for anything",
+          id: 'global-enhancements-search-query',
+          'data-id': 'search-query',
+          'data-search-input': '',
+          type: 'text',
+          name: 'search_query',
+          className: 'search-bar-input',
+          placeholder: 'Search for anything',
           value: this.search,
-          autoComplete: "off",
-          autoCorrect: "off",
-          autoCapitalize: "off"
+          autoComplete: 'off',
+          autoCorrect: 'off',
+          autoCapitalize: 'off'
         }),
         _react2.default.createElement(
-          "button",
+          'button',
           {
-            className: "search-bar-button",
+            className: 'search-bar-button',
             onClick: this.handleClick
           },
           _react2.default.createElement(
-            "span",
-            { className: "search-bar-button-icon" },
+            'span',
+            { className: 'search-bar-button-icon' },
             _react2.default.createElement(
-              "svg",
+              'svg',
               {
-                width: "24",
-                height: "24",
-                xmlns: "http://www.w3.org/2000/svg",
-                viewBox: "0 0 24 24",
-                "aria-hidden": "true",
-                focusable: "false"
+                width: '24',
+                height: '24',
+                xmlns: 'http://www.w3.org/2000/svg',
+                viewBox: '0 0 24 24',
+                'aria-hidden': 'true',
+                focusable: 'false'
               },
-              _react2.default.createElement("path", { d: "M10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18ZM10,4a6,6,0,1,0,6,6A6.007,6.007,0,0,0,10,4Z" }),
-              _react2.default.createElement("path", { d: "M21,22a1,1,0,0,1-.707-0.293l-4-4a1,1,0,0,1,1.414-1.414l4,4A1,1,0,0,1,21,22Z" })
+              _react2.default.createElement('path', { d: 'M10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18ZM10,4a6,6,0,1,0,6,6A6.007,6.007,0,0,0,10,4Z' }),
+              _react2.default.createElement('path', { d: 'M21,22a1,1,0,0,1-.707-0.293l-4-4a1,1,0,0,1,1.414-1.414l4,4A1,1,0,0,1,21,22Z' })
             )
           )
         )
@@ -1338,7 +1349,25 @@ var ProductIndex = function (_React$Component) {
   _createClass(ProductIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchProducts();
+      if (this.props.location.search.substring(1)) {
+        var searchTerm = this.props.location.search.substring(1);
+        this.props.findProduct(searchTerm);
+      } else {
+        this.props.fetchProducts();
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      // Typical usage (don't forget to compare props):
+      if (this.props.location.search !== prevProps.location.search) {
+        if (this.props.location.search.substring(1)) {
+          var searchTerm = this.props.location.search.substring(1);
+          this.props.findProduct(searchTerm);
+        } else {
+          this.props.fetchProducts();
+        }
+      }
     }
   }, {
     key: "render",
@@ -1408,6 +1437,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchProducts: function fetchProducts() {
       return dispatch((0, _products.fetchProducts)());
+    },
+    findProduct: function findProduct(search) {
+      return dispatch((0, _products.findProduct)(search));
     }
   };
 };
@@ -1762,6 +1794,8 @@ var ProductPage = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       if (!this.props.product) {
         return _react2.default.createElement(
           'div',
@@ -1769,6 +1803,7 @@ var ProductPage = function (_React$Component) {
           'LOADING'
         );
       }
+      // const history = useHistory();
 
       return _react2.default.createElement(
         'div',
@@ -1777,8 +1812,10 @@ var ProductPage = function (_React$Component) {
           'div',
           { className: 'product-page-back-button' },
           _react2.default.createElement(
-            _reactRouterDom.Link,
-            { className: 'btn', to: '/products' },
+            'p',
+            { className: 'btn', onClick: function onClick() {
+                return _this3.props.history.goBack();
+              } },
             'back'
           )
         ),
