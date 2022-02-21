@@ -1429,8 +1429,8 @@ var ProductNew = function (_React$Component) {
       e.preventDefault();
       this.setState({ showMessage: false });
       if (this.state.title && this.state.description && this.state.price && this.state.image) {
-        this.props.createProduct(this.state).then(function (product) {
-          return _this3.props.history.push('/products/' + product.id);
+        this.props.createProduct(this.state).then(function (res) {
+          _this3.props.history.push('/products/' + res.product.id);
         });
       } else {
         this.setState({ showMessage: true });

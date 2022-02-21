@@ -25,8 +25,10 @@ class ProductNew extends React.Component {
     e.preventDefault();
     this.setState({showMessage: false});
     if (this.state.title && this.state.description && this.state.price && this.state.image) {
-          this.props.createProduct(this.state)
-          .then((product) => this.props.history.push(`/products/${product.id}`));
+      this.props.createProduct(this.state)
+      .then((res) => {
+        this.props.history.push(`/products/${res.product.id}`)
+      });
 
     } else {
       this.setState({ showMessage: true });
