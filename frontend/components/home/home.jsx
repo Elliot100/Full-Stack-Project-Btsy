@@ -1,4 +1,5 @@
 import React from "react";
+import ProductIndexContainer from '../products/product_index_container';
 
 // eslint-disable-next-line react/display-name
 export default () => {
@@ -35,7 +36,7 @@ export default () => {
   return (
     <div>
       <div>{website_message}</div>
-      <div>{home_products}</div>
+      <div>{ProductIndexContainer}</div>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const LOGOUT = "LOGOUT";
 
 // eslint-disable-next-line react/display-name
 export default ({ currentUser, logout }) => {
@@ -74,21 +73,6 @@ export default ({ currentUser, logout }) => {
     //   <option value="LOGOUT">Sign out</option>
     // </select>
   );
-
-    // <select className="cartitem-qty-dropdown" value={cartitem.qty} onChange={handleQtyChange}>
-    //   <option defaultValue="1">1</option>
-    //   <option value="2">2</option>
-    //   <option value="3">3</option>
-    //   <option value="4">4</option>
-    //   <option value="5">5</option>
-    //   <option value="6">6</option>
-    //   <option value="7">7</option>
-    //   <option value="8">8</option>
-    //   <option value="9">9</option>
-    //   <option value="10">10</option>
-    // </select>
-
-
 
   const auth = currentUser ? (
     <div className="nav-bar-items">

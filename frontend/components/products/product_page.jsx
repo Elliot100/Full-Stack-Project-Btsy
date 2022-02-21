@@ -20,16 +20,20 @@ class ProductPage extends React.Component {
     const { id, title, price, description } = this.props.product;
     let addToCartText = "Add to cart";
     let addToCartAction = () => {
-      this.props.addToCart(id)
-      .then(() => 
-      this.props.history.push(`/users/${this.props.currentUser.id}/cartitems`)
-      )
+      if (this.props.currentUser) {
+        this.props.addToCart(id)
+        .then(() => 
+        this.props.history.push(`/users/${this.props.currentUser.id}/cartitems`)
+        )
+      } else {
+        this.props.history.push(`/login`);
+      }
     }
 
-    if (this.props.product.added_by_current_user) {
-      addToCartText = "Added to cart";
-      addToCartAction = () => this.props.deleteFromCart(id);
-    }
+    // if (this.props.product.added_by_current_user) {
+    //   addToCartText = "Added to cart";
+    //   addToCartAction = () => this.props.deleteFromCart(id);
+    // }
     
     return (
       <div className="product-info">

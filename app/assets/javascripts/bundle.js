@@ -348,6 +348,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _welcome_bar_container = __webpack_require__(/*! ./nav_bar/welcome_bar_container */ "./frontend/components/nav_bar/welcome_bar_container.jsx");
+
+var _welcome_bar_container2 = _interopRequireDefault(_welcome_bar_container);
+
 var _nav_bar_container = __webpack_require__(/*! ./nav_bar/nav_bar_container */ "./frontend/components/nav_bar/nav_bar_container.jsx");
 
 var _nav_bar_container2 = _interopRequireDefault(_nav_bar_container);
@@ -387,24 +391,17 @@ var _route_utils = __webpack_require__(/*! ../utils/route_utils */ "./frontend/u
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // eslint-disable-next-line react/display-name
-
-// import WelcomeBar from "./nav_bar/welcome_bar_container";
 exports.default = function () {
   return _react2.default.createElement(
     "div",
     null,
     _react2.default.createElement(_reactRouterDom.Route, { path: "/", component: _nav_bar_container2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _home2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _welcome_bar_container2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _product_index_container2.default }),
     _react2.default.createElement(_route_utils.AuthRoute, { path: "/signup", component: _signup_container2.default }),
     _react2.default.createElement(_route_utils.AuthRoute, { path: "/login", component: _login_container2.default }),
     _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/users/:user_id/cartitems", component: _cartitems_container2.default }),
-    _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/newproduct", component: _product_new_container2.default }),
-    _react2.default.createElement(
-      _reactRouterDom.Switch,
-      null,
-      _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/products/:id", component: _product_page_container2.default }),
-      _react2.default.createElement(_route_utils.ProtectedRoute, { exact: true, path: "/products", component: _product_index_container2.default })
-    )
+    _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/newproduct", component: _product_new_container2.default })
   );
 };
 
@@ -831,6 +828,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _product_index_container = __webpack_require__(/*! ../products/product_index_container */ "./frontend/components/products/product_index_container.jsx");
+
+var _product_index_container2 = _interopRequireDefault(_product_index_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // eslint-disable-next-line react/display-name
@@ -882,7 +883,7 @@ exports.default = function () {
     _react2.default.createElement(
       "div",
       null,
-      home_products
+      _product_index_container2.default
     )
   );
 };
@@ -911,10 +912,7 @@ var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_module
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var LOGOUT = "LOGOUT";
-
 // eslint-disable-next-line react/display-name
-
 exports.default = function (_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
@@ -1019,20 +1017,6 @@ exports.default = function (_ref) {
     // </select>
     ;
   };
-
-  // <select className="cartitem-qty-dropdown" value={cartitem.qty} onChange={handleQtyChange}>
-  //   <option defaultValue="1">1</option>
-  //   <option value="2">2</option>
-  //   <option value="3">3</option>
-  //   <option value="4">4</option>
-  //   <option value="5">5</option>
-  //   <option value="6">6</option>
-  //   <option value="7">7</option>
-  //   <option value="8">8</option>
-  //   <option value="9">9</option>
-  //   <option value="10">10</option>
-  // </select>
-
 
   var auth = currentUser ? _react2.default.createElement(
     "div",
@@ -1192,6 +1176,84 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 // const mapDispatchToProps = null;
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_nav_bar2.default);
+
+/***/ }),
+
+/***/ "./frontend/components/nav_bar/welcome_bar.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/nav_bar/welcome_bar.jsx ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line react/display-name
+exports.default = function (_ref) {
+  var currentUser = _ref.currentUser;
+
+
+  var website_message = currentUser ? _react2.default.createElement("div", null) : _react2.default.createElement(
+    "div",
+    { className: "website-message" },
+    _react2.default.createElement(
+      "h1",
+      null,
+      "Find extra-special ways to express your love."
+    )
+  );
+
+  return _react2.default.createElement(
+    "div",
+    null,
+    website_message
+  );
+};
+
+/***/ }),
+
+/***/ "./frontend/components/nav_bar/welcome_bar_container.jsx":
+/*!***************************************************************!*\
+  !*** ./frontend/components/nav_bar/welcome_bar_container.jsx ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _welcome_bar = __webpack_require__(/*! ./welcome_bar */ "./frontend/components/nav_bar/welcome_bar.jsx");
+
+var _welcome_bar2 = _interopRequireDefault(_welcome_bar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: state.session.currentUser
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_welcome_bar2.default);
 
 /***/ }),
 
@@ -1615,17 +1677,19 @@ var ProductPage = function (_React$Component) {
 
       var addToCartText = "Add to cart";
       var addToCartAction = function addToCartAction() {
-        _this2.props.addToCart(id).then(function () {
-          return _this2.props.history.push('/users/' + _this2.props.currentUser.id + '/cartitems');
-        });
+        if (_this2.props.currentUser) {
+          _this2.props.addToCart(id).then(function () {
+            return _this2.props.history.push('/users/' + _this2.props.currentUser.id + '/cartitems');
+          });
+        } else {
+          _this2.props.history.push('/login');
+        }
       };
 
-      if (this.props.product.added_by_current_user) {
-        addToCartText = "Added to cart";
-        addToCartAction = function addToCartAction() {
-          return _this2.props.deleteFromCart(id);
-        };
-      }
+      // if (this.props.product.added_by_current_user) {
+      //   addToCartText = "Added to cart";
+      //   addToCartAction = () => this.props.deleteFromCart(id);
+      // }
 
       return _react2.default.createElement(
         'div',

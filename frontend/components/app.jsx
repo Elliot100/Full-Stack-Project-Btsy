@@ -1,5 +1,5 @@
 import React from "react";
-// import WelcomeBar from "./nav_bar/welcome_bar_container";
+import WelcomeBarContainer from "./nav_bar/welcome_bar_container";
 import NavBarContainer from "./nav_bar/nav_bar_container";
 import ProductIndexContainer from "./products/product_index_container";
 import ProductPageContainer from "./products/product_page_container";
@@ -16,14 +16,17 @@ import { AuthRoute, ProtectedRoute } from "../utils/route_utils";
 export default () => (
   <div>
     <Route path="/" component={NavBarContainer} />
-    <Route exact path="/" component={Home} />
+    <Route exact path="/" component={WelcomeBarContainer} />
+    <Route exact path="/" component={ProductIndexContainer} />
+    {/* <Route path="/products/:id" component={ProductPageContainer} />  */}
     <AuthRoute path="/signup" component={SignupContainer} />
     <AuthRoute path="/login" component={LoginContainer} />
     <ProtectedRoute path="/users/:user_id/cartitems" component={CartitemContainer} />
     <ProtectedRoute path="/newproduct" component={ProductNewContainer} />
-    <Switch>
+
+    {/* <Switch>
       <ProtectedRoute path="/products/:id" component={ProductPageContainer} />
       <ProtectedRoute exact path="/products" component={ProductIndexContainer} />
-    </Switch>
+    </Switch> */}
   </div>
 );
