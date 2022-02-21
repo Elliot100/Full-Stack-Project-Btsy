@@ -18,7 +18,8 @@ export default () => (
     <Route path="/" component={NavBarContainer} />
     <Route exact path="/" component={WelcomeBarContainer} />
     <Route exact path="/" component={ProductIndexContainer} />
-    {/* <Route path="/products/:id" component={ProductPageContainer} />  */}
+    <Route exact path="/products" component={ProductIndexContainer} />
+    <Route path="/products/:id" component={ProductPageContainer} />
     <AuthRoute path="/signup" component={SignupContainer} />
     <AuthRoute path="/login" component={LoginContainer} />
     <ProtectedRoute path="/users/:user_id/cartitems" component={CartitemContainer} />

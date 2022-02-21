@@ -7,23 +7,27 @@ class Api::CartitemsController < ApplicationController
         qty: cartitem.qty,
         product: cartitem.product }
     }
-
-    # @players = Player.order(params[:sort])
-    # puts @cartitems[0][:qty]
-    # puts @cartitems[0][:product].title
   end
 
   def create
-    @cartitem = Cartitem.new
-    @cartitem.user_id = current_user.id
-    @cartitem.product_id = params[:id]
-    @cartitem.qty = params[:qty]
-
-    if @cartitem.save
+    if (@cartitem = Cartitem.find_by(user_id: current_user.id, product_id: params[:id])) 
+      @cartitem.qty += 1;
+      @cartitem.save
       @product = @cartitem.product
       render 'api/products/show'
     else
-      render json: @cartitem.errors.full_messages, status: 401
+
+      @cartitem = Cartitem.new
+      @cartitem.user_id = current_user.id
+      @cartitem.product_id = params[:id]
+      @cartitem.qty = params[:qty]
+
+      if @cartitem.save
+        @product = @cartitem.product
+        render 'api/products/show'
+      else
+        render json: @cartitem.errors.full_messages, status: 401
+      end
     end
   end
 

@@ -398,6 +398,8 @@ exports.default = function () {
     _react2.default.createElement(_reactRouterDom.Route, { path: "/", component: _nav_bar_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _welcome_bar_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _product_index_container2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/products", component: _product_index_container2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { path: "/products/:id", component: _product_page_container2.default }),
     _react2.default.createElement(_route_utils.AuthRoute, { path: "/signup", component: _signup_container2.default }),
     _react2.default.createElement(_route_utils.AuthRoute, { path: "/login", component: _login_container2.default }),
     _react2.default.createElement(_route_utils.ProtectedRoute, { path: "/users/:user_id/cartitems", component: _cartitems_container2.default }),
