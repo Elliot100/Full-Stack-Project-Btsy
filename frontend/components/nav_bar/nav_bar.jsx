@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SearchBar from "./search_bar";
+
 
 // eslint-disable-next-line react/display-name
-export default ({ currentUser, logout }) => {
+export default ({ currentUser, logout, findProduct }) => {
 
 
   const cart_icon = (
@@ -68,10 +70,6 @@ export default ({ currentUser, logout }) => {
         <li onClick={logout}><a>Log Out</a></li>
       </ul>
     </div>
-    // <select onChange={handleAuthDropdown}>
-    //   <option defaultValue="1">{currentUser.username.split(" ")[0]}</option>
-    //   <option value="LOGOUT">Sign out</option>
-    // </select>
   );
 
   const auth = currentUser ? (
@@ -114,7 +112,7 @@ export default ({ currentUser, logout }) => {
               Btsy
             </Link>
           </div>
-          {search_bar}
+          <SearchBar/>
           <div className="auth">{auth}</div>
         </nav>
       </header>

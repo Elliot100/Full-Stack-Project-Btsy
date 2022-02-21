@@ -160,7 +160,7 @@ var updateFromCart = exports.updateFromCart = function updateFromCart(id, qty) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createProduct = exports.deleteFromCart = exports.addToCart = exports.fetchSingleProduct = exports.fetchProducts = exports.RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_PRODUCTS = undefined;
+exports.findProduct = exports.createProduct = exports.deleteFromCart = exports.addToCart = exports.fetchSingleProduct = exports.fetchProducts = exports.RECEIVE_SINGLE_PRODUCT = exports.RECEIVE_PRODUCTS = undefined;
 
 var _products = __webpack_require__(/*! ../utils/products */ "./frontend/utils/products.js");
 
@@ -219,6 +219,14 @@ var createProduct = exports.createProduct = function createProduct(product) {
   return function (dispatch) {
     return (0, _products.postProduct)(product).then(function (product) {
       return dispatch(receiveSingleProduct(product));
+    });
+  };
+};
+
+var findProduct = exports.findProduct = function findProduct(search) {
+  return function (dispatch) {
+    return (0, _products.searchProduct)(search).then(function (products) {
+      return dispatch(receiveProducts(products));
     });
   };
 };
@@ -375,10 +383,6 @@ var _signup_container2 = _interopRequireDefault(_signup_container);
 var _login_container = __webpack_require__(/*! ./session/login_container */ "./frontend/components/session/login_container.js");
 
 var _login_container2 = _interopRequireDefault(_login_container);
-
-var _home = __webpack_require__(/*! ./home/home */ "./frontend/components/home/home.jsx");
-
-var _home2 = _interopRequireDefault(_home);
 
 var _cartitems_container = __webpack_require__(/*! ./cartitems/cartitems_container */ "./frontend/components/cartitems/cartitems_container.js");
 
@@ -812,86 +816,6 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 /***/ }),
 
-/***/ "./frontend/components/home/home.jsx":
-/*!*******************************************!*\
-  !*** ./frontend/components/home/home.jsx ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _product_index_container = __webpack_require__(/*! ../products/product_index_container */ "./frontend/components/products/product_index_container.jsx");
-
-var _product_index_container2 = _interopRequireDefault(_product_index_container);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// eslint-disable-next-line react/display-name
-exports.default = function () {
-  var website_message = _react2.default.createElement(
-    "div",
-    { className: "website-message" },
-    _react2.default.createElement(
-      "h1",
-      null,
-      "Find extra-special ways to express your love."
-    )
-  );
-
-  var home_products = _react2.default.createElement(
-    "div",
-    { className: "home-products" },
-    _react2.default.createElement(
-      "div",
-      { className: "product-img-frame" },
-      _react2.default.createElement("img", {
-        className: "product-img imagedropshadow",
-        src: "https://media.istockphoto.com/photos/leather-minimalist-wallet-picture-id916776140?k=20&m=916776140&s=170667a&w=0&h=_GqFjqKp8_LP5_FFeMapbVFzMw7UMxEyiWNhLQYMasE="
-      }),
-      _react2.default.createElement("img", {
-        className: "product-img imagedropshadow",
-        src: "https://homesourcetx-wpengine.netdna-ssl.com/wp-content/uploads/2021/02/Industrial-and-wooden-desk.jpg"
-      }),
-      _react2.default.createElement("img", {
-        className: "product-img imagedropshadow",
-        src: "https://media.istockphoto.com/photos/yellow-artistic-lamp-with-rock-and-wooden-basement-on-the-table-picture-id1127365483?k=20&m=1127365483&s=170667a&w=0&h=mMKNACPJma1MCZPKJJsIZFzUMkVjxSxihn65Al-Zjq0="
-      }),
-      _react2.default.createElement("img", {
-        className: "product-img imagedropshadow",
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ6eg1NED1_i7sG-GRzpTxaht2SOIGRG7XSA&usqp=CAU"
-      }),
-      _react2.default.createElement("img", { className: "product-img imagedropshadow", src: "https://www.kids-world.com/images/LO886.jpg" })
-    )
-  );
-
-  return _react2.default.createElement(
-    "div",
-    null,
-    _react2.default.createElement(
-      "div",
-      null,
-      website_message
-    ),
-    _react2.default.createElement(
-      "div",
-      null,
-      _product_index_container2.default
-    )
-  );
-};
-
-/***/ }),
-
 /***/ "./frontend/components/nav_bar/nav_bar.jsx":
 /*!*************************************************!*\
   !*** ./frontend/components/nav_bar/nav_bar.jsx ***!
@@ -912,12 +836,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
+var _search_bar = __webpack_require__(/*! ./search_bar */ "./frontend/components/nav_bar/search_bar.jsx");
+
+var _search_bar2 = _interopRequireDefault(_search_bar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // eslint-disable-next-line react/display-name
 exports.default = function (_ref) {
   var currentUser = _ref.currentUser,
-      logout = _ref.logout;
+      logout = _ref.logout,
+      findProduct = _ref.findProduct;
 
 
   var cart_icon = _react2.default.createElement(
@@ -1012,12 +941,7 @@ exports.default = function (_ref) {
           )
         )
       )
-    )
-    // <select onChange={handleAuthDropdown}>
-    //   <option defaultValue="1">{currentUser.username.split(" ")[0]}</option>
-    //   <option value="LOGOUT">Sign out</option>
-    // </select>
-    ;
+    );
   };
 
   var auth = currentUser ? _react2.default.createElement(
@@ -1111,7 +1035,7 @@ exports.default = function (_ref) {
             "Btsy"
           )
         ),
-        search_bar,
+        _react2.default.createElement(_search_bar2.default, null),
         _react2.default.createElement(
           "div",
           { className: "auth" },
@@ -1143,19 +1067,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
-
-var _react2 = _interopRequireDefault(_react);
-
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 var _nav_bar = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
 
 var _nav_bar2 = _interopRequireDefault(_nav_bar);
 
+var _products = __webpack_require__(/*! ../../actions/products */ "./frontend/actions/products.js");
+
 var _session = __webpack_require__(/*! ../../actions/session */ "./frontend/actions/session.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Comment this back in after you have built the login functionality
+
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -1163,12 +1088,13 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-// Comment this back in after you have built the login functionality
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     logout: function logout() {
       return dispatch((0, _session.logout)());
+    },
+    findProduct: function findProduct(search) {
+      return dispatch((0, _products.findProduct)(search));
     }
   };
 };
@@ -1178,6 +1104,100 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 // const mapDispatchToProps = null;
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_nav_bar2.default);
+
+/***/ }),
+
+/***/ "./frontend/components/nav_bar/search_bar.jsx":
+/*!****************************************************!*\
+  !*** ./frontend/components/nav_bar/search_bar.jsx ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SearchBar = function (_React$Component) {
+  _inherits(SearchBar, _React$Component);
+
+  function SearchBar(props) {
+    _classCallCheck(this, SearchBar);
+
+    return _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+  }
+
+  _createClass(SearchBar, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "search-bar" },
+        _react2.default.createElement("input", {
+          id: "global-enhancements-search-query",
+          "data-id": "search-query",
+          "data-search-input": "",
+          type: "text",
+          name: "search_query",
+          className: "search-bar-input",
+          placeholder: "Search for anything",
+          value: "HI THERE",
+          autoComplete: "off",
+          autoCorrect: "off",
+          autoCapitalize: "off"
+        }),
+        _react2.default.createElement(
+          "button",
+          {
+            type: "submit",
+            className: "search-bar-button",
+            value: "Search",
+            "aria-label": "Search",
+            "data-id": "gnav-search-submit-button"
+          },
+          _react2.default.createElement(
+            "span",
+            { className: "search-bar-button-icon" },
+            _react2.default.createElement(
+              "svg",
+              {
+                width: "24",
+                height: "24",
+                xmlns: "http://www.w3.org/2000/svg",
+                viewBox: "0 0 24 24",
+                "aria-hidden": "true",
+                focusable: "false"
+              },
+              _react2.default.createElement("path", { d: "M10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18ZM10,4a6,6,0,1,0,6,6A6.007,6.007,0,0,0,10,4Z" }),
+              _react2.default.createElement("path", { d: "M21,22a1,1,0,0,1-.707-0.293l-4-4a1,1,0,0,1,1.414-1.414l4,4A1,1,0,0,1,21,22Z" })
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return SearchBar;
+}(_react2.default.Component);
+
+exports.default = SearchBar;
 
 /***/ }),
 
@@ -2515,6 +2535,14 @@ var postProduct = exports.postProduct = function postProduct(product) {
     url: 'api/products',
     method: "POST",
     data: { product: product }
+  });
+};
+
+var searchProduct = exports.searchProduct = function searchProduct(search) {
+  return $.ajax({
+    url: 'api/search',
+    method: "POST",
+    data: { search: search }
   });
 };
 

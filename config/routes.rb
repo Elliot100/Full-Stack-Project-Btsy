@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
     resource :session, only: [:create, :destroy]
 
-    post '/search', to: 'users#search'
+    post '/search', to: 'products#search'
 
     resources :products
     resources :cartitems, only: [:index,:create,:update]

@@ -1,4 +1,4 @@
-import { getProducts, getSingleProduct, postProduct } from '../utils/products';
+import { getProducts, getSingleProduct, postProduct, searchProduct } from '../utils/products';
 import { postCartitem, deleteCartitem } from '../utils/cartitems';
 
 export const RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
@@ -28,3 +28,6 @@ export const deleteFromCart = (id) => (dispatch) => deleteCartitem(id)
 
 export const createProduct = (product) => (dispatch) =>
   postProduct(product).then((product) => dispatch(receiveSingleProduct(product)));
+
+export const findProduct = (search) => (dispatch) =>
+  searchProduct(search).then((products) => dispatch(receiveProducts(products)));

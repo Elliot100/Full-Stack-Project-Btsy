@@ -1,10 +1,11 @@
-import React from "react";
 import { connect } from "react-redux";
 import NavBar from "./nav_bar";
+import { findProduct } from "../../actions/products";
+import { logout } from "../../actions/session";
 
 // Comment this back in after you have built the login functionality
 
-import { logout } from "../../actions/session";
+
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
@@ -12,6 +13,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(logout()),
+  findProduct: search => dispatch(findProduct(search))
 });
 
 // Comment this out when you have built the login functionality
