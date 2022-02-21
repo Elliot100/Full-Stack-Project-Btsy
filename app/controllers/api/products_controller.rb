@@ -45,10 +45,10 @@ class Api::ProductsController < ApplicationController
 
   def search
     # User.where("lower(username) LIKE ?", "%" + "broo".downcase + "%")
-    @products = Product.where("lower(title) LIKE ?", "%" + "#{params[search]}".downcase + "%")
+    @products = Product.where("lower(title) LIKE ?", "%" + "#{params[:search]}".downcase + "%")
 
     # @users = User.where("username LIKE '%#{params[:query]}%'")
-    render json: @products
+    render :index
   end
   
   private

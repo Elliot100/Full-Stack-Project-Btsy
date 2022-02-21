@@ -230,6 +230,7 @@ var findProduct = exports.findProduct = function findProduct(search) {
     });
   };
 };
+// .then((products) => dispatch(receiveProducts(products)));
 
 /***/ }),
 
@@ -864,50 +865,45 @@ exports.default = function (_ref) {
     _react2.default.createElement("path", { d: "M21,5H5.665L4.978,1.79A1,1,0,0,0,4,1H1A1,1,0,0,0,1,3H3.191L6.022,16.21a0.962,0.962,0,0,0,.064.159,1.015,1.015,0,0,0,.063.155,0.978,0.978,0,0,0,.133.153,1.006,1.006,0,0,0,.088.1,1,1,0,0,0,.185.105,0.975,0.975,0,0,0,.107.06A0.994,0.994,0,0,0,7,17H18a1,1,0,0,0,.958-0.713l3-10A1,1,0,0,0,21,5Zm-2.244,5H16V7h3.656ZM7.819,15l-0.6-3H9v3H7.819ZM11,12h3v3H11V12Zm0-2V7h3v3H11ZM9,7v3H6.82L6.22,7H9Zm8.256,8H16V12h2.156Z" })
   );
 
-  var search_bar = _react2.default.createElement(
-    "div",
-    { className: "search-bar" },
-    _react2.default.createElement("input", {
-      id: "global-enhancements-search-query",
-      "data-id": "search-query",
-      "data-search-input": "",
-      type: "text",
-      name: "search_query",
-      className: "search-bar-input",
-      placeholder: "Search for anything",
-      value: "",
-      autoComplete: "off",
-      autoCorrect: "off",
-      autoCapitalize: "off"
-    }),
-    _react2.default.createElement(
-      "button",
-      {
-        type: "submit",
-        className: "search-bar-button",
-        value: "Search",
-        "aria-label": "Search",
-        "data-id": "gnav-search-submit-button"
-      },
-      _react2.default.createElement(
-        "span",
-        { className: "search-bar-button-icon" },
-        _react2.default.createElement(
-          "svg",
-          {
-            width: "24",
-            height: "24",
-            xmlns: "http://www.w3.org/2000/svg",
-            viewBox: "0 0 24 24",
-            "aria-hidden": "true",
-            focusable: "false"
-          },
-          _react2.default.createElement("path", { d: "M10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18ZM10,4a6,6,0,1,0,6,6A6.007,6.007,0,0,0,10,4Z" }),
-          _react2.default.createElement("path", { d: "M21,22a1,1,0,0,1-.707-0.293l-4-4a1,1,0,0,1,1.414-1.414l4,4A1,1,0,0,1,21,22Z" })
-        )
-      )
-    )
-  );
+  // const search_bar = (
+  //   <div className="search-bar">
+  //     <input
+  //       id="global-enhancements-search-query"
+  //       data-id="search-query"
+  //       data-search-input=""
+  //       type="text"
+  //       name="search_query"
+  //       className="search-bar-input"
+  //       placeholder="Search for anything"
+  //       value=""
+  //       autoComplete="off"
+  //       autoCorrect="off"
+  //       autoCapitalize="off"
+  //     />
+  //     <button
+  //       type="submit"
+  //       className="search-bar-button"
+  //       value="Search"
+  //       aria-label="Search"
+  //       data-id="gnav-search-submit-button"
+  //     >
+  //       <span className="search-bar-button-icon">
+  //         <svg
+  //           width="24"
+  //           height="24"
+  //           xmlns="http://www.w3.org/2000/svg"
+  //           viewBox="0 0 24 24"
+  //           aria-hidden="true"
+  //           focusable="false"
+  //         >
+  //           <path d="M10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18ZM10,4a6,6,0,1,0,6,6A6.007,6.007,0,0,0,10,4Z"></path>
+  //           <path d="M21,22a1,1,0,0,1-.707-0.293l-4-4a1,1,0,0,1,1.414-1.414l4,4A1,1,0,0,1,21,22Z"></path>
+  //         </svg>
+  //       </span>
+  //     </button>
+  //   </div>
+  // );
+
 
   var render_auth_dropdown = function render_auth_dropdown() {
     return _react2.default.createElement(
@@ -1035,7 +1031,7 @@ exports.default = function (_ref) {
             "Btsy"
           )
         ),
-        _react2.default.createElement(_search_bar2.default, null),
+        _react2.default.createElement(_search_bar2.default, { findProduct: findProduct }),
         _react2.default.createElement(
           "div",
           { className: "auth" },
@@ -1141,16 +1137,38 @@ var SearchBar = function (_React$Component) {
   function SearchBar(props) {
     _classCallCheck(this, SearchBar);
 
-    return _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+
+    _this.state = {
+      search: ""
+    };
+    _this.handleInput = _this.handleInput.bind(_this);
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
   }
 
   _createClass(SearchBar, [{
+    key: "handleInput",
+    value: function handleInput(e) {
+      this.setState({ search: e.target.value });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      // console.log(this.state);
+      this.props.findProduct(this.state.search).then(function (res) {
+        return console.log(res);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
         "div",
         { className: "search-bar" },
         _react2.default.createElement("input", {
+          onChange: this.handleInput,
           id: "global-enhancements-search-query",
           "data-id": "search-query",
           "data-search-input": "",
@@ -1158,7 +1176,7 @@ var SearchBar = function (_React$Component) {
           name: "search_query",
           className: "search-bar-input",
           placeholder: "Search for anything",
-          value: "HI THERE",
+          value: this.search,
           autoComplete: "off",
           autoCorrect: "off",
           autoCapitalize: "off"
@@ -1166,11 +1184,8 @@ var SearchBar = function (_React$Component) {
         _react2.default.createElement(
           "button",
           {
-            type: "submit",
             className: "search-bar-button",
-            value: "Search",
-            "aria-label": "Search",
-            "data-id": "gnav-search-submit-button"
+            onClick: this.handleClick
           },
           _react2.default.createElement(
             "span",

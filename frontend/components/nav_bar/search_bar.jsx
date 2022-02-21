@@ -3,12 +3,29 @@ import React from 'react';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      search: ""
+    }
+    this.handleInput = this.handleInput.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleInput (e) {
+    this.setState({search: e.target.value})
+  }
+
+  handleClick (e) {
+    e.preventDefault();
+    // console.log(this.state);
+    this.props.findProduct(this.state.search)
+      .then((res) => console.log(res));
   }
 
   render () {
     return (
       <div className="search-bar">
         <input
+          onChange={this.handleInput}
           id="global-enhancements-search-query"
           data-id="search-query"
           data-search-input=""
@@ -16,17 +33,14 @@ class SearchBar extends React.Component {
           name="search_query"
           className="search-bar-input"
           placeholder="Search for anything"
-          value="HI THERE"
+          value={this.search}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
         />
         <button
-          type="submit"
           className="search-bar-button"
-          value="Search"
-          aria-label="Search"
-          data-id="gnav-search-submit-button"
+          onClick={this.handleClick}
         >
           <span className="search-bar-button-icon">
             <svg

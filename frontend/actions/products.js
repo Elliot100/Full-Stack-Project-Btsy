@@ -31,3 +31,4 @@ export const createProduct = (product) => (dispatch) =>
 
 export const findProduct = (search) => (dispatch) =>
   searchProduct(search).then((products) => dispatch(receiveProducts(products)));
+// .then((products) => dispatch(receiveProducts(products)));
