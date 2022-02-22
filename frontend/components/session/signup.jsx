@@ -30,23 +30,19 @@ class SignUp extends React.Component {
       <div className="session-form">
         <h2>Sign Up!</h2>
         <form>
-          <label>
-            username:
-            <input type="text" value={this.state.username} onChange={this.handleInput("username")} />
-          </label>
+          <label>username</label>
+          <input type="text" value={this.state.username} onChange={this.handleInput("username")} />
           <br />
-          <label>
-            email:
-            <input type="text" value={this.state.email} onChange={this.handleInput("email")} />
-          </label>
+          <label>email</label>
+          <input type="text" value={this.state.email} onChange={this.handleInput("email")} />
           <br />
-          <label>
-            password:
-            <input type="password" value={this.state.password} onChange={this.handleInput("password")} />
-          </label>
+          <label>password</label>
+          <input type="password" value={this.state.password} onChange={this.handleInput("password")} />
           <br />
 
-          <button className="growing-button" onClick={this.handleSubmit}>sign up</button>
+          <button className="growing-button" onClick={this.handleSubmit}>
+            sign up
+          </button>
         </form>
       </div>
     );

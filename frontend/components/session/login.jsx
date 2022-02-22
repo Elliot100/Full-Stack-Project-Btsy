@@ -36,15 +36,11 @@ class Login extends React.Component {
       <div className="session-form">
         <h2>Sign In!</h2>
         <form>
-          <label>
-            username:
-            <input type="text" value={this.username} onChange={this.handleInput("username")} />
-          </label>
+          <label>username</label>
+          <input type="text" value={this.username} onChange={this.handleInput("username")} />
           <br />
-          <label>
-            password:
-            <input type="password" value={this.password} onChange={this.handleInput("password")} />
-          </label>
+          <label>password</label>
+          <input type="password" value={this.password} onChange={this.handleInput("password")} />
           <br />
           <button className="growing-button" onClick={this.handleSubmit}>
             sign in
@@ -54,7 +50,9 @@ class Login extends React.Component {
           <button className="growing-button" onClick={this.handleDemoUser}>
             Log in as Demo User
           </button>
-          <Link className="register" to="/signup">Register</Link>
+          <Link className="register" to="/signup">
+            Register
+          </Link>
         </form>
       </div>
     );

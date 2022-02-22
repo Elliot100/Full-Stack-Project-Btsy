@@ -2045,16 +2045,16 @@ var Login = function (_React$Component) {
           _react2.default.createElement(
             "label",
             null,
-            "username:",
-            _react2.default.createElement("input", { type: "text", value: this.username, onChange: this.handleInput("username") })
+            "username"
           ),
+          _react2.default.createElement("input", { type: "text", value: this.username, onChange: this.handleInput("username") }),
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "label",
             null,
-            "password:",
-            _react2.default.createElement("input", { type: "password", value: this.password, onChange: this.handleInput("password") })
+            "password"
           ),
+          _react2.default.createElement("input", { type: "password", value: this.password, onChange: this.handleInput("password") }),
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "button",
@@ -2207,23 +2207,23 @@ var SignUp = function (_React$Component) {
           _react2.default.createElement(
             "label",
             null,
-            "username:",
-            _react2.default.createElement("input", { type: "text", value: this.state.username, onChange: this.handleInput("username") })
+            "username"
           ),
+          _react2.default.createElement("input", { type: "text", value: this.state.username, onChange: this.handleInput("username") }),
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "label",
             null,
-            "email:",
-            _react2.default.createElement("input", { type: "text", value: this.state.email, onChange: this.handleInput("email") })
+            "email"
           ),
+          _react2.default.createElement("input", { type: "text", value: this.state.email, onChange: this.handleInput("email") }),
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "label",
             null,
-            "password:",
-            _react2.default.createElement("input", { type: "password", value: this.state.password, onChange: this.handleInput("password") })
+            "password"
           ),
+          _react2.default.createElement("input", { type: "password", value: this.state.password, onChange: this.handleInput("password") }),
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "button",
