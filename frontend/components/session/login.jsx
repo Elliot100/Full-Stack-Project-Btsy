@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="session-form">
-        <h2>Log In!</h2>
+        <h2>Sign In!</h2>
         <form>
           <label>
             username:
@@ -46,13 +47,14 @@ class Login extends React.Component {
           </label>
           <br />
           <button className="growing-button" onClick={this.handleSubmit}>
-            log in
+            sign in
           </button>
           <br />
           or
           <button className="growing-button" onClick={this.handleDemoUser}>
             Log in as Demo User
           </button>
+          <Link className="register" to="/signup">Register</Link>
         </form>
       </div>
     );

@@ -46,7 +46,7 @@ class SignUp extends React.Component {
           </label>
           <br />
 
-          <button onClick={this.handleSubmit}>sign up</button>
+          <button className="growing-button" onClick={this.handleSubmit}>sign up</button>
         </form>
       </div>
     );

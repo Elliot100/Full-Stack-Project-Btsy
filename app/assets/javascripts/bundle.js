@@ -1970,6 +1970,8 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2035,7 +2037,7 @@ var Login = function (_React$Component) {
         _react2.default.createElement(
           "h2",
           null,
-          "Log In!"
+          "Sign In!"
         ),
         _react2.default.createElement(
           "form",
@@ -2057,7 +2059,7 @@ var Login = function (_React$Component) {
           _react2.default.createElement(
             "button",
             { className: "growing-button", onClick: this.handleSubmit },
-            "log in"
+            "sign in"
           ),
           _react2.default.createElement("br", null),
           "or",
@@ -2065,6 +2067,11 @@ var Login = function (_React$Component) {
             "button",
             { className: "growing-button", onClick: this.handleDemoUser },
             "Log in as Demo User"
+          ),
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: "register", to: "/signup" },
+            "Register"
           )
         )
       );
@@ -2220,7 +2227,7 @@ var SignUp = function (_React$Component) {
           _react2.default.createElement("br", null),
           _react2.default.createElement(
             "button",
-            { onClick: this.handleSubmit },
+            { className: "growing-button", onClick: this.handleSubmit },
             "sign up"
           )
         )
