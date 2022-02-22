@@ -42,7 +42,7 @@ class Login extends React.Component {
     return (
       <div className="session-form">
         <h2>Sign In!</h2>
-        <form className="show-message-container">
+        <form className="message-container">
           <label>username</label>
           <input type="text" value={this.username} onChange={this.handleInput("username")} />
           <br />
@@ -52,13 +52,6 @@ class Login extends React.Component {
           <button className="growing-button" onClick={this.handleSubmit}>
             sign in
           </button>
-          {this.state.showMessage && (
-            <div className="show-message">
-              <FlashMessage duration={5000}>
-                <p>please fill out all the fields</p>
-              </FlashMessage>
-            </div>
-          )}
           or
           <button className="growing-button" onClick={this.handleDemoUser}>
             Log in as Demo User
@@ -66,6 +59,13 @@ class Login extends React.Component {
           <Link className="register" to="/signup">
             Register
           </Link>
+          {this.state.showMessage && (
+            <div className="signin-message">
+              <FlashMessage duration={5000}>
+                <p>please fill out all the fields</p>
+              </FlashMessage>
+            </div>
+          )}
         </form>
       </div>
     );

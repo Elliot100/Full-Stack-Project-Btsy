@@ -55,11 +55,16 @@
    color: black;
  }
 
- .show-message-container {
-   position: relative;
+ .message-container {
+  position: relative;
  }
 
- .show-message {
+ .signin-message {
   position: absolute;
   top: 40%;
+ }
+
+ .signup-message {
+  position: absolute;
+  top: 62%;
  }

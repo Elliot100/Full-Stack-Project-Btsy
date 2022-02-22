@@ -2050,7 +2050,7 @@ var Login = function (_React$Component) {
         ),
         _react2.default.createElement(
           "form",
-          { className: "show-message-container" },
+          { className: "message-container" },
           _react2.default.createElement(
             "label",
             null,
@@ -2070,19 +2070,6 @@ var Login = function (_React$Component) {
             { className: "growing-button", onClick: this.handleSubmit },
             "sign in"
           ),
-          this.state.showMessage && _react2.default.createElement(
-            "div",
-            { className: "show-message" },
-            _react2.default.createElement(
-              _reactFlashMessage2.default,
-              { duration: 5000 },
-              _react2.default.createElement(
-                "p",
-                null,
-                "please fill out all the fields"
-              )
-            )
-          ),
           "or",
           _react2.default.createElement(
             "button",
@@ -2093,6 +2080,19 @@ var Login = function (_React$Component) {
             _reactRouterDom.Link,
             { className: "register", to: "/signup" },
             "Register"
+          ),
+          this.state.showMessage && _react2.default.createElement(
+            "div",
+            { className: "signin-message" },
+            _react2.default.createElement(
+              _reactFlashMessage2.default,
+              { duration: 5000 },
+              _react2.default.createElement(
+                "p",
+                null,
+                "please fill out all the fields"
+              )
+            )
           )
         )
       );
@@ -2162,6 +2162,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactFlashMessage = __webpack_require__(/*! react-flash-message */ "./node_modules/react-flash-message/build/index.js");
+
+var _reactFlashMessage2 = _interopRequireDefault(_reactFlashMessage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2183,7 +2187,8 @@ var SignUp = function (_React$Component) {
     _this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      showMessage: false
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.handleInput = _this.handleInput.bind(_this);
@@ -2207,9 +2212,14 @@ var SignUp = function (_React$Component) {
 
       // redirect after sucessfully create user
       e.preventDefault();
-      this.props.createNewUser(this.state).then(function () {
-        return _this3.props.history.push("/products");
-      });
+      this.setState({ showMessage: false });
+      if (this.state.username && this.state.password) {
+        this.props.createNewUser(this.state).then(function () {
+          return _this3.props.history.push("/products");
+        });
+      } else {
+        this.setState({ showMessage: true });
+      }
     }
   }, {
     key: "render",
@@ -2224,7 +2234,7 @@ var SignUp = function (_React$Component) {
         ),
         _react2.default.createElement(
           "form",
-          null,
+          { className: "message-container" },
           _react2.default.createElement(
             "label",
             null,
@@ -2250,6 +2260,19 @@ var SignUp = function (_React$Component) {
             "button",
             { className: "growing-button", onClick: this.handleSubmit },
             "sign up"
+          ),
+          this.state.showMessage && _react2.default.createElement(
+            "div",
+            { className: "signup-message" },
+            _react2.default.createElement(
+              _reactFlashMessage2.default,
+              { duration: 5000 },
+              _react2.default.createElement(
+                "p",
+                null,
+                "please fill out all the fields"
+              )
+            )
           )
         )
       );
