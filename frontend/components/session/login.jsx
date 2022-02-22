@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import FlashMessage from "react-flash-message";
+
 
 class Login extends React.Component {
   constructor(props) {
@@ -7,6 +9,7 @@ class Login extends React.Component {
     this.state = {
       username: "",
       password: "",
+      showMessage: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemoUser = this.handleDemoUser.bind(this);
@@ -20,8 +23,12 @@ class Login extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.login(this.state)
-      .then(() => this.props.history.push("/products"));
+    this.setState({ showMessage: false });
+    if (this.state.username && this.state.password) {
+      this.props.login(this.state).then(() => this.props.history.push("/products"));
+    } else {
+      this.setState({ showMessage: true });
+    }
   }
 
   handleDemoUser(e) {
@@ -35,7 +42,7 @@ class Login extends React.Component {
     return (
       <div className="session-form">
         <h2>Sign In!</h2>
-        <form>
+        <form className="show-message-container">
           <label>username</label>
           <input type="text" value={this.username} onChange={this.handleInput("username")} />
           <br />
@@ -45,7 +52,13 @@ class Login extends React.Component {
           <button className="growing-button" onClick={this.handleSubmit}>
             sign in
           </button>
-          <br />
+          {this.state.showMessage && (
+            <div className="show-message">
+              <FlashMessage duration={5000}>
+                <p>please fill out all the fields</p>
+              </FlashMessage>
+            </div>
+          )}
           or
           <button className="growing-button" onClick={this.handleDemoUser}>
             Log in as Demo User

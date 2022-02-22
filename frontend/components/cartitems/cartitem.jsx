@@ -19,7 +19,6 @@ export default ({ cartitem, props }) => {
   );
 
   const handleQtyChange = (e) => {
-    // console.log("qty", e.target.value);
     props.updateFromCart(cartitem.id, e.target.value);
   };
 

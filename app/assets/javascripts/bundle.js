@@ -466,7 +466,6 @@ exports.default = function (_ref) {
   );
 
   var handleQtyChange = function handleQtyChange(e) {
-    // console.log("qty", e.target.value);
     props.updateFromCart(cartitem.id, e.target.value);
   };
 
@@ -1972,6 +1971,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
+var _reactFlashMessage = __webpack_require__(/*! react-flash-message */ "./node_modules/react-flash-message/build/index.js");
+
+var _reactFlashMessage2 = _interopRequireDefault(_reactFlashMessage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1992,7 +1995,8 @@ var Login = function (_React$Component) {
 
     _this.state = {
       username: "",
-      password: ""
+      password: "",
+      showMessage: false
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.handleDemoUser = _this.handleDemoUser.bind(_this);
@@ -2014,9 +2018,14 @@ var Login = function (_React$Component) {
       var _this3 = this;
 
       e.preventDefault();
-      this.props.login(this.state).then(function () {
-        return _this3.props.history.push("/products");
-      });
+      this.setState({ showMessage: false });
+      if (this.state.username && this.state.password) {
+        this.props.login(this.state).then(function () {
+          return _this3.props.history.push("/products");
+        });
+      } else {
+        this.setState({ showMessage: true });
+      }
     }
   }, {
     key: "handleDemoUser",
@@ -2041,7 +2050,7 @@ var Login = function (_React$Component) {
         ),
         _react2.default.createElement(
           "form",
-          null,
+          { className: "show-message-container" },
           _react2.default.createElement(
             "label",
             null,
@@ -2061,7 +2070,19 @@ var Login = function (_React$Component) {
             { className: "growing-button", onClick: this.handleSubmit },
             "sign in"
           ),
-          _react2.default.createElement("br", null),
+          this.state.showMessage && _react2.default.createElement(
+            "div",
+            { className: "show-message" },
+            _react2.default.createElement(
+              _reactFlashMessage2.default,
+              { duration: 5000 },
+              _react2.default.createElement(
+                "p",
+                null,
+                "please fill out all the fields"
+              )
+            )
+          ),
           "or",
           _react2.default.createElement(
             "button",

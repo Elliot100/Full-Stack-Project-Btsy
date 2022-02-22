@@ -54,3 +54,12 @@
    text-decoration: none;
    color: black;
  }
+
+ .show-message-container {
+   position: relative;
+ }
+
+ .show-message {
+  position: absolute;
+  top: 40%;
+ }
