@@ -1260,7 +1260,7 @@ exports.default = function (_ref) {
     _react2.default.createElement(
       "h1",
       null,
-      "Find extra-special ways to express your love."
+      "Shop for handmade, vintage, custom, and unique gifts for everyone"
     )
   );
 

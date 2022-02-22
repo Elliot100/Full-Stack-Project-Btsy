@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 export default ({ currentUser }) => {
 
   const website_message = currentUser ? (
-      <div/>
+    <div />
   ) : (
     <div className="website-message">
-      <h1>Find extra-special ways to express your love.</h1>
+      <h1>Shop for handmade, vintage, custom, and unique gifts for everyone</h1>
     </div>
   );
 
