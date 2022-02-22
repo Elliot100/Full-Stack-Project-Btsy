@@ -1768,11 +1768,6 @@ var ProductPage = function (_React$Component) {
         }
       };
 
-      // if (this.props.product.added_by_current_user) {
-      //   addToCartText = "Added to cart";
-      //   addToCartAction = () => this.props.deleteFromCart(id);
-      // }
-
       return _react2.default.createElement(
         'div',
         { className: 'product-info' },
@@ -1785,7 +1780,7 @@ var ProductPage = function (_React$Component) {
           'div',
           { className: 'product-info-price' },
           '$',
-          price
+          parseFloat(price).toFixed(2)
         ),
         _react2.default.createElement(
           'div',

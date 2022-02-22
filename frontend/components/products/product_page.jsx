@@ -30,16 +30,11 @@ class ProductPage extends React.Component {
         this.props.history.push(`/login`);
       }
     }
-
-    // if (this.props.product.added_by_current_user) {
-    //   addToCartText = "Added to cart";
-    //   addToCartAction = () => this.props.deleteFromCart(id);
-    // }
     
     return (
       <div className="product-info">
         <h1 className="product-info-title">{title}</h1>
-        <div className="product-info-price">${price}</div>
+        <div className="product-info-price">${parseFloat(price).toFixed(2)}</div>
         <div className="product-info-description">
           <h3>Description</h3>
           {description}
