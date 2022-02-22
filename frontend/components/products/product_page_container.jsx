@@ -1,4 +1,3 @@
-import React from "react";
 import ProductPage from "./product_page";
 import { fetchSingleProduct, addToCart, deleteFromCart } from "../../actions/products";
 import { connect } from "react-redux";

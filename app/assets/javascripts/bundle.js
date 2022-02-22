@@ -640,7 +640,7 @@ var CartitemIndex = function (_React$Component) {
           ),
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: "/products" },
+            { className: "keep-shopping", to: "/products" },
             "Keep shopping"
           )
         )
@@ -1468,7 +1468,10 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var MAX_LENGTH = 30;
+
 // eslint-disable-next-line react/display-name
+
 exports.default = function (_ref) {
   var product = _ref.product,
       props = _ref.props;
@@ -1482,8 +1485,19 @@ exports.default = function (_ref) {
 
   return _react2.default.createElement(
     "div",
-    null,
-    _react2.default.createElement("img", { onClick: handleClick, className: "product-img imagedropshadow", src: product.image })
+    { className: "product-index" },
+    _react2.default.createElement("img", { onClick: handleClick, className: "product-img imagedropshadow", src: product.image }),
+    _react2.default.createElement(
+      "p",
+      null,
+      "" + product.title.substring(0, MAX_LENGTH)
+    ),
+    _react2.default.createElement(
+      "a",
+      null,
+      "$",
+      product.price
+    )
   );
 };
 
@@ -1857,10 +1871,6 @@ exports.default = ProductPage;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
-
-var _react2 = _interopRequireDefault(_react);
 
 var _product_page = __webpack_require__(/*! ./product_page */ "./frontend/components/products/product_page.jsx");
 

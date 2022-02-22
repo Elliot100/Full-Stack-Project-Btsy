@@ -39,7 +39,7 @@ class CartitemIndex extends React.Component {
       <div className="cart-nav-frame">
         <div className="cart-nav">
           <p>{this.props.cartitems.length} items in your cart</p>
-          <Link to="/products">Keep shopping</Link>
+          <Link className="keep-shopping" to="/products">Keep shopping</Link>
         </div>
       </div>
     );

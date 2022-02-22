@@ -23,6 +23,7 @@
   width: 250px;
   object-fit: cover;
   border-radius: 5%;
+  margin-top: 30px;
 }
 
 .imagedropshadow {
@@ -130,4 +131,8 @@ img.imagedropshadow:hover {
 
 .growing-button:hover {
   transform: scale(1.02);
+}
+
+.product-index > a {
+  font-weight: bold;
 }
