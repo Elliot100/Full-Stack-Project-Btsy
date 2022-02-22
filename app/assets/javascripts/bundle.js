@@ -1593,34 +1593,34 @@ var ProductNew = function (_React$Component) {
         ),
         _react2.default.createElement(
           'form',
-          null,
+          { className: 'message-container' },
           _react2.default.createElement(
             'label',
             null,
-            'title :',
-            _react2.default.createElement('input', { type: 'text', value: this.title, onChange: this.handleInput("title") })
+            'title'
           ),
+          _react2.default.createElement('input', { type: 'text', value: this.title, onChange: this.handleInput("title") }),
           _react2.default.createElement('br', null),
           _react2.default.createElement(
             'label',
             null,
-            'description :',
-            _react2.default.createElement('input', { type: 'text', value: this.description, onChange: this.handleInput("description") })
+            'description'
           ),
+          _react2.default.createElement('input', { type: 'text', value: this.description, onChange: this.handleInput("description") }),
           _react2.default.createElement('br', null),
           _react2.default.createElement(
             'label',
             null,
-            'price :',
-            _react2.default.createElement('input', { type: 'text', value: this.price, onChange: this.handleInput("price") })
+            'price'
           ),
+          _react2.default.createElement('input', { type: 'text', value: this.price, onChange: this.handleInput("price") }),
           _react2.default.createElement('br', null),
           _react2.default.createElement(
             'label',
             null,
-            'image url :',
-            _react2.default.createElement('input', { type: 'text', value: this.image, onChange: this.handleInput("image") })
+            'image url'
           ),
+          _react2.default.createElement('input', { type: 'text', value: this.image, onChange: this.handleInput("image") }),
           _react2.default.createElement('br', null),
           _react2.default.createElement(
             'button',
@@ -1629,12 +1629,12 @@ var ProductNew = function (_React$Component) {
           ),
           this.state.showMessage && _react2.default.createElement(
             'div',
-            null,
+            { className: 'newproduct-message' },
             _react2.default.createElement(
               _reactFlashMessage2.default,
               { duration: 5000 },
               _react2.default.createElement(
-                'strong',
+                'p',
                 null,
                 'please fill out all the fields'
               )
