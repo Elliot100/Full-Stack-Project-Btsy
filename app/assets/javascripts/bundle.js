@@ -1496,7 +1496,7 @@ exports.default = function (_ref) {
       "a",
       null,
       "$",
-      product.price
+      parseFloat(product.price).toFixed(2)
     )
   );
 };
@@ -2024,7 +2024,7 @@ var Login = function (_React$Component) {
       var _this4 = this;
 
       e.preventDefault();
-      this.props.login({ username: "Brooks Spencer LLD", password: "password" }).then(function () {
+      this.props.login({ username: "Patti Schmeler", password: "password" }).then(function () {
         return _this4.props.history.push("/products");
       });
     }

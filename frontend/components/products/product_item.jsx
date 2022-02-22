@@ -14,7 +14,7 @@ export default ({ product, props }) => {
     <div className="product-index">
       <img onClick={handleClick} className="product-img imagedropshadow" src={product.image} />
       <p>{`${product.title.substring(0, MAX_LENGTH)}`}</p>
-      <a>${product.price}</a>
+      <a>${parseFloat(product.price).toFixed(2)}</a>
     </div>
   );
 };
