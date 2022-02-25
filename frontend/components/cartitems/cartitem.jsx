@@ -44,7 +44,7 @@ export default ({ cartitem, props }) => {
       <div className="cartitem-info-frame">
         {image_title_remove}
         <a>{cartitem_qty_dropdown}</a>
-        <p>${cartitem.product.price}</p>
+        <p>${parseFloat(cartitem.product.price).toFixed(2)}</p>
       </div>
     </div>
   );

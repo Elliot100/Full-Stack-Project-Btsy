@@ -540,7 +540,7 @@ exports.default = function (_ref) {
         "p",
         null,
         "$",
-        cartitem.product.price
+        parseFloat(cartitem.product.price).toFixed(2)
       )
     )
   );
