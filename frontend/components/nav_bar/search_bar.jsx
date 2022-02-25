@@ -17,16 +17,10 @@ class SearchBar extends React.Component {
 
   handleClick (e) {
     e.preventDefault();
-    // console.log(this.props);
-    // this.props.history.push(`/products?${this.state}`);
     this.props.findProduct(this.state.search)
     .then(() =>  {
       this.props.history.push(`/?${this.state.search}`);
-            // console.log(this.props.location.search.substring(1));
     });
-    // this.props.history.push(`/products?${this.state}`)
-
-    // console.log(this.state);
   }
 
   render () {
