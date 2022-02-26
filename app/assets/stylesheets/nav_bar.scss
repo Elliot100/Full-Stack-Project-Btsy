@@ -121,6 +121,79 @@
   font-family: "Graphik Webfont";
 }
 
+.cat-dropdown {
+  display: flex;
+  // background-size: 50px 50px;
+  // width: 100%;
+  // height: 50px;
+  align-items: center;
+  position: relative;
+  cursor:pointer;
+  font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+}
+
+.cat-dropdown > ul {
+  display: none;
+}
+
+.cat-dropdown:hover ul {
+  display: flex;
+  z-index: 2;
+  width: 250px;
+  height: 300px;
+  position: absolute;
+  top: 100%;
+  left: -10%;
+  flex-direction: column;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(34, 34, 34, 0.15);
+  flex: 1;
+  background: #FFF;
+  list-style-type: none;
+  border-radius: 12px;
+  justify-content: center;
+  align-items: flex-start;
+  opacity: 1;
+  transform: scaleX(1) scaleY(1) perspective(1px);
+  visibility: visible;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border: 1px rgba(34, 34, 34, 0.15) solid;
+  font-size: 14px;
+  font-family: inherit;
+  color: #222;
+  padding-left: 0;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.cat-dropdown-ul > li {
+  display: flex;
+  flex: 1;
+  font-family: inherit;
+  color: inherit;
+  height: 40%;
+  text-align: left;
+  width: 80%;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20%;
+  font-weight: 100;
+}
+
+.cat-dropdown-ul > li:hover {
+  transition: background-color 100ms ease-out;
+  background-color: rgb(236, 235, 235);
+  width: 80%;
+  height: 40%;
+  display: flex;
+  text-align: left;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20%;
+  font-weight: 100;
+}
+
 .auth-dropdown {
   display: flex;
   background-size: 50px 50px;

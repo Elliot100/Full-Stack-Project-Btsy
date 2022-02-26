@@ -22,46 +22,6 @@ export default ({ currentUser, logout, findProduct, history, location}) => {
     </svg>
   );
 
-  // const search_bar = (
-  //   <div className="search-bar">
-  //     <input
-  //       id="global-enhancements-search-query"
-  //       data-id="search-query"
-  //       data-search-input=""
-  //       type="text"
-  //       name="search_query"
-  //       className="search-bar-input"
-  //       placeholder="Search for anything"
-  //       value=""
-  //       autoComplete="off"
-  //       autoCorrect="off"
-  //       autoCapitalize="off"
-  //     />
-  //     <button
-  //       type="submit"
-  //       className="search-bar-button"
-  //       value="Search"
-  //       aria-label="Search"
-  //       data-id="gnav-search-submit-button"
-  //     >
-  //       <span className="search-bar-button-icon">
-  //         <svg
-  //           width="24"
-  //           height="24"
-  //           xmlns="http://www.w3.org/2000/svg"
-  //           viewBox="0 0 24 24"
-  //           aria-hidden="true"
-  //           focusable="false"
-  //         >
-  //           <path d="M10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18ZM10,4a6,6,0,1,0,6,6A6.007,6.007,0,0,0,10,4Z"></path>
-  //           <path d="M21,22a1,1,0,0,1-.707-0.293l-4-4a1,1,0,0,1,1.414-1.414l4,4A1,1,0,0,1,21,22Z"></path>
-  //         </svg>
-  //       </span>
-  //     </button>
-  //   </div>
-  // );
-
-
   const render_auth_dropdown = () => (
     <div className="auth-dropdown">
       <p>Hi {currentUser.username.split(" ")[0]}</p>
@@ -87,18 +47,29 @@ export default ({ currentUser, logout, findProduct, history, location}) => {
     </div>
   );
 
+  const cat_dropdown_ul = (
+    <ul className="cat-dropdown-ul">
+      <li><a>Link 1</a></li>
+      <li><a>Link 2</a></li>
+      <li><a>Link 3</a></li>
+      <li><a>Link 4</a></li>
+      <li><a>Link 5</a></li>
+      <li><a>Link 6</a></li>
+    </ul>
+  );
+
   const categories = (
     <div className="categories">
       <ul className="category-items">
-        <li className="btn">Special Day Gifts</li>
-        <li className="btn">Jewelry & Accessories</li>
-        <li className="btn">Clothing & Shoes</li>
-        <li className="btn">Home & Living</li>
-        <li className="btn">Wedding & Party</li>
-        <li className="btn">Toys & Entertainment</li>
-        <li className="btn">Art & Collectibles</li>
-        <li className="btn">Craft Supplies</li>
-        <li className="btn">Gifts & Gift Cards</li>
+        <li className="cat-dropdown">Special Day Gifts{cat_dropdown_ul}</li>
+        <li className="cat-dropdown">Jewelry & Accessories{cat_dropdown_ul}</li>
+        <li className="cat-dropdown">Clothing & Shoes{cat_dropdown_ul}</li>
+        <li className="cat-dropdown">Home & Living{cat_dropdown_ul}</li>
+        <li className="cat-dropdown">Wedding & Party{cat_dropdown_ul}</li>
+        <li className="cat-dropdown">Toys & Entertainment{cat_dropdown_ul}</li>
+        <li className="cat-dropdown">Art & Collectibles{cat_dropdown_ul}</li>
+        <li className="cat-dropdown">Craft Supplies{cat_dropdown_ul}</li>
+        <li className="cat-dropdown">Gifts & Gift Cards{cat_dropdown_ul}</li>
       </ul>
     </div>
   );
