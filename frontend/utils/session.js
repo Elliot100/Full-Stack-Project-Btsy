@@ -6,6 +6,12 @@ export const postUser = (user) =>
     data: { user },
   });
 
+export const showUser = (id) =>
+  $.ajax({
+    url: `api/users/${id}`,
+    method: "GET",
+  })
+
 // login user
 export const postSession = (user) =>
   $.ajax({

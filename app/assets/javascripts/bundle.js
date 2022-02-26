@@ -1983,7 +1983,8 @@ var Login = function (_React$Component) {
     _this.state = {
       username: "",
       password: "",
-      showMessage: false
+      showMessage: false,
+      demoUsername: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.handleDemoUser = _this.handleDemoUser.bind(_this);
@@ -1991,24 +1992,33 @@ var Login = function (_React$Component) {
   }
 
   _createClass(Login, [{
-    key: "handleInput",
-    value: function handleInput(type) {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       var _this2 = this;
 
+      this.props.showUser(1).then(function (user) {
+        _this2.setState({ demoUsername: user.username });
+      });
+    }
+  }, {
+    key: "handleInput",
+    value: function handleInput(type) {
+      var _this3 = this;
+
       return function (e) {
-        _this2.setState(_defineProperty({}, type, e.target.value));
+        _this3.setState(_defineProperty({}, type, e.target.value));
       };
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       e.preventDefault();
       this.setState({ showMessage: false });
       if (this.state.username && this.state.password) {
         this.props.login(this.state).then(function () {
-          return _this3.props.history.push("/products");
+          return _this4.props.history.push("/products");
         });
       } else {
         this.setState({ showMessage: true });
@@ -2017,11 +2027,11 @@ var Login = function (_React$Component) {
   }, {
     key: "handleDemoUser",
     value: function handleDemoUser(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       e.preventDefault();
-      this.props.login({ username: "Patti Schmeler", password: "password" }).then(function () {
-        return _this4.props.history.push("/products");
+      this.props.login({ username: this.state.demoUsername, password: "password" }).then(function () {
+        return _this5.props.history.push("/products");
       });
     }
   }, {
@@ -2111,6 +2121,8 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 var _session = __webpack_require__(/*! ../../actions/session */ "./frontend/actions/session.js");
 
+var _session2 = __webpack_require__(/*! ../../utils/session */ "./frontend/utils/session.js");
+
 var _login2 = __webpack_require__(/*! ./login */ "./frontend/components/session/login.jsx");
 
 var _login3 = _interopRequireDefault(_login2);
@@ -2121,6 +2133,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     login: function login(formUser) {
       return dispatch((0, _session.login)(formUser));
+    },
+    showUser: function showUser(id) {
+      return (0, _session2.showUser)(id);
     }
   };
 };
@@ -2723,6 +2738,13 @@ var postUser = exports.postUser = function postUser(user) {
     url: "/api/users",
     method: "POST",
     data: { user: user }
+  });
+};
+
+var showUser = exports.showUser = function showUser(id) {
+  return $.ajax({
+    url: "api/users/" + id,
+    method: "GET"
   });
 };
 

@@ -10,9 +10,17 @@ class Login extends React.Component {
       username: "",
       password: "",
       showMessage: false,
+      demoUsername: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemoUser = this.handleDemoUser.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.showUser(1)
+    .then((user) => {
+      this.setState({demoUsername: user.username});
+    })
   }
 
   handleInput(type) {
@@ -34,7 +42,7 @@ class Login extends React.Component {
   handleDemoUser(e) {
     e.preventDefault();
     this.props
-      .login({ username: "Patti Schmeler", password: "password" })
+      .login({ username: this.state.demoUsername, password: "password" })
       .then(() => this.props.history.push("/products"));
   }
 
