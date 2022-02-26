@@ -35,6 +35,7 @@ gem 'jquery-rails'
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 
 gem 'bootsnap', require: false
+  gem 'faker'
 
 
 # Use Capistrano for deployment
@@ -47,7 +48,6 @@ group :development, :test do
   gem 'selenium-webdriver'
 
   gem 'annotate'
-  gem 'faker'
 end
 
 group :development do
