@@ -1143,6 +1143,7 @@ var SearchBar = function (_React$Component) {
     };
     _this.handleInput = _this.handleInput.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
+    _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     return _this;
   }
 
@@ -1236,6 +1237,17 @@ var SearchBar = function (_React$Component) {
       );
     }
   }, {
+    key: 'handleKeyPress',
+    value: function handleKeyPress(e) {
+      var _this5 = this;
+
+      if (e.key === "Enter") {
+        this.props.findProduct(this.state.search).then(function () {
+          _this5.props.history.push('/?' + _this5.state.search);
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -1254,7 +1266,8 @@ var SearchBar = function (_React$Component) {
           value: this.search,
           autoComplete: 'off',
           autoCorrect: 'off',
-          autoCapitalize: 'off'
+          autoCapitalize: 'off',
+          onKeyPress: this.handleKeyPress
         }),
         _react2.default.createElement(
           'button',
@@ -6400,6 +6413,20 @@ module.exports = invariant;
 
 /***/ }),
 
+/***/ "./node_modules/isarray/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash-es/_Symbol.js":
 /*!*******************************************!*\
   !*** ./node_modules/lodash-es/_Symbol.js ***!
@@ -6877,7 +6904,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isarray = __webpack_require__(/*! isarray */ "./node_modules/path-to-regexp/node_modules/isarray/index.js")
+var isarray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js")
 
 /**
  * Expose `pathToRegexp`.
@@ -7303,20 +7330,6 @@ function pathToRegexp (path, keys, options) {
 
   return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/path-to-regexp/node_modules/isarray/index.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/path-to-regexp/node_modules/isarray/index.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
-};
 
 
 /***/ }),
@@ -8062,7 +8075,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
         if (checkerResult == null) {
           return null;
         }
-        if (checkerResult.data && has(checkerResult.data, 'expectedType')) {
+        if (checkerResult.data.hasOwnProperty('expectedType')) {
           expectedTypes.push(checkerResult.data.expectedType);
         }
       }
