@@ -594,7 +594,8 @@ var CartitemIndex = function (_React$Component) {
       itemstotal: 0,
       subtotal: 0,
       shipping: 0,
-      total: 0
+      total: 0,
+      totalitems: 0
     };
     return _this;
   }
@@ -618,6 +619,11 @@ var CartitemIndex = function (_React$Component) {
           shipping: itemstotal * 0.048,
           total: itemstotal + itemstotal * 0.048
         });
+        var totalitems = 0;
+        this.props.cartitems.forEach(function (cartitem) {
+          return totalitems += cartitem.qty;
+        });
+        this.setState({ totalitems: totalitems });
       }
     }
   }, {
@@ -632,7 +638,7 @@ var CartitemIndex = function (_React$Component) {
           _react2.default.createElement(
             "p",
             null,
-            this.props.cartitems.length,
+            this.state.totalitems,
             " items in your cart"
           ),
           _react2.default.createElement(

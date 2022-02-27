@@ -10,6 +10,7 @@ class CartitemIndex extends React.Component {
       subtotal: 0,
       shipping: 0,
       total: 0,
+      totalitems: 0,
     };
   }
 
@@ -29,6 +30,9 @@ class CartitemIndex extends React.Component {
         shipping: itemstotal * 0.048,
         total: itemstotal + (itemstotal * 0.048)
       });
+      var totalitems = 0;
+      this.props.cartitems.forEach(cartitem => totalitems += cartitem.qty);
+      this.setState({totalitems});
     }
   }
 
@@ -36,7 +40,7 @@ class CartitemIndex extends React.Component {
     return (
       <div className="cart-nav-frame">
         <div className="cart-nav">
-          <p>{this.props.cartitems.length} items in your cart</p>
+          <p>{this.state.totalitems} items in your cart</p>
           <Link className="keep-shopping" to="/products">Keep shopping</Link>
         </div>
       </div>
