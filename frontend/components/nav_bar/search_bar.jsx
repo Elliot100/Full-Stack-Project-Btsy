@@ -23,9 +23,38 @@ class SearchBar extends React.Component {
     });
   }
 
+  handleDropdown (search) {
+    this.props.findProduct(search).then(() => {
+      this.props.history.push(`/?${search}`);
+    });
+  }
+
+  search_dropdown () {
+    return (
+      <ul className="search-dropdown-ul">
+        <li onClick={() => this.handleDropdown("pants")}>
+          <a>pants</a>
+        </li>
+        <li onClick={() => this.handleDropdown("hat")}>
+          <a>hat</a>
+        </li>
+        <li onClick={() => this.handleDropdown("yarn")}>
+          <a>yarn</a>
+        </li>
+        <li onClick={() => this.handleDropdown("slippers")}>
+          <a>slippers</a>
+        </li>
+        <li onClick={() => this.handleDropdown("flowers")}>
+          <a>flowers</a>
+        </li>
+      </ul>
+    );
+  }
+
   render () {
     return (
       <div className="search-bar">
+        {this.search_dropdown()}
         <input
           onChange={this.handleInput}
           id="global-enhancements-search-query"
@@ -40,10 +69,8 @@ class SearchBar extends React.Component {
           autoCorrect="off"
           autoCapitalize="off"
         />
-        <button
-          className="search-bar-button"
-          onClick={this.handleClick}
-        >
+
+        <button className="search-bar-button" onClick={this.handleClick}>
           <span className="search-bar-button-icon">
             <svg
               width="24"
@@ -59,7 +86,7 @@ class SearchBar extends React.Component {
           </span>
         </button>
       </div>
-    )
+    );
   }
 }
 

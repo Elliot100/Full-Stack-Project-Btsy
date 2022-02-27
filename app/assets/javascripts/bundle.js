@@ -1192,11 +1192,86 @@ var SearchBar = function (_React$Component) {
       });
     }
   }, {
+    key: 'handleDropdown',
+    value: function handleDropdown(search) {
+      var _this3 = this;
+
+      this.props.findProduct(search).then(function () {
+        _this3.props.history.push('/?' + search);
+      });
+    }
+  }, {
+    key: 'search_dropdown',
+    value: function search_dropdown() {
+      var _this4 = this;
+
+      return _react2.default.createElement(
+        'ul',
+        { className: 'search-dropdown-ul' },
+        _react2.default.createElement(
+          'li',
+          { onClick: function onClick() {
+              return _this4.handleDropdown("pants");
+            } },
+          _react2.default.createElement(
+            'a',
+            null,
+            'pants'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          { onClick: function onClick() {
+              return _this4.handleDropdown("hat");
+            } },
+          _react2.default.createElement(
+            'a',
+            null,
+            'hat'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          { onClick: function onClick() {
+              return _this4.handleDropdown("yarn");
+            } },
+          _react2.default.createElement(
+            'a',
+            null,
+            'yarn'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          { onClick: function onClick() {
+              return _this4.handleDropdown("slippers");
+            } },
+          _react2.default.createElement(
+            'a',
+            null,
+            'slippers'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          { onClick: function onClick() {
+              return _this4.handleDropdown("flowers");
+            } },
+          _react2.default.createElement(
+            'a',
+            null,
+            'flowers'
+          )
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         { className: 'search-bar' },
+        this.search_dropdown(),
         _react2.default.createElement('input', {
           onChange: this.handleInput,
           id: 'global-enhancements-search-query',
@@ -1213,10 +1288,7 @@ var SearchBar = function (_React$Component) {
         }),
         _react2.default.createElement(
           'button',
-          {
-            className: 'search-bar-button',
-            onClick: this.handleClick
-          },
+          { className: 'search-bar-button', onClick: this.handleClick },
           _react2.default.createElement(
             'span',
             { className: 'search-bar-button-icon' },
@@ -1270,10 +1342,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // eslint-disable-next-line react/display-name
 exports.default = function (_ref) {
-  var currentUser = _ref.currentUser;
+  var currentUser = _ref.currentUser,
+      location = _ref.location;
 
 
-  var website_message = currentUser ? _react2.default.createElement("div", null) : _react2.default.createElement(
+  var website_message = currentUser ? _react2.default.createElement("div", null) : location.search.substring(1) ? _react2.default.createElement("div", null) : _react2.default.createElement(
     "div",
     { className: "website-message" },
     _react2.default.createElement(
