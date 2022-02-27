@@ -5,7 +5,17 @@ import SearchBar from "./search_bar";
 
 // eslint-disable-next-line react/display-name
 export default ({ currentUser, logout, findProduct, history, location}) => {
-
+const links = {
+  tab1: ["Valentine's Day", "Birthday", "Mother's Day", "Anniversary"], 
+  tab2: ["Accessories","Bags & Purses","Necklaces","Rings","Earrings","Bracelets","Body Jewelry"],
+  tab3: ["Women's","Men's","Kids' & Baby","Bags & Purses"],
+  tab4: ["Home","Bath & Beauty","Pet Supplies"],
+  tab5: ["Party Supplies","Invitations & Paper","Wedding Decorations","Wedding Gifts","Wedding Accessories","Wedding Clothing"],
+  tab6: ["Baby & Toddler Toys","Dolls & Action Figures","Stuffed Animals","Games & Puzzles","Learning & School","Kids' Crafts"],
+  tab7: ["Prints","Photography","Painting","Sculpture","Glass Art"],
+  tab8: ["Home & Hobby","Jewelry & Beauty","Sewing & Fiber","Papercraft","Visual Arts","Sculpting & Forming"],
+  tab9: ["Gifts for Her","Gifts for Kids","Black owned Btsy Shops","Birthday Gifts"]
+}
   
   const cart_icon = (
     <svg
@@ -47,29 +57,24 @@ export default ({ currentUser, logout, findProduct, history, location}) => {
     </div>
   );
 
-  const cat_dropdown_ul = (
+  const cat_dropdown_ul = (tab) => (
     <ul className="cat-dropdown-ul">
-      <li><a>Link 1</a></li>
-      <li><a>Link 2</a></li>
-      <li><a>Link 3</a></li>
-      <li><a>Link 4</a></li>
-      <li><a>Link 5</a></li>
-      <li><a>Link 6</a></li>
+      {tab.map((subcategory,idx) => (<li key={idx}><a>{subcategory}</a></li>))}
     </ul>
   );
 
   const categories = (
     <div className="categories">
       <ul className="category-items">
-        <li className="cat-dropdown">Special Day Gifts{cat_dropdown_ul}</li>
-        <li className="cat-dropdown">Jewelry & Accessories{cat_dropdown_ul}</li>
-        <li className="cat-dropdown">Clothing & Shoes{cat_dropdown_ul}</li>
-        <li className="cat-dropdown">Home & Living{cat_dropdown_ul}</li>
-        <li className="cat-dropdown">Wedding & Party{cat_dropdown_ul}</li>
-        <li className="cat-dropdown">Toys & Entertainment{cat_dropdown_ul}</li>
-        <li className="cat-dropdown">Art & Collectibles{cat_dropdown_ul}</li>
-        <li className="cat-dropdown">Craft Supplies{cat_dropdown_ul}</li>
-        <li className="cat-dropdown">Gifts & Gift Cards{cat_dropdown_ul}</li>
+        <li className="cat-dropdown">Special Day Gifts{cat_dropdown_ul(links.tab1)}</li>
+        <li className="cat-dropdown">Jewelry & Accessories{cat_dropdown_ul(links.tab2)}</li>
+        <li className="cat-dropdown">Clothing & Shoes{cat_dropdown_ul(links.tab3)}</li>
+        <li className="cat-dropdown">Home & Living{cat_dropdown_ul(links.tab4)}</li>
+        <li className="cat-dropdown">Wedding & Party{cat_dropdown_ul(links.tab5)}</li>
+        <li className="cat-dropdown">Toys & Entertainment{cat_dropdown_ul(links.tab6)}</li>
+        <li className="cat-dropdown">Art & Collectibles{cat_dropdown_ul(links.tab7)}</li>
+        <li className="cat-dropdown">Craft Supplies{cat_dropdown_ul(links.tab8)}</li>
+        <li className="cat-dropdown">Gifts & Gift Cards{cat_dropdown_ul(links.tab9)}</li>
       </ul>
     </div>
   );

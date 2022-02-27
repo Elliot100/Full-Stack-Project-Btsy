@@ -848,6 +848,17 @@ exports.default = function (_ref) {
       history = _ref.history,
       location = _ref.location;
 
+  var links = {
+    tab1: ["Valentine's Day", "Birthday", "Mother's Day", "Anniversary"],
+    tab2: ["Accessories", "Bags & Purses", "Necklaces", "Rings", "Earrings", "Bracelets", "Body Jewelry"],
+    tab3: ["Women's", "Men's", "Kids' & Baby", "Bags & Purses"],
+    tab4: ["Home", "Bath & Beauty", "Pet Supplies"],
+    tab5: ["Party Supplies", "Invitations & Paper", "Wedding Decorations", "Wedding Gifts", "Wedding Accessories", "Wedding Clothing"],
+    tab6: ["Baby & Toddler Toys", "Dolls & Action Figures", "Stuffed Animals", "Games & Puzzles", "Learning & School", "Kids' Crafts"],
+    tab7: ["Prints", "Photography", "Painting", "Sculpture", "Glass Art"],
+    tab8: ["Home & Hobby", "Jewelry & Beauty", "Sewing & Fiber", "Papercraft", "Visual Arts", "Sculpting & Forming"],
+    tab9: ["Gifts for Her", "Gifts for Kids", "Black owned Btsy Shops", "Birthday Gifts"]
+  };
 
   var cart_icon = _react2.default.createElement(
     "svg",
@@ -918,64 +929,23 @@ exports.default = function (_ref) {
     )
   );
 
-  var cat_dropdown_ul = _react2.default.createElement(
-    "ul",
-    { className: "cat-dropdown-ul" },
-    _react2.default.createElement(
-      "li",
-      null,
-      _react2.default.createElement(
-        "a",
-        null,
-        "Link 1"
-      )
-    ),
-    _react2.default.createElement(
-      "li",
-      null,
-      _react2.default.createElement(
-        "a",
-        null,
-        "Link 2"
-      )
-    ),
-    _react2.default.createElement(
-      "li",
-      null,
-      _react2.default.createElement(
-        "a",
-        null,
-        "Link 3"
-      )
-    ),
-    _react2.default.createElement(
-      "li",
-      null,
-      _react2.default.createElement(
-        "a",
-        null,
-        "Link 4"
-      )
-    ),
-    _react2.default.createElement(
-      "li",
-      null,
-      _react2.default.createElement(
-        "a",
-        null,
-        "Link 5"
-      )
-    ),
-    _react2.default.createElement(
-      "li",
-      null,
-      _react2.default.createElement(
-        "a",
-        null,
-        "Link 6"
-      )
-    )
-  );
+  var cat_dropdown_ul = function cat_dropdown_ul(tab) {
+    return _react2.default.createElement(
+      "ul",
+      { className: "cat-dropdown-ul" },
+      tab.map(function (subcategory, idx) {
+        return _react2.default.createElement(
+          "li",
+          { key: idx },
+          _react2.default.createElement(
+            "a",
+            null,
+            subcategory
+          )
+        );
+      })
+    );
+  };
 
   var categories = _react2.default.createElement(
     "div",
@@ -987,55 +957,55 @@ exports.default = function (_ref) {
         "li",
         { className: "cat-dropdown" },
         "Special Day Gifts",
-        cat_dropdown_ul
+        cat_dropdown_ul(links.tab1)
       ),
       _react2.default.createElement(
         "li",
         { className: "cat-dropdown" },
         "Jewelry & Accessories",
-        cat_dropdown_ul
+        cat_dropdown_ul(links.tab2)
       ),
       _react2.default.createElement(
         "li",
         { className: "cat-dropdown" },
         "Clothing & Shoes",
-        cat_dropdown_ul
+        cat_dropdown_ul(links.tab3)
       ),
       _react2.default.createElement(
         "li",
         { className: "cat-dropdown" },
         "Home & Living",
-        cat_dropdown_ul
+        cat_dropdown_ul(links.tab4)
       ),
       _react2.default.createElement(
         "li",
         { className: "cat-dropdown" },
         "Wedding & Party",
-        cat_dropdown_ul
+        cat_dropdown_ul(links.tab5)
       ),
       _react2.default.createElement(
         "li",
         { className: "cat-dropdown" },
         "Toys & Entertainment",
-        cat_dropdown_ul
+        cat_dropdown_ul(links.tab6)
       ),
       _react2.default.createElement(
         "li",
         { className: "cat-dropdown" },
         "Art & Collectibles",
-        cat_dropdown_ul
+        cat_dropdown_ul(links.tab7)
       ),
       _react2.default.createElement(
         "li",
         { className: "cat-dropdown" },
         "Craft Supplies",
-        cat_dropdown_ul
+        cat_dropdown_ul(links.tab8)
       ),
       _react2.default.createElement(
         "li",
         { className: "cat-dropdown" },
         "Gifts & Gift Cards",
-        cat_dropdown_ul
+        cat_dropdown_ul(links.tab9)
       )
     )
   );
