@@ -1155,6 +1155,24 @@ var SearchBar = function (_React$Component) {
   }
 
   _createClass(SearchBar, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var elements = document.getElementsByClassName("search-dropdown-ul");
+      var searchbar = document.getElementsByClassName("search-bar");
+      var element = elements[0];
+
+      document.addEventListener("click", function (e) {
+        if (e.target !== element && !searchbar[0].contains(e.target)) {
+          element.style.display = "none";
+        }
+      });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      // remve event listener 
+    }
+  }, {
     key: 'handleInput',
     value: function handleInput(e) {
       this.setState({ search: e.target.value });
@@ -1165,6 +1183,8 @@ var SearchBar = function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
+      var elements = document.getElementsByClassName("search-dropdown-ul");
+      elements[0].style.display = "none";
       this.props.findProduct(this.state.search).then(function () {
         _this2.props.history.push('/?' + _this2.state.search);
       });
@@ -1189,6 +1209,15 @@ var SearchBar = function (_React$Component) {
       return _react2.default.createElement(
         'ul',
         { className: 'search-dropdown-ul' },
+        _react2.default.createElement(
+          'li',
+          { className: 'popular-right-now' },
+          _react2.default.createElement(
+            'b',
+            null,
+            'Popular right now'
+          )
+        ),
         _react2.default.createElement(
           'li',
           { onClick: function onClick() {
@@ -1258,6 +1287,8 @@ var SearchBar = function (_React$Component) {
       var _this5 = this;
 
       if (e.key === "Enter") {
+        var elements = document.getElementsByClassName("search-dropdown-ul");
+        elements[0].style.display = "none";
         this.props.findProduct(this.state.search).then(function () {
           _this5.props.history.push('/?' + _this5.state.search);
         });
@@ -1485,7 +1516,9 @@ var ProductIndex = function (_React$Component) {
             "h1",
             null,
             this.state.numSearchResult,
-            " search results "
+            " search results for \"",
+            this.props.location.search.substring(1),
+            "\""
           )
         );
       }

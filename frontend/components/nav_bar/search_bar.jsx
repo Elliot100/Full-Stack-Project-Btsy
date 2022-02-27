@@ -13,12 +13,30 @@ class SearchBar extends React.Component {
     this.handleDropdown = this.handleDropdown.bind(this);
   }
 
+  componentDidMount() {
+    var elements = document.getElementsByClassName("search-dropdown-ul");
+    var searchbar = document.getElementsByClassName("search-bar");
+    const element = elements[0];
+
+    document.addEventListener("click", function (e) {
+      if (e.target !== element && !searchbar[0].contains(e.target)) {
+        element.style.display = "none";
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    // remve event listener 
+  }
+
   handleInput(e) {
     this.setState({ search: e.target.value });
   }
 
   handleClick(e) {
     e.preventDefault();
+    var elements = document.getElementsByClassName("search-dropdown-ul");
+    elements[0].style.display = "none";
     this.props.findProduct(this.state.search).then(() => {
       this.props.history.push(`/?${this.state.search}`);
     });
@@ -36,6 +54,9 @@ class SearchBar extends React.Component {
   search_dropdown() {
     return (
       <ul className="search-dropdown-ul">
+        <li className="popular-right-now">
+          <b>Popular right now</b>
+        </li>
         <li onClick={() => this.handleDropdown("pants")}>
           <a> pants</a>
         </li>
@@ -62,6 +83,8 @@ class SearchBar extends React.Component {
 
   handleKeyPress(e) {
     if (e.key === "Enter") {
+      var elements = document.getElementsByClassName("search-dropdown-ul");
+      elements[0].style.display = "none";
       this.props.findProduct(this.state.search).then(() => {
         this.props.history.push(`/?${this.state.search}`);
       });

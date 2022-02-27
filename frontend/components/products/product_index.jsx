@@ -37,7 +37,7 @@ class ProductIndex extends React.Component {
     if (this.props.location.search.substring(1)) {
       return (
         <div className="search-results">
-          <h1>{this.state.numSearchResult} search results </h1>
+          <h1>{this.state.numSearchResult} search results for "{this.props.location.search.substring(1)}"</h1>
         </div>
       );
     }
