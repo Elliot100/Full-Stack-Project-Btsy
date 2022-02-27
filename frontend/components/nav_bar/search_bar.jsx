@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       search: props.location.search.slice(1) || "",
     };
@@ -26,9 +25,11 @@ class SearchBar extends React.Component {
   }
 
   handleDropdown(search) {
+    var elements = document.getElementsByClassName("search-dropdown-ul");
+    elements[0].style.display = "none";
     this.setState({ search });
     this.props.findProduct(search).then(() => {
-      this.props.history.push(`/?${search}`)
+      this.props.history.push(`/?${search}`);
     });
   }
 
@@ -36,8 +37,7 @@ class SearchBar extends React.Component {
     return (
       <ul className="search-dropdown-ul">
         <li onClick={() => this.handleDropdown("pants")}>
-          <a> pants
-          </a>
+          <a> pants</a>
         </li>
         <li onClick={() => this.handleDropdown("hat")}>
           <a>hat</a>
@@ -55,11 +55,16 @@ class SearchBar extends React.Component {
     );
   }
 
+  render_search_dropdown() {
+    var elements = document.getElementsByClassName("search-dropdown-ul");
+    elements[0].style.display = "flex";
+  }
+
   handleKeyPress(e) {
     if (e.key === "Enter") {
-    this.props.findProduct(this.state.search).then(() => {
-      this.props.history.push(`/?${this.state.search}`);
-    });
+      this.props.findProduct(this.state.search).then(() => {
+        this.props.history.push(`/?${this.state.search}`);
+      });
     }
   }
 
@@ -81,6 +86,7 @@ class SearchBar extends React.Component {
           autoCorrect="off"
           autoCapitalize="off"
           onKeyPress={this.handleKeyPress}
+          onClick={this.render_search_dropdown}
         />
 
         <button className="search-bar-button" onClick={this.handleClick}>

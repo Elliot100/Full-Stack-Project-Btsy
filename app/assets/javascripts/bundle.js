@@ -1144,7 +1144,6 @@ var SearchBar = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
 
-    console.log(props);
     _this.state = {
       search: props.location.search.slice(1) || ""
     };
@@ -1175,6 +1174,8 @@ var SearchBar = function (_React$Component) {
     value: function handleDropdown(search) {
       var _this3 = this;
 
+      var elements = document.getElementsByClassName("search-dropdown-ul");
+      elements[0].style.display = "none";
       this.setState({ search: search });
       this.props.findProduct(search).then(function () {
         _this3.props.history.push('/?' + search);
@@ -1246,6 +1247,12 @@ var SearchBar = function (_React$Component) {
       );
     }
   }, {
+    key: 'render_search_dropdown',
+    value: function render_search_dropdown() {
+      var elements = document.getElementsByClassName("search-dropdown-ul");
+      elements[0].style.display = "flex";
+    }
+  }, {
     key: 'handleKeyPress',
     value: function handleKeyPress(e) {
       var _this5 = this;
@@ -1276,7 +1283,8 @@ var SearchBar = function (_React$Component) {
           autoComplete: 'off',
           autoCorrect: 'off',
           autoCapitalize: 'off',
-          onKeyPress: this.handleKeyPress
+          onKeyPress: this.handleKeyPress,
+          onClick: this.render_search_dropdown
         }),
         _react2.default.createElement(
           'button',

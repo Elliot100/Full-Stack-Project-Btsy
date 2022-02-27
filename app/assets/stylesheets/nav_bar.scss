@@ -272,14 +272,15 @@
   color: inherit;
 }
 
+// .search-bar > ul {
+//   display: none;
+//   height: 130px;
+// }
+
+
 .search-bar > ul {
   display: none;
-  height: 130px;
-}
-
-
-.search-bar:hover ul {
-  display: flex;
+  
   z-index: 2;
   width: 300px;
   height: 130px;
