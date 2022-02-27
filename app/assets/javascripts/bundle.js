@@ -1362,15 +1362,24 @@ var ProductIndex = function (_React$Component) {
   function ProductIndex(props) {
     _classCallCheck(this, ProductIndex);
 
-    return _possibleConstructorReturn(this, (ProductIndex.__proto__ || Object.getPrototypeOf(ProductIndex)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ProductIndex.__proto__ || Object.getPrototypeOf(ProductIndex)).call(this, props));
+
+    _this.state = {
+      numSearchResult: 0
+    };
+    return _this;
   }
 
   _createClass(ProductIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this2 = this;
+
       if (this.props.location.search.substring(1)) {
         var searchTerm = this.props.location.search.substring(1);
-        this.props.findProduct(searchTerm);
+        this.props.findProduct(searchTerm).then(function (products) {
+          return _this2.setState({ numSearchResult: products.products.length });
+        });
       } else {
         this.props.fetchProducts();
       }
@@ -1378,32 +1387,58 @@ var ProductIndex = function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      var _this3 = this;
+
       // Typical usage (don't forget to compare props):
       if (this.props.location.search !== prevProps.location.search) {
         if (this.props.location.search.substring(1)) {
           var searchTerm = this.props.location.search.substring(1);
-          this.props.findProduct(searchTerm);
+          this.props.findProduct(searchTerm).then(function (products) {
+            return _this3.setState({ numSearchResult: products.products.length });
+          });
         } else {
           this.props.fetchProducts();
         }
       }
     }
   }, {
+    key: "numSearchResults",
+    value: function numSearchResults() {
+      if (this.props.location.search.substring(1)) {
+        return _react2.default.createElement(
+          "div",
+          { className: "search-results" },
+          _react2.default.createElement(
+            "h1",
+            null,
+            this.state.numSearchResult,
+            " search results "
+          )
+        );
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this4 = this;
 
       var products = this.props.products;
 
+
       return _react2.default.createElement(
         "div",
-        { className: "home-products" },
+        null,
+        this.numSearchResults(),
         _react2.default.createElement(
           "div",
-          { className: "product-img-frame" },
-          products.map(function (product) {
-            return _react2.default.createElement(_product_item2.default, { key: "product" + product.id, product: product, props: _this2.props });
-          })
+          { className: "home-products" },
+          _react2.default.createElement(
+            "div",
+            { className: "product-img-frame" },
+            products.map(function (product) {
+              return _react2.default.createElement(_product_item2.default, { key: "product" + product.id, product: product, props: _this4.props });
+            })
+          )
         )
       );
     }

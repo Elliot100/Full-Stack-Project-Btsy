@@ -56,9 +56,6 @@ class ProductPage extends React.Component {
       <div>
         <div className="product-page-back-button">
           <p className="btn" onClick={() => this.props.history.goBack()}>back</p>
-          {/* <Link className="btn" to="/products">
-            back
-          </Link> */}
         </div>
         <div className="product-page">
           <section className="product-page-frame">
