@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
-      search: "",
+      search: props.location.search.slice(1) || "",
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleDropdown = this.handleDropdown.bind(this);
   }
 
   handleInput(e) {
@@ -24,8 +26,9 @@ class SearchBar extends React.Component {
   }
 
   handleDropdown(search) {
+    this.setState({ search });
     this.props.findProduct(search).then(() => {
-      this.props.history.push(`/?${search}`);
+      this.props.history.push(`/?${search}`)
     });
   }
 
@@ -33,7 +36,8 @@ class SearchBar extends React.Component {
     return (
       <ul className="search-dropdown-ul">
         <li onClick={() => this.handleDropdown("pants")}>
-          <a>pants</a>
+          <a> pants
+          </a>
         </li>
         <li onClick={() => this.handleDropdown("hat")}>
           <a>hat</a>
@@ -72,7 +76,7 @@ class SearchBar extends React.Component {
           name="search_query"
           className="search-bar-input"
           placeholder="Search for anything"
-          value={this.search}
+          value={this.state.search}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"

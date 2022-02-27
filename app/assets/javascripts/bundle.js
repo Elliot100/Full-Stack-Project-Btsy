@@ -1144,12 +1144,14 @@ var SearchBar = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
 
+    console.log(props);
     _this.state = {
-      search: ""
+      search: props.location.search.slice(1) || ""
     };
     _this.handleInput = _this.handleInput.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
+    _this.handleDropdown = _this.handleDropdown.bind(_this);
     return _this;
   }
 
@@ -1173,6 +1175,7 @@ var SearchBar = function (_React$Component) {
     value: function handleDropdown(search) {
       var _this3 = this;
 
+      this.setState({ search: search });
       this.props.findProduct(search).then(function () {
         _this3.props.history.push('/?' + search);
       });
@@ -1193,7 +1196,7 @@ var SearchBar = function (_React$Component) {
           _react2.default.createElement(
             'a',
             null,
-            'pants'
+            ' pants'
           )
         ),
         _react2.default.createElement(
@@ -1269,7 +1272,7 @@ var SearchBar = function (_React$Component) {
           name: 'search_query',
           className: 'search-bar-input',
           placeholder: 'Search for anything',
-          value: this.search,
+          value: this.state.search,
           autoComplete: 'off',
           autoCorrect: 'off',
           autoCapitalize: 'off',
