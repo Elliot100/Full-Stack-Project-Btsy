@@ -1,6 +1,7 @@
 import React from "react";
 import Cartitem from "./cartitem";
 import { Link } from "react-router-dom";
+import FlashMessage from "react-flash-message";
 
 class CartitemIndex extends React.Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class CartitemIndex extends React.Component {
       shipping: 0,
       total: 0,
       totalcartitems: 0,
+      showMessage: false,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -50,6 +53,10 @@ class CartitemIndex extends React.Component {
     );
   }
 
+  handleSubmit() {
+    this.setState({showMessage: true});
+  }
+
   checkout_frame() {
     return (
       <div className="checkout-frame">
@@ -70,7 +77,14 @@ class CartitemIndex extends React.Component {
             <p>Total</p>
             <p>${this.state.total.toFixed(2)}</p>
           </div>
-          <button className="growing-button">Proceed to checkout</button>
+          {this.state.showMessage && (
+            <div className="checkout-message">
+              <FlashMessage duration={5000}>
+                <p>just a demo no need to checkout =)</p>
+              </FlashMessage>
+            </div>
+          )}
+          <button onClick={this.handleSubmit} className="growing-button">Proceed to checkout</button>
         </div>
       </div>
     );

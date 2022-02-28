@@ -572,6 +572,10 @@ var _cartitem2 = _interopRequireDefault(_cartitem);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
+var _reactFlashMessage = __webpack_require__(/*! react-flash-message */ "./node_modules/react-flash-message/build/index.js");
+
+var _reactFlashMessage2 = _interopRequireDefault(_reactFlashMessage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -593,8 +597,10 @@ var CartitemIndex = function (_React$Component) {
       subtotal: 0,
       shipping: 0,
       total: 0,
-      totalcartitems: 0
+      totalcartitems: 0,
+      showMessage: false
     };
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
@@ -649,6 +655,11 @@ var CartitemIndex = function (_React$Component) {
           )
         )
       );
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      this.setState({ showMessage: true });
     }
   }, {
     key: "checkout_frame",
@@ -719,9 +730,22 @@ var CartitemIndex = function (_React$Component) {
               this.state.total.toFixed(2)
             )
           ),
+          this.state.showMessage && _react2.default.createElement(
+            "div",
+            { className: "checkout-message" },
+            _react2.default.createElement(
+              _reactFlashMessage2.default,
+              { duration: 5000 },
+              _react2.default.createElement(
+                "p",
+                null,
+                "just a demo no need to checkout =)"
+              )
+            )
+          ),
           _react2.default.createElement(
             "button",
-            { className: "growing-button" },
+            { onClick: this.handleSubmit, className: "growing-button" },
             "Proceed to checkout"
           )
         )
