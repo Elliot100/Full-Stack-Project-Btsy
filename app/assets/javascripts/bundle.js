@@ -1252,6 +1252,13 @@ var SearchBar = function (_React$Component) {
       });
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.location.search.slice(1) !== this.state.search) {
+        this.setState({ search: this.props.location.search.slice(1) });
+      }
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       // remve event listener 

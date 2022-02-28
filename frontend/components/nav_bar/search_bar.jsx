@@ -24,6 +24,12 @@ class SearchBar extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.location.search.slice(1) !== this.state.search) {
+      this.setState({ search: this.props.location.search.slice(1) });
+    }
+  }
+
   componentWillUnmount() {
     // remve event listener 
   }
