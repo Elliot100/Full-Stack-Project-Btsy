@@ -1,6 +1,7 @@
 import React from "react";
 import Cartitem from "./cartitem";
 import { Link } from "react-router-dom";
+import { patchUser } from "../../utils/session.js";
 
 class CartitemIndex extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class CartitemIndex extends React.Component {
       subtotal: 0,
       shipping: 0,
       total: 0,
-      totalitems: 0,
+      totalcartitems: 0,
     };
   }
 
@@ -30,9 +31,23 @@ class CartitemIndex extends React.Component {
         shipping: itemstotal * 0.048,
         total: itemstotal + (itemstotal * 0.048)
       });
-      var totalitems = 0;
-      this.props.cartitems.forEach(cartitem => totalitems += cartitem.qty);
-      this.setState({totalitems});
+      var totalcartitems = 0;
+      this.props.cartitems.forEach(cartitem => totalcartitems += cartitem.qty);
+      this.setState({totalcartitems});
+
+      var user = this.props.currentUser;
+      user.totalcartitems = totalcartitems;
+      // console.log(user);
+      patchUser(user);
+
+      // console.log(this.props.currentUser);
+    }
+    if (this.props.currentUser.totalcartitems !== this.state.totalcartitems) {
+    //   var user = Object.assign({}, this.props.currentUser );
+    //   // var user = this.props.currentUser;
+    //   user.totalcartitems = this.state.totalcartitems;
+    //   // console.log(user);
+    //   this.props.updateUser(user);
     }
   }
 
@@ -40,7 +55,7 @@ class CartitemIndex extends React.Component {
     return (
       <div className="cart-nav-frame">
         <div className="cart-nav">
-          <p>{this.state.totalitems} items in your cart</p>
+          <p>{this.state.totalcartitems} items in your cart</p>
           <Link className="keep-shopping" to="/products">Keep shopping</Link>
         </div>
       </div>

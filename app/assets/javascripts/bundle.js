@@ -247,7 +247,7 @@ var findProduct = exports.findProduct = function findProduct(search) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logout = exports.login = exports.createNewUser = exports.LOGOUT_CURRENT_USER = exports.RECEIVE_CURRENT_USER = undefined;
+exports.logout = exports.login = exports.updateUser = exports.createNewUser = exports.LOGOUT_CURRENT_USER = exports.RECEIVE_CURRENT_USER = undefined;
 
 var _session = __webpack_require__(/*! ../utils/session */ "./frontend/utils/session.js");
 
@@ -274,6 +274,13 @@ var createNewUser = exports.createNewUser = function createNewUser(formUser) {
     });
   };
 };
+
+var updateUser = exports.updateUser = function updateUser(formUser) {
+  return function (dispatch) {
+    return (0, _session.patchUser)(formUser);
+  };
+};
+// .then((user) => dispatch(receiveCurrentUser(user)));
 
 var login = exports.login = function login(formUser) {
   return function (dispatch) {
@@ -574,6 +581,8 @@ var _cartitem2 = _interopRequireDefault(_cartitem);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
+var _session = __webpack_require__(/*! ../../utils/session.js */ "./frontend/utils/session.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -595,7 +604,7 @@ var CartitemIndex = function (_React$Component) {
       subtotal: 0,
       shipping: 0,
       total: 0,
-      totalitems: 0
+      totalcartitems: 0
     };
     return _this;
   }
@@ -619,11 +628,25 @@ var CartitemIndex = function (_React$Component) {
           shipping: itemstotal * 0.048,
           total: itemstotal + itemstotal * 0.048
         });
-        var totalitems = 0;
+        var totalcartitems = 0;
         this.props.cartitems.forEach(function (cartitem) {
-          return totalitems += cartitem.qty;
+          return totalcartitems += cartitem.qty;
         });
-        this.setState({ totalitems: totalitems });
+        this.setState({ totalcartitems: totalcartitems });
+
+        var user = this.props.currentUser;
+        user.totalcartitems = totalcartitems;
+        // console.log(user);
+        (0, _session.patchUser)(user);
+
+        // console.log(this.props.currentUser);
+      }
+      if (this.props.currentUser.totalcartitems !== this.state.totalcartitems) {
+        //   var user = Object.assign({}, this.props.currentUser );
+        //   // var user = this.props.currentUser;
+        //   user.totalcartitems = this.state.totalcartitems;
+        //   // console.log(user);
+        //   this.props.updateUser(user);
       }
     }
   }, {
@@ -638,7 +661,7 @@ var CartitemIndex = function (_React$Component) {
           _react2.default.createElement(
             "p",
             null,
-            this.state.totalitems,
+            this.state.totalcartitems,
             " items in your cart"
           ),
           _react2.default.createElement(
@@ -797,7 +820,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     cartitems: Object.keys(state.entities.cartitems).map(function (key) {
       return state.entities.cartitems[key];
-    })
+    }),
+    currentUser: state.session.currentUser
     // cartitems: state.entities.cartitems
   };
 };
@@ -834,6 +858,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
@@ -846,209 +872,238 @@ var _search_bar2 = _interopRequireDefault(_search_bar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 // eslint-disable-next-line react/display-name
-exports.default = function (_ref) {
-  var currentUser = _ref.currentUser,
-      logout = _ref.logout,
-      findProduct = _ref.findProduct,
-      history = _ref.history,
-      location = _ref.location;
+var NavBar = function (_React$Component) {
+  _inherits(NavBar, _React$Component);
 
-  var links = {
-    tab1: ["Valentine's Day", "Birthday", "Mother's Day", "Anniversary"],
-    tab2: ["Accessories", "Bags & Purses", "Necklaces", "Rings", "Earrings", "Bracelets", "Body Jewelry"],
-    tab3: ["Women's", "Men's", "Kids' & Baby", "Bags & Purses"],
-    tab4: ["Home", "Bath & Beauty", "Pet Supplies"],
-    tab5: ["Party Supplies", "Invitations & Paper", "Wedding Decorations", "Wedding Gifts", "Wedding Accessories", "Wedding Clothing"],
-    tab6: ["Baby & Toddler Toys", "Dolls & Action Figures", "Stuffed Animals", "Games & Puzzles", "Learning & School", "Kids' Crafts"],
-    tab7: ["Prints", "Photography", "Painting", "Sculpture", "Glass Art"],
-    tab8: ["Home & Hobby", "Jewelry & Beauty", "Sewing & Fiber", "Papercraft", "Visual Arts", "Sculpting & Forming"],
-    tab9: ["Gifts for Her", "Gifts for Kids", "Black owned Btsy Shops", "Birthday Gifts"]
-  };
+  function NavBar(props) {
+    _classCallCheck(this, NavBar);
 
-  var cart_icon = _react2.default.createElement(
-    "svg",
-    {
-      width: "24",
-      height: "24",
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 24 24",
-      "aria-hidden": "true",
-      focusable: "false"
-    },
-    _react2.default.createElement("circle", { cx: "9", cy: "20", r: "2" }),
-    _react2.default.createElement("circle", { cx: "16", cy: "20", r: "2" }),
-    _react2.default.createElement("path", { d: "M21,5H5.665L4.978,1.79A1,1,0,0,0,4,1H1A1,1,0,0,0,1,3H3.191L6.022,16.21a0.962,0.962,0,0,0,.064.159,1.015,1.015,0,0,0,.063.155,0.978,0.978,0,0,0,.133.153,1.006,1.006,0,0,0,.088.1,1,1,0,0,0,.185.105,0.975,0.975,0,0,0,.107.06A0.994,0.994,0,0,0,7,17H18a1,1,0,0,0,.958-0.713l3-10A1,1,0,0,0,21,5Zm-2.244,5H16V7h3.656ZM7.819,15l-0.6-3H9v3H7.819ZM11,12h3v3H11V12Zm0-2V7h3v3H11ZM9,7v3H6.82L6.22,7H9Zm8.256,8H16V12h2.156Z" })
-  );
+    return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+  }
 
-  var render_auth_dropdown = function render_auth_dropdown() {
-    return _react2.default.createElement(
-      "div",
-      { className: "auth-dropdown" },
-      _react2.default.createElement(
-        "p",
+  _createClass(NavBar, [{
+    key: "render",
+    value: function render() {
+      var _props = this.props,
+          currentUser = _props.currentUser,
+          logout = _props.logout,
+          findProduct = _props.findProduct,
+          history = _props.history,
+          location = _props.location;
+
+      var links = {
+        tab1: ["Valentine's Day", "Birthday", "Mother's Day", "Anniversary"],
+        tab2: ["Accessories", "Bags & Purses", "Necklaces", "Rings", "Earrings", "Bracelets", "Body Jewelry"],
+        tab3: ["Women's", "Men's", "Kids' & Baby", "Bags & Purses"],
+        tab4: ["Home", "Bath & Beauty", "Pet Supplies"],
+        tab5: ["Party Supplies", "Invitations & Paper", "Wedding Decorations", "Wedding Gifts", "Wedding Accessories", "Wedding Clothing"],
+        tab6: ["Baby & Toddler Toys", "Dolls & Action Figures", "Stuffed Animals", "Games & Puzzles", "Learning & School", "Kids' Crafts"],
+        tab7: ["Prints", "Photography", "Painting", "Sculpture", "Glass Art"],
+        tab8: ["Home & Hobby", "Jewelry & Beauty", "Sewing & Fiber", "Papercraft", "Visual Arts", "Sculpting & Forming"],
+        tab9: ["Gifts for Her", "Gifts for Kids", "Black owned Btsy Shops", "Birthday Gifts"]
+      };
+
+      var cart_icon = _react2.default.createElement(
+        "div",
         null,
-        "Hi ",
-        currentUser.username.split(" ")[0]
-      ),
-      _react2.default.createElement(
-        "ul",
-        { className: "auth-dropdown-ul" },
         _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { className: "auth-link", to: "/newproduct" },
-            "Sell a product"
-          )
+          "svg",
+          {
+            width: "24",
+            height: "24",
+            xmlns: "http://www.w3.org/2000/svg",
+            viewBox: "0 0 24 24",
+            "aria-hidden": "true",
+            focusable: "false"
+          },
+          _react2.default.createElement("circle", { cx: "9", cy: "20", r: "2" }),
+          _react2.default.createElement("circle", { cx: "16", cy: "20", r: "2" }),
+          _react2.default.createElement("path", { d: "M21,5H5.665L4.978,1.79A1,1,0,0,0,4,1H1A1,1,0,0,0,1,3H3.191L6.022,16.21a0.962,0.962,0,0,0,.064.159,1.015,1.015,0,0,0,.063.155,0.978,0.978,0,0,0,.133.153,1.006,1.006,0,0,0,.088.1,1,1,0,0,0,.185.105,0.975,0.975,0,0,0,.107.06A0.994,0.994,0,0,0,7,17H18a1,1,0,0,0,.958-0.713l3-10A1,1,0,0,0,21,5Zm-2.244,5H16V7h3.656ZM7.819,15l-0.6-3H9v3H7.819ZM11,12h3v3H11V12Zm0-2V7h3v3H11ZM9,7v3H6.82L6.22,7H9Zm8.256,8H16V12h2.156Z" })
         ),
-        _react2.default.createElement(
-          "li",
-          { onClick: logout },
-          _react2.default.createElement(
-            "a",
-            null,
-            "Log Out"
-          )
-        )
-      )
-    );
-  };
+        _react2.default.createElement("b", null)
+      );
 
-  var auth = currentUser ? _react2.default.createElement(
-    "div",
-    { className: "nav-bar-items" },
-    render_auth_dropdown(),
-    _react2.default.createElement(
-      _reactRouterDom.Link,
-      { to: "/users/" + currentUser.id + "/cartitems" },
-      cart_icon
-    )
-  ) : _react2.default.createElement(
-    "div",
-    { className: "nav-bar-items" },
-    _react2.default.createElement(
-      _reactRouterDom.Link,
-      { className: "btn", to: "/login" },
-      "Sign in"
-    )
-  );
-
-  var cat_dropdown_ul = function cat_dropdown_ul(tab) {
-    return _react2.default.createElement(
-      "ul",
-      { className: "cat-dropdown-ul" },
-      tab.map(function (subcategory, idx) {
+      var render_auth_dropdown = function render_auth_dropdown() {
         return _react2.default.createElement(
-          "li",
-          { key: idx },
+          "div",
+          { className: "auth-dropdown" },
           _react2.default.createElement(
-            "a",
+            "p",
             null,
-            subcategory
+            "Hi ",
+            currentUser.username.split(" ")[0]
+          ),
+          _react2.default.createElement(
+            "ul",
+            { className: "auth-dropdown-ul" },
+            _react2.default.createElement(
+              "li",
+              null,
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { className: "auth-link", to: "/newproduct" },
+                "Sell a product"
+              )
+            ),
+            _react2.default.createElement(
+              "li",
+              { onClick: logout },
+              _react2.default.createElement(
+                "a",
+                null,
+                "Log Out"
+              )
+            )
           )
         );
-      })
-    );
-  };
+      };
 
-  var categories = _react2.default.createElement(
-    "div",
-    { className: "categories" },
-    _react2.default.createElement(
-      "ul",
-      { className: "category-items" },
-      _react2.default.createElement(
-        "li",
-        { className: "cat-dropdown" },
-        "Special Day Gifts",
-        cat_dropdown_ul(links.tab1)
-      ),
-      _react2.default.createElement(
-        "li",
-        { className: "cat-dropdown" },
-        "Jewelry & Accessories",
-        cat_dropdown_ul(links.tab2)
-      ),
-      _react2.default.createElement(
-        "li",
-        { className: "cat-dropdown" },
-        "Clothing & Shoes",
-        cat_dropdown_ul(links.tab3)
-      ),
-      _react2.default.createElement(
-        "li",
-        { className: "cat-dropdown" },
-        "Home & Living",
-        cat_dropdown_ul(links.tab4)
-      ),
-      _react2.default.createElement(
-        "li",
-        { className: "cat-dropdown" },
-        "Wedding & Party",
-        cat_dropdown_ul(links.tab5)
-      ),
-      _react2.default.createElement(
-        "li",
-        { className: "cat-dropdown" },
-        "Toys & Entertainment",
-        cat_dropdown_ul(links.tab6)
-      ),
-      _react2.default.createElement(
-        "li",
-        { className: "cat-dropdown" },
-        "Art & Collectibles",
-        cat_dropdown_ul(links.tab7)
-      ),
-      _react2.default.createElement(
-        "li",
-        { className: "cat-dropdown" },
-        "Craft Supplies",
-        cat_dropdown_ul(links.tab8)
-      ),
-      _react2.default.createElement(
-        "li",
-        { className: "cat-dropdown" },
-        "Gifts & Gift Cards",
-        cat_dropdown_ul(links.tab9)
-      )
-    )
-  );
+      var auth = currentUser ? _react2.default.createElement(
+        "div",
+        { className: "nav-bar-items" },
+        render_auth_dropdown(),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: "/users/" + currentUser.id + "/cartitems" },
+          cart_icon
+        )
+      ) : _react2.default.createElement(
+        "div",
+        { className: "nav-bar-items" },
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { className: "btn", to: "/login" },
+          "Sign in"
+        )
+      );
 
-  return _react2.default.createElement(
-    "div",
-    null,
-    _react2.default.createElement(
-      "header",
-      { className: "header" },
-      _react2.default.createElement(
-        "nav",
-        { className: "nav-bar" },
+      var cat_dropdown_ul = function cat_dropdown_ul(tab) {
+        return _react2.default.createElement(
+          "ul",
+          { className: "cat-dropdown-ul" },
+          tab.map(function (subcategory, idx) {
+            return _react2.default.createElement(
+              "li",
+              { key: idx },
+              _react2.default.createElement(
+                "a",
+                null,
+                subcategory
+              )
+            );
+          })
+        );
+      };
+
+      var categories = _react2.default.createElement(
+        "div",
+        { className: "categories" },
+        _react2.default.createElement(
+          "ul",
+          { className: "category-items" },
+          _react2.default.createElement(
+            "li",
+            { className: "cat-dropdown" },
+            "Special Day Gifts",
+            cat_dropdown_ul(links.tab1)
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "cat-dropdown" },
+            "Jewelry & Accessories",
+            cat_dropdown_ul(links.tab2)
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "cat-dropdown" },
+            "Clothing & Shoes",
+            cat_dropdown_ul(links.tab3)
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "cat-dropdown" },
+            "Home & Living",
+            cat_dropdown_ul(links.tab4)
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "cat-dropdown" },
+            "Wedding & Party",
+            cat_dropdown_ul(links.tab5)
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "cat-dropdown" },
+            "Toys & Entertainment",
+            cat_dropdown_ul(links.tab6)
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "cat-dropdown" },
+            "Art & Collectibles",
+            cat_dropdown_ul(links.tab7)
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "cat-dropdown" },
+            "Craft Supplies",
+            cat_dropdown_ul(links.tab8)
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "cat-dropdown" },
+            "Gifts & Gift Cards",
+            cat_dropdown_ul(links.tab9)
+          )
+        )
+      );
+
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(
+          "header",
+          { className: "header" },
+          _react2.default.createElement(
+            "nav",
+            { className: "nav-bar" },
+            _react2.default.createElement(
+              "div",
+              null,
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { className: "logo", to: "/" },
+                "Btsy"
+              )
+            ),
+            _react2.default.createElement(_search_bar2.default, { findProduct: findProduct, history: history, location: location }),
+            _react2.default.createElement(
+              "div",
+              { className: "auth" },
+              auth
+            )
+          )
+        ),
         _react2.default.createElement(
           "div",
           null,
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { className: "logo", to: "/" },
-            "Btsy"
-          )
-        ),
-        _react2.default.createElement(_search_bar2.default, { findProduct: findProduct, history: history, location: location }),
-        _react2.default.createElement(
-          "div",
-          { className: "auth" },
-          auth
+          categories
         )
-      )
-    ),
-    _react2.default.createElement(
-      "div",
-      null,
-      categories
-    )
-  );
-};
+      );
+    }
+  }]);
+
+  return NavBar;
+}(_react2.default.Component);
+
+exports.default = NavBar;
 
 /***/ }),
 
@@ -1076,6 +1131,8 @@ var _products = __webpack_require__(/*! ../../actions/products */ "./frontend/ac
 
 var _session = __webpack_require__(/*! ../../actions/session */ "./frontend/actions/session.js");
 
+var _cartitems = __webpack_require__(/*! ../../actions/cartitems */ "./frontend/actions/cartitems.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Comment this back in after you have built the login functionality
@@ -1083,6 +1140,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    cartitems: Object.keys(state.entities.cartitems).map(function (key) {
+      return state.entities.cartitems[key];
+    }),
     currentUser: state.session.currentUser
   };
 };
@@ -1094,13 +1154,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     findProduct: function findProduct(search) {
       return dispatch((0, _products.findProduct)(search));
+    },
+    fetchCartitems: function fetchCartitems() {
+      return dispatch((0, _cartitems.fetchCartitems)());
     }
   };
 };
-
-// Comment this out when you have built the login functionality
-// const mapStateToProps = null;
-// const mapDispatchToProps = null;
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_nav_bar2.default);
 

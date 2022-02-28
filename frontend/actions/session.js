@@ -1,5 +1,6 @@
 import { 
   postUser, 
+  patchUser,
   postSession, 
   deleteSession 
 } from "../utils/session";
@@ -19,6 +20,10 @@ const logoutCurrentUser = () => ({
 export const createNewUser = (formUser) => (dispatch) =>
   postUser(formUser)
   .then((user) => dispatch(receiveCurrentUser(user)));
+
+export const updateUser = formUser => dispatch =>
+  patchUser(formUser)
+  // .then((user) => dispatch(receiveCurrentUser(user)));
 
 export const login = (formUser) => (dispatch) =>
   postSession(formUser)
