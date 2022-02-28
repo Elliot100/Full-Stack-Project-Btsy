@@ -3,10 +3,6 @@ import React from 'react';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      search: props.location.search.slice(1) || "",
-    };
-    this.handleInput = this.handleInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleDropdown = this.handleDropdown.bind(this);
@@ -16,6 +12,7 @@ class SearchBar extends React.Component {
     var elements = document.getElementsByClassName("search-dropdown-ul");
     var searchbar = document.getElementsByClassName("search-bar");
     const element = elements[0];
+    var logo = document.getElementsByClassName("logo")[0];
 
     document.addEventListener("click", function (e) {
       if (e.target !== element && !searchbar[0].contains(e.target)) {
@@ -24,18 +21,8 @@ class SearchBar extends React.Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.location.search.slice(1) !== this.state.search) {
-      this.setState({ search: this.props.location.search.slice(1) });
-    }
-  }
-
   componentWillUnmount() {
     // remve event listener 
-  }
-
-  handleInput(e) {
-    this.setState({ search: e.target.value });
   }
 
   handleClick(e) {
@@ -50,7 +37,7 @@ class SearchBar extends React.Component {
   handleDropdown(search) {
     var elements = document.getElementsByClassName("search-dropdown-ul");
     elements[0].style.display = "none";
-    this.setState({ search });
+    this.props.handleInput(search);
     this.props.findProduct(search).then(() => {
       this.props.history.push(`/?${search}`);
     });
@@ -62,19 +49,19 @@ class SearchBar extends React.Component {
         <li className="popular-right-now">
           <b>Popular right now</b>
         </li>
-        <li className="search-dropdown-options" onClick={() => this.handleDropdown("pants")}>
+        <li className="search-dropdown-options" value="pants" onClick={() => this.handleDropdown("pants")}>
           <a> pants</a>
         </li>
-        <li className="search-dropdown-options" onClick={() => this.handleDropdown("hat")}>
+        <li className="search-dropdown-options" value="hat" onClick={() => this.handleDropdown("hat")}>
           <a>hat</a>
         </li>
-        <li className="search-dropdown-options" onClick={() => this.handleDropdown("yarn")}>
+        <li className="search-dropdown-options" value="yarn" onClick={() => this.handleDropdown("yarn")}>
           <a>yarn</a>
         </li>
-        <li className="search-dropdown-options" onClick={() => this.handleDropdown("slippers")}>
+        <li className="search-dropdown-options" value="slippers" onClick={() => this.handleDropdown("slippers")}>
           <a>slippers</a>
         </li>
-        <li className="search-dropdown-options" onClick={() => this.handleDropdown("flowers")}>
+        <li className="search-dropdown-options" value="flowers" onClick={() => this.handleDropdown("flowers")}>
           <a>flowers</a>
         </li>
       </ul>
@@ -90,8 +77,8 @@ class SearchBar extends React.Component {
     if (e.key === "Enter") {
       var elements = document.getElementsByClassName("search-dropdown-ul");
       elements[0].style.display = "none";
-      this.props.findProduct(this.state.search).then(() => {
-        this.props.history.push(`/?${this.state.search}`);
+      this.props.findProduct(this.props.search).then(() => {
+        this.props.history.push(`/?${this.props.search}`);
       });
     }
   }
@@ -101,7 +88,10 @@ class SearchBar extends React.Component {
       <div className="search-bar">
         {this.search_dropdown()}
         <input
-          onChange={this.handleInput}
+          onChange={(e) => {
+            console.log(e.target.value)
+            this.props.handleInput(e.target.value);}
+          }
           id="global-enhancements-search-query"
           data-id="search-query"
           data-search-input=""
@@ -109,7 +99,7 @@ class SearchBar extends React.Component {
           name="search_query"
           className="search-bar-input"
           placeholder="Search for anything"
-          value={this.state.search}
+          value={this.props.search}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
@@ -117,7 +107,7 @@ class SearchBar extends React.Component {
           onClick={this.render_search_dropdown}
         />
 
-        <button className="search-bar-button" onClick={this.handleClick}>
+        <button className="search-bar-button" onClick={this.props.handleClick}>
           <span className="search-bar-button-icon">
             <svg
               width="24"

@@ -890,8 +890,11 @@ var NavBar = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
 
     _this.state = {
-      totalcartitems: 0
+      totalcartitems: 0,
+      search: props.location.search.slice(1) || ""
     };
+    _this.handleInput = _this.handleInput.bind(_this);
+    _this.clearSearch = _this.clearSearch.bind(_this);
     return _this;
   }
 
@@ -899,6 +902,11 @@ var NavBar = function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchCartitems();
+    }
+  }, {
+    key: "handleInput",
+    value: function handleInput(string) {
+      this.setState({ search: string });
     }
   }, {
     key: "componentDidUpdate",
@@ -909,8 +917,12 @@ var NavBar = function (_React$Component) {
           return totalcartitems += cartitem.qty;
         });
         this.setState({ totalcartitems: totalcartitems });
-        // console.log(this.state.totalcartitems);
       }
+    }
+  }, {
+    key: "clearSearch",
+    value: function clearSearch() {
+      this.setState({ search: "" });
     }
   }, {
     key: "render",
@@ -1109,11 +1121,17 @@ var NavBar = function (_React$Component) {
               null,
               _react2.default.createElement(
                 _reactRouterDom.Link,
-                { className: "logo", to: "/" },
+                { onClick: this.clearSearch, className: "logo", to: "/" },
                 "Btsy"
               )
             ),
-            _react2.default.createElement(_search_bar2.default, { findProduct: findProduct, history: history, location: location }),
+            _react2.default.createElement(_search_bar2.default, {
+              handleInput: this.handleInput,
+              findProduct: findProduct,
+              history: history,
+              location: location,
+              search: this.state.search
+            }),
             _react2.default.createElement(
               "div",
               { className: "auth" },
@@ -1228,10 +1246,6 @@ var SearchBar = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
 
-    _this.state = {
-      search: props.location.search.slice(1) || ""
-    };
-    _this.handleInput = _this.handleInput.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleDropdown = _this.handleDropdown.bind(_this);
@@ -1244,6 +1258,7 @@ var SearchBar = function (_React$Component) {
       var elements = document.getElementsByClassName("search-dropdown-ul");
       var searchbar = document.getElementsByClassName("search-bar");
       var element = elements[0];
+      var logo = document.getElementsByClassName("logo")[0];
 
       document.addEventListener("click", function (e) {
         if (e.target !== element && !searchbar[0].contains(e.target)) {
@@ -1252,21 +1267,9 @@ var SearchBar = function (_React$Component) {
       });
     }
   }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (this.props.location.search.slice(1) !== this.state.search) {
-        this.setState({ search: this.props.location.search.slice(1) });
-      }
-    }
-  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       // remve event listener 
-    }
-  }, {
-    key: "handleInput",
-    value: function handleInput(e) {
-      this.setState({ search: e.target.value });
     }
   }, {
     key: "handleClick",
@@ -1287,7 +1290,7 @@ var SearchBar = function (_React$Component) {
 
       var elements = document.getElementsByClassName("search-dropdown-ul");
       elements[0].style.display = "none";
-      this.setState({ search: search });
+      this.props.handleInput(search);
       this.props.findProduct(search).then(function () {
         _this3.props.history.push("/?" + search);
       });
@@ -1311,7 +1314,7 @@ var SearchBar = function (_React$Component) {
         ),
         _react2.default.createElement(
           "li",
-          { className: "search-dropdown-options", onClick: function onClick() {
+          { className: "search-dropdown-options", value: "pants", onClick: function onClick() {
               return _this4.handleDropdown("pants");
             } },
           _react2.default.createElement(
@@ -1322,7 +1325,7 @@ var SearchBar = function (_React$Component) {
         ),
         _react2.default.createElement(
           "li",
-          { className: "search-dropdown-options", onClick: function onClick() {
+          { className: "search-dropdown-options", value: "hat", onClick: function onClick() {
               return _this4.handleDropdown("hat");
             } },
           _react2.default.createElement(
@@ -1333,7 +1336,7 @@ var SearchBar = function (_React$Component) {
         ),
         _react2.default.createElement(
           "li",
-          { className: "search-dropdown-options", onClick: function onClick() {
+          { className: "search-dropdown-options", value: "yarn", onClick: function onClick() {
               return _this4.handleDropdown("yarn");
             } },
           _react2.default.createElement(
@@ -1344,7 +1347,7 @@ var SearchBar = function (_React$Component) {
         ),
         _react2.default.createElement(
           "li",
-          { className: "search-dropdown-options", onClick: function onClick() {
+          { className: "search-dropdown-options", value: "slippers", onClick: function onClick() {
               return _this4.handleDropdown("slippers");
             } },
           _react2.default.createElement(
@@ -1355,7 +1358,7 @@ var SearchBar = function (_React$Component) {
         ),
         _react2.default.createElement(
           "li",
-          { className: "search-dropdown-options", onClick: function onClick() {
+          { className: "search-dropdown-options", value: "flowers", onClick: function onClick() {
               return _this4.handleDropdown("flowers");
             } },
           _react2.default.createElement(
@@ -1380,20 +1383,25 @@ var SearchBar = function (_React$Component) {
       if (e.key === "Enter") {
         var elements = document.getElementsByClassName("search-dropdown-ul");
         elements[0].style.display = "none";
-        this.props.findProduct(this.state.search).then(function () {
-          _this5.props.history.push("/?" + _this5.state.search);
+        this.props.findProduct(this.props.search).then(function () {
+          _this5.props.history.push("/?" + _this5.props.search);
         });
       }
     }
   }, {
     key: "render",
     value: function render() {
+      var _this6 = this;
+
       return _react2.default.createElement(
         "div",
         { className: "search-bar" },
         this.search_dropdown(),
         _react2.default.createElement("input", {
-          onChange: this.handleInput,
+          onChange: function onChange(e) {
+            console.log(e.target.value);
+            _this6.props.handleInput(e.target.value);
+          },
           id: "global-enhancements-search-query",
           "data-id": "search-query",
           "data-search-input": "",
@@ -1401,7 +1409,7 @@ var SearchBar = function (_React$Component) {
           name: "search_query",
           className: "search-bar-input",
           placeholder: "Search for anything",
-          value: this.state.search,
+          value: this.props.search,
           autoComplete: "off",
           autoCorrect: "off",
           autoCapitalize: "off",
@@ -1410,7 +1418,7 @@ var SearchBar = function (_React$Component) {
         }),
         _react2.default.createElement(
           "button",
-          { className: "search-bar-button", onClick: this.handleClick },
+          { className: "search-bar-button", onClick: this.props.handleClick },
           _react2.default.createElement(
             "span",
             { className: "search-bar-button-icon" },

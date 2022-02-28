@@ -8,12 +8,19 @@ export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalcartitems: 0
-    }
+      totalcartitems: 0,
+      search: props.location.search.slice(1) || "",
+    };
+    this.handleInput = this.handleInput.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchCartitems();
+  }
+
+  handleInput(string) {
+    this.setState({ search: string });
   }
 
   componentDidUpdate(prevProps) {
@@ -21,8 +28,11 @@ export default class NavBar extends React.Component {
       var totalcartitems = 0;
       this.props.cartitems.forEach((cartitem) => (totalcartitems += cartitem.qty));
       this.setState({ totalcartitems });
-      // console.log(this.state.totalcartitems);
     }
+  }
+
+  clearSearch() {
+    this.setState({search: ""});
   }
 
   render() {
@@ -133,11 +143,17 @@ export default class NavBar extends React.Component {
         <header className="header">
           <nav className="nav-bar">
             <div>
-              <Link className="logo" to="/">
+              <Link onClick={this.clearSearch} className="logo" to="/">
                 Btsy
               </Link>
             </div>
-            <SearchBar findProduct={findProduct} history={history} location={location} />
+            <SearchBar
+              handleInput={this.handleInput}
+              findProduct={findProduct}
+              history={history}
+              location={location}
+              search={this.state.search}
+            />
             <div className="auth">{auth}</div>
           </nav>
         </header>
