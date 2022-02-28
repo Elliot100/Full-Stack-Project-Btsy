@@ -1188,8 +1188,6 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1217,7 +1215,7 @@ var SearchBar = function (_React$Component) {
   }
 
   _createClass(SearchBar, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       var elements = document.getElementsByClassName("search-dropdown-ul");
       var searchbar = document.getElementsByClassName("search-bar");
@@ -1230,17 +1228,17 @@ var SearchBar = function (_React$Component) {
       });
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       // remve event listener 
     }
   }, {
-    key: 'handleInput',
+    key: "handleInput",
     value: function handleInput(e) {
       this.setState({ search: e.target.value });
     }
   }, {
-    key: 'handleClick',
+    key: "handleClick",
     value: function handleClick(e) {
       var _this2 = this;
 
@@ -1248,11 +1246,11 @@ var SearchBar = function (_React$Component) {
       var elements = document.getElementsByClassName("search-dropdown-ul");
       elements[0].style.display = "none";
       this.props.findProduct(this.state.search).then(function () {
-        _this2.props.history.push('/?' + _this2.state.search);
+        _this2.props.history.push("/?" + _this2.state.search);
       });
     }
   }, {
-    key: 'handleDropdown',
+    key: "handleDropdown",
     value: function handleDropdown(search) {
       var _this3 = this;
 
@@ -1260,91 +1258,91 @@ var SearchBar = function (_React$Component) {
       elements[0].style.display = "none";
       this.setState({ search: search });
       this.props.findProduct(search).then(function () {
-        _this3.props.history.push('/?' + search);
+        _this3.props.history.push("/?" + search);
       });
     }
   }, {
-    key: 'search_dropdown',
+    key: "search_dropdown",
     value: function search_dropdown() {
       var _this4 = this;
 
       return _react2.default.createElement(
-        'ul',
-        { className: 'search-dropdown-ul' },
+        "ul",
+        { className: "search-dropdown-ul" },
         _react2.default.createElement(
-          'li',
-          { className: 'popular-right-now' },
+          "li",
+          { className: "popular-right-now" },
           _react2.default.createElement(
-            'b',
+            "b",
             null,
-            'Popular right now'
+            "Popular right now"
           )
         ),
         _react2.default.createElement(
-          'li',
-          { onClick: function onClick() {
+          "li",
+          { className: "search-dropdown-options", onClick: function onClick() {
               return _this4.handleDropdown("pants");
             } },
           _react2.default.createElement(
-            'a',
+            "a",
             null,
-            ' pants'
+            " pants"
           )
         ),
         _react2.default.createElement(
-          'li',
-          { onClick: function onClick() {
+          "li",
+          { className: "search-dropdown-options", onClick: function onClick() {
               return _this4.handleDropdown("hat");
             } },
           _react2.default.createElement(
-            'a',
+            "a",
             null,
-            'hat'
+            "hat"
           )
         ),
         _react2.default.createElement(
-          'li',
-          { onClick: function onClick() {
+          "li",
+          { className: "search-dropdown-options", onClick: function onClick() {
               return _this4.handleDropdown("yarn");
             } },
           _react2.default.createElement(
-            'a',
+            "a",
             null,
-            'yarn'
+            "yarn"
           )
         ),
         _react2.default.createElement(
-          'li',
-          { onClick: function onClick() {
+          "li",
+          { className: "search-dropdown-options", onClick: function onClick() {
               return _this4.handleDropdown("slippers");
             } },
           _react2.default.createElement(
-            'a',
+            "a",
             null,
-            'slippers'
+            "slippers"
           )
         ),
         _react2.default.createElement(
-          'li',
-          { onClick: function onClick() {
+          "li",
+          { className: "search-dropdown-options", onClick: function onClick() {
               return _this4.handleDropdown("flowers");
             } },
           _react2.default.createElement(
-            'a',
+            "a",
             null,
-            'flowers'
+            "flowers"
           )
         )
       );
     }
   }, {
-    key: 'render_search_dropdown',
+    key: "render_search_dropdown",
     value: function render_search_dropdown() {
       var elements = document.getElementsByClassName("search-dropdown-ul");
       elements[0].style.display = "flex";
     }
   }, {
-    key: 'handleKeyPress',
+    key: "handleKeyPress",
     value: function handleKeyPress(e) {
       var _this5 = this;
 
@@ -1352,51 +1350,51 @@ var SearchBar = function (_React$Component) {
         var elements = document.getElementsByClassName("search-dropdown-ul");
         elements[0].style.display = "none";
         this.props.findProduct(this.state.search).then(function () {
-          _this5.props.history.push('/?' + _this5.state.search);
+          _this5.props.history.push("/?" + _this5.state.search);
         });
       }
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        { className: 'search-bar' },
+        "div",
+        { className: "search-bar" },
         this.search_dropdown(),
-        _react2.default.createElement('input', {
+        _react2.default.createElement("input", {
           onChange: this.handleInput,
-          id: 'global-enhancements-search-query',
-          'data-id': 'search-query',
-          'data-search-input': '',
-          type: 'text',
-          name: 'search_query',
-          className: 'search-bar-input',
-          placeholder: 'Search for anything',
+          id: "global-enhancements-search-query",
+          "data-id": "search-query",
+          "data-search-input": "",
+          type: "text",
+          name: "search_query",
+          className: "search-bar-input",
+          placeholder: "Search for anything",
           value: this.state.search,
-          autoComplete: 'off',
-          autoCorrect: 'off',
-          autoCapitalize: 'off',
+          autoComplete: "off",
+          autoCorrect: "off",
+          autoCapitalize: "off",
           onKeyPress: this.handleKeyPress,
           onClick: this.render_search_dropdown
         }),
         _react2.default.createElement(
-          'button',
-          { className: 'search-bar-button', onClick: this.handleClick },
+          "button",
+          { className: "search-bar-button", onClick: this.handleClick },
           _react2.default.createElement(
-            'span',
-            { className: 'search-bar-button-icon' },
+            "span",
+            { className: "search-bar-button-icon" },
             _react2.default.createElement(
-              'svg',
+              "svg",
               {
-                width: '24',
-                height: '24',
-                xmlns: 'http://www.w3.org/2000/svg',
-                viewBox: '0 0 24 24',
-                'aria-hidden': 'true',
-                focusable: 'false'
+                width: "24",
+                height: "24",
+                xmlns: "http://www.w3.org/2000/svg",
+                viewBox: "0 0 24 24",
+                "aria-hidden": "true",
+                focusable: "false"
               },
-              _react2.default.createElement('path', { d: 'M10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18ZM10,4a6,6,0,1,0,6,6A6.007,6.007,0,0,0,10,4Z' }),
-              _react2.default.createElement('path', { d: 'M21,22a1,1,0,0,1-.707-0.293l-4-4a1,1,0,0,1,1.414-1.414l4,4A1,1,0,0,1,21,22Z' })
+              _react2.default.createElement("path", { d: "M10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18ZM10,4a6,6,0,1,0,6,6A6.007,6.007,0,0,0,10,4Z" }),
+              _react2.default.createElement("path", { d: "M21,22a1,1,0,0,1-.707-0.293l-4-4a1,1,0,0,1,1.414-1.414l4,4A1,1,0,0,1,21,22Z" })
             )
           )
         )

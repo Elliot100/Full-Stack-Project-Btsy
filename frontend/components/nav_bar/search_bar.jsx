@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -57,19 +56,19 @@ class SearchBar extends React.Component {
         <li className="popular-right-now">
           <b>Popular right now</b>
         </li>
-        <li onClick={() => this.handleDropdown("pants")}>
+        <li className="search-dropdown-options" onClick={() => this.handleDropdown("pants")}>
           <a> pants</a>
         </li>
-        <li onClick={() => this.handleDropdown("hat")}>
+        <li className="search-dropdown-options" onClick={() => this.handleDropdown("hat")}>
           <a>hat</a>
         </li>
-        <li onClick={() => this.handleDropdown("yarn")}>
+        <li className="search-dropdown-options" onClick={() => this.handleDropdown("yarn")}>
           <a>yarn</a>
         </li>
-        <li onClick={() => this.handleDropdown("slippers")}>
+        <li className="search-dropdown-options" onClick={() => this.handleDropdown("slippers")}>
           <a>slippers</a>
         </li>
-        <li onClick={() => this.handleDropdown("flowers")}>
+        <li className="search-dropdown-options" onClick={() => this.handleDropdown("flowers")}>
           <a>flowers</a>
         </li>
       </ul>
