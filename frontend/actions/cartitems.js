@@ -23,12 +23,3 @@ export const updateFromCart = (id, qty) => (dispatch) =>
     .then((cartitems) => {
       dispatch(receiveCartitems(cartitems));
 });
-
-// export const addToCart = (id) => (dispatch) =>
-//   postCartitem(id).then((product) => dispatch(receiveSingleProduct(product)));
-
-// export const deleteFromCart = (id) => (dispatch) =>
-//   deleteCartitem(id).then(getCartitems()
-// .then((cartitems) => {
-//   dispatch(receiveCartitems(cartitems))})
-// );

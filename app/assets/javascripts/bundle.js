@@ -136,15 +136,6 @@ var updateFromCart = exports.updateFromCart = function updateFromCart(id, qty) {
   };
 };
 
-// export const addToCart = (id) => (dispatch) =>
-//   postCartitem(id).then((product) => dispatch(receiveSingleProduct(product)));
-
-// export const deleteFromCart = (id) => (dispatch) =>
-//   deleteCartitem(id).then(getCartitems()
-// .then((cartitems) => {
-//   dispatch(receiveCartitems(cartitems))})
-// );
-
 /***/ }),
 
 /***/ "./frontend/actions/products.js":
@@ -581,8 +572,6 @@ var _cartitem2 = _interopRequireDefault(_cartitem);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
-var _session = __webpack_require__(/*! ../../utils/session.js */ "./frontend/utils/session.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -636,17 +625,6 @@ var CartitemIndex = function (_React$Component) {
 
         var user = this.props.currentUser;
         user.totalcartitems = totalcartitems;
-        // console.log(user);
-        (0, _session.patchUser)(user);
-
-        // console.log(this.props.currentUser);
-      }
-      if (this.props.currentUser.totalcartitems !== this.state.totalcartitems) {
-        //   var user = Object.assign({}, this.props.currentUser );
-        //   // var user = this.props.currentUser;
-        //   user.totalcartitems = this.state.totalcartitems;
-        //   // console.log(user);
-        //   this.props.updateUser(user);
       }
     }
   }, {
@@ -885,10 +863,32 @@ var NavBar = function (_React$Component) {
   function NavBar(props) {
     _classCallCheck(this, NavBar);
 
-    return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+
+    _this.state = {
+      totalcartitems: 0
+    };
+    return _this;
   }
 
   _createClass(NavBar, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchCartitems();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.cartitems !== prevProps.cartitems) {
+        var totalcartitems = 0;
+        this.props.cartitems.forEach(function (cartitem) {
+          return totalcartitems += cartitem.qty;
+        });
+        this.setState({ totalcartitems: totalcartitems });
+        // console.log(this.state.totalcartitems);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _props = this.props,
@@ -912,7 +912,7 @@ var NavBar = function (_React$Component) {
 
       var cart_icon = _react2.default.createElement(
         "div",
-        null,
+        { className: "cart-icon-frame" },
         _react2.default.createElement(
           "svg",
           {
@@ -927,7 +927,13 @@ var NavBar = function (_React$Component) {
           _react2.default.createElement("circle", { cx: "16", cy: "20", r: "2" }),
           _react2.default.createElement("path", { d: "M21,5H5.665L4.978,1.79A1,1,0,0,0,4,1H1A1,1,0,0,0,1,3H3.191L6.022,16.21a0.962,0.962,0,0,0,.064.159,1.015,1.015,0,0,0,.063.155,0.978,0.978,0,0,0,.133.153,1.006,1.006,0,0,0,.088.1,1,1,0,0,0,.185.105,0.975,0.975,0,0,0,.107.06A0.994,0.994,0,0,0,7,17H18a1,1,0,0,0,.958-0.713l3-10A1,1,0,0,0,21,5Zm-2.244,5H16V7h3.656ZM7.819,15l-0.6-3H9v3H7.819ZM11,12h3v3H11V12Zm0-2V7h3v3H11ZM9,7v3H6.82L6.22,7H9Zm8.256,8H16V12h2.156Z" })
         ),
-        _react2.default.createElement("b", null)
+        _react2.default.createElement(
+          "b",
+          { className: "total-cartitems" },
+          "(",
+          this.state.totalcartitems,
+          ")"
+        )
       );
 
       var render_auth_dropdown = function render_auth_dropdown() {
@@ -971,7 +977,7 @@ var NavBar = function (_React$Component) {
         render_auth_dropdown(),
         _react2.default.createElement(
           _reactRouterDom.Link,
-          { to: "/users/" + currentUser.id + "/cartitems" },
+          { className: "cart-icon", to: "/users/" + currentUser.id + "/cartitems" },
           cart_icon
         )
       ) : _react2.default.createElement(
@@ -1134,9 +1140,6 @@ var _session = __webpack_require__(/*! ../../actions/session */ "./frontend/acti
 var _cartitems = __webpack_require__(/*! ../../actions/cartitems */ "./frontend/actions/cartitems.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Comment this back in after you have built the login functionality
-
 
 var mapStateToProps = function mapStateToProps(state) {
   return {

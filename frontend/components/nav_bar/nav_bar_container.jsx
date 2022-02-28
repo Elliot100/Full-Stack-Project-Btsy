@@ -2,11 +2,7 @@ import { connect } from "react-redux";
 import NavBar from "./nav_bar";
 import { findProduct } from "../../actions/products";
 import { logout } from "../../actions/session";
-import { fetchCartitems } from "../../actions/cartitems";
-
-// Comment this back in after you have built the login functionality
-
-
+import { fetchCartitems, updateFromCart, deleteFromCart } from "../../actions/cartitems";
 
 const mapStateToProps = (state) => {
   return {

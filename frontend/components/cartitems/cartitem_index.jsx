@@ -1,7 +1,6 @@
 import React from "react";
 import Cartitem from "./cartitem";
 import { Link } from "react-router-dom";
-import { patchUser } from "../../utils/session.js";
 
 class CartitemIndex extends React.Component {
   constructor(props) {
@@ -37,17 +36,6 @@ class CartitemIndex extends React.Component {
 
       var user = this.props.currentUser;
       user.totalcartitems = totalcartitems;
-      // console.log(user);
-      patchUser(user);
-
-      // console.log(this.props.currentUser);
-    }
-    if (this.props.currentUser.totalcartitems !== this.state.totalcartitems) {
-    //   var user = Object.assign({}, this.props.currentUser );
-    //   // var user = this.props.currentUser;
-    //   user.totalcartitems = this.state.totalcartitems;
-    //   // console.log(user);
-    //   this.props.updateUser(user);
     }
   }
 

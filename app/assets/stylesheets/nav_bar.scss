@@ -272,12 +272,6 @@
   color: inherit;
 }
 
-// .search-bar > ul {
-//   display: none;
-//   height: 130px;
-// }
-
-
 .search-bar > ul {
   display: none;
   
@@ -341,4 +335,27 @@
   justify-content: flex-start;
   padding: 5% 5%;
   font-weight: 100;
+}
+
+.cart-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 80px;
+  height: 24px;
+}
+
+.cart-icon-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.total-cartitems {
+    color: #2e2d2d;
+    height: 24px;
+    width: 24px;
+    font-size: 20px;
+    padding-bottom: 5px;
 }
