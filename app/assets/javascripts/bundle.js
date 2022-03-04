@@ -1914,7 +1914,7 @@ var ProductNew = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { className: 'growing-button', onClick: this.handleSubmit },
-            'submit'
+            'Submit'
           ),
           this.state.showMessage && _react2.default.createElement(
             'div',

@@ -78,7 +78,7 @@ class ProductNew extends React.Component {
           <input type="text" value={this.image} onChange={this.handleInput("image")} />
           <br />
           <button className="growing-button" onClick={this.handleSubmit}>
-            submit
+            Submit
           </button>
           {this.state.showMessage && (
             <div className="newproduct-message">
