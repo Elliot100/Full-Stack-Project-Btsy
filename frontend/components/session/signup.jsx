@@ -48,7 +48,7 @@ class SignUp extends React.Component {
           <input type="password" value={this.state.password} onChange={this.handleInput("password")} />
           <br />
           <button className="growing-button" onClick={this.handleSubmit}>
-            sign up
+            Sign up
           </button>
           {this.state.showMessage && (
             <div className="signup-message">

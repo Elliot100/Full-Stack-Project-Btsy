@@ -58,7 +58,7 @@ class Login extends React.Component {
           <input type="password" value={this.password} onChange={this.handleInput("password")} />
           <br />
           <button className="growing-button" onClick={this.handleSubmit}>
-            sign in
+            Sign in
           </button>
           or
           <button className="growing-button" onClick={this.handleDemoUser}>

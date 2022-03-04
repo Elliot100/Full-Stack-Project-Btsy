@@ -2362,7 +2362,7 @@ var Login = function (_React$Component) {
           _react2.default.createElement(
             "button",
             { className: "growing-button", onClick: this.handleSubmit },
-            "sign in"
+            "Sign in"
           ),
           "or",
           _react2.default.createElement(
@@ -2558,7 +2558,7 @@ var SignUp = function (_React$Component) {
           _react2.default.createElement(
             "button",
             { className: "growing-button", onClick: this.handleSubmit },
-            "sign up"
+            "Sign up"
           ),
           this.state.showMessage && _react2.default.createElement(
             "div",

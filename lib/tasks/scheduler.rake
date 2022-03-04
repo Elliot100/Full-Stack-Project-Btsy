@@ -1,0 +1,1 @@
+# heroku restart; heroku pg:reset DATABASE --confirm btsy100; heroku run rake db:migrate; heroku run rake db:seed
