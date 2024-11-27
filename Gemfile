@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.5.1"
+ruby "2.6.6"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -32,7 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'jquery-rails'
 
-gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
+gem 'mimemagic', github: 'mimemagicrb/mimemagic'
 
 gem 'bootsnap', require: false
 gem 'faker'

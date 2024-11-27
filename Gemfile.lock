@@ -1,9 +1,10 @@
 GIT
   remote: https://github.com/mimemagicrb/mimemagic.git
-  revision: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
-  ref: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
+  revision: af5a9b1c5b774e65fd84bd7ca4239a9f3eba2039
   specs:
-    mimemagic (0.3.5)
+    mimemagic (0.4.3)
+      nokogiri (~> 1)
+      rake
 
 GEM
   remote: https://rubygems.org/
@@ -232,7 +233,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.6.6p146
 
 BUNDLED WITH
-   2.2.19
+   2.4.0
