@@ -39,6 +39,8 @@ gem 'faker'
 
 gem 'database_cleaner'
 
+gem 'rails_12factor'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
